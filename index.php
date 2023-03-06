@@ -18,8 +18,7 @@
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
     <main>
-        <div id="formDisplayer">
-        </div>
+        <div id="formDisplayer"></div>
     </main>
 </body>
 </html>

@@ -10,3 +10,25 @@
     background-color: white;
     color: black;
 }
+
+/* Message d'erreur */
+.alert-success {
+    color: #fff;
+    background: #238636;
+    /*    border: 1px solid rgba(240,246,252,0.1);*/
+    box-shadow: 0 0 transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+.alert-danger {
+    color: #fff;
+    background: #f85149;
+    border: 1px solid rgba(240,246,252,0.1);
+    box-shadow: 0 0 transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+.hidden {
+    transition: ease-out 1.5s;
+    opacity: 0;
+}
