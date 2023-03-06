@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'resources/assests/Classes/Users.php';
+require_once '../Classes/Users.php';
 
 if (isset($_POST['login'])) {
     $login = htmlspecialchars($_POST['login']);
