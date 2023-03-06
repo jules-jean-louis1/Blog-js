@@ -8,12 +8,14 @@
         <div id="linksHeader">
             <div id="navbar">
                 <nav>
-                    <li>
-                        <a href="">Inscription</a>
-                    </li>
-                    <li>
-                        <a href="">Connexion</a>
-                    </li>
+                    <ul class="flex space-x-2">
+                        <li>
+                            <button type="button" id="buttonRegisterHeader" class="p-2 bg-blue-400">Inscription</button>
+                        </li>
+                        <li>
+                            <button type="button" id="buttonLoginHeader" class="p-2 bg-blue-200">Connexion</button>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </div>
