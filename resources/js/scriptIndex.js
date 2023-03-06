@@ -55,3 +55,39 @@ BtnRegister.addEventListener('click', async (ev) => {
             });
         });
 });
+
+// Evenement pour afficher le formulaire de connexion
+BtnLogin.addEventListener('click', async (ev) => {
+   await fetch('resources/assests/fetch/login.php')
+         .then(response => response.text())
+            .then(data => {
+                formDisplayer.innerHTML = data;
+            });
+               const formLogin = document.querySelector('#login-form');
+                formLogin.addEventListener('submit', (ev) => {
+                    ev.preventDefault();
+                    fetch('resources/assests/fetch/login.php', {
+                        method: 'POST',
+                        body: new FormData(formLogin)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        let message = document.querySelector('#errorMsg');
+                        if (data.status === 'success') {
+                            message.innerHTML = data.message;
+                            displaySuccess(message);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                        if (data.status === 'emptyFlieds') {
+                            message.innerHTML = data.message;
+                            displayError(message);
+                        }
+                        if (data.status === 'loginFail') {
+                            message.innerHTML = data.message;
+                            displayError(message);
+                        }
+                    });
+                });
+});

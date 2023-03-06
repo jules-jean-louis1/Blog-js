@@ -37,4 +37,24 @@ class Users
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['login' => $login, 'password' => $password]);
     }
+    public function login($login, $password)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT * FROM utilisateurs WHERE login = :login');
+        $req->execute(['login' => $login]);
+        $result = $req->fetch();
+        if ($result) {
+            if (password_verify($password, $result['password'])) {
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['login'] = $result['login'];
+                $_SESSION['droits'] = $result['droits'];
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
