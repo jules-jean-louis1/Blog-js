@@ -36,7 +36,7 @@ BtnRegister.addEventListener('click', async (ev) => {
                     message.innerHTML = data.message;
                     displaySuccess(message);
                 }
-                if (data.status === 'emptyFlieds') {
+                if (data.status === 'empty') {
                     message.innerHTML = data.message;
                     displayError(message);
                 }
@@ -80,7 +80,7 @@ BtnLogin.addEventListener('click', async (ev) => {
                                 window.location.reload();
                             }, 2000);
                         }
-                        if (data.status === 'emptyFlieds') {
+                        if (data.status === 'empty') {
                             message.innerHTML = data.message;
                             displayError(message);
                         }

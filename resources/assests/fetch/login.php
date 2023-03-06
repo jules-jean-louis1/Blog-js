@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
         }
     } else {
         header('Content-Type: application/json');
-        echo json_encode(["status" => "emptyFields" , "message" => "Veuillez remplir tous les champs"]);
+        echo json_encode(["status" => "empty" , "message" => "Veuillez remplir tous les champs"]);
     }
     die();
 }
