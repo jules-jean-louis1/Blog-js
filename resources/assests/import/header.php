@@ -3,8 +3,10 @@
 ?>
 
 <div id="containerHeader">
-    <div id="wapperHeader">
-        <div id="logo"></div>
+    <div id="wapperHeader" class="flex justify-between items-center p-2">
+        <div id="logo" class="p-2 rounded-lg bg-slate-100">
+            <h1>Blog</h1>
+        </div>
         <div id="linksHeader">
             <div id="navbar">
                 <?php if (isset($_SESSION['login']) != null) : ?>
