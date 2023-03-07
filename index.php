@@ -19,6 +19,11 @@
 </header>
     <main>
         <div id="formDisplayer"></div>
+        <div id="test">
+            <h2 class="text-6xl text-center text-blue-400">
+                Hello World
+            </h2>
+        </div>
     </main>
 </body>
 </html>

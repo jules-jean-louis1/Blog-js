@@ -34,7 +34,10 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<form action="" method="post" id="resgister-form" class="p-2 flex flex-col space-y-2">
+<form action="" method="post" id="resgister-form" class="px-4 py-5 flex flex-col space-y-2">
+    <div id="containerCloseDialog">
+        <button type="button" id="closeDialog" class="p-2 bg-slate-200">X</button>
+    </div>
     <div class="flex flex-col">
         <label for="login">Login</label>
         <input type="text" name="login" id="login" placeholder="login" class="p-2 bg-slate-100">

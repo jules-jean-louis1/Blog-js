@@ -14,11 +14,19 @@ function displaySuccess(message) {
     message.classList.add('alert-success');
     message.classList.remove('alert-danger');
 }
+function closeModal() {
+    let dialog = document.querySelector("#dialog");
+    dialog.close();
+    dialog.remove();
+}
+
+
 // Evenement pour afficher le formulaire d'inscription
 BtnRegister.addEventListener('click', async (ev) => {
     // Créer l'élément dialog
     const dialog = document.createElement('dialog');
     dialog.setAttribute('id', 'dialog');
+    dialog.className = 'dialog_modal';
     formDisplayer.appendChild(dialog);
     dialog.innerHTML = '';
     // Affichage du formulaire d'inscription
@@ -30,6 +38,11 @@ BtnRegister.addEventListener('click', async (ev) => {
 
              // Afficher le dialog
              dialog.showModal();
+             document.addEventListener('click', (ev) => {
+                 if (ev.target.id === 'closeDialog') {
+                     closeModal();
+                 }
+             });
          });
         const formRegister = document.querySelector('#resgister-form');
         formRegister.addEventListener('submit', (ev) => {
