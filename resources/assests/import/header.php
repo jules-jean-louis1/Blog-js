@@ -18,7 +18,9 @@
                             </button>
                         </li>
                         <li>
-                            <button type="button" id="buttonLoginHeader" class="p-2 bg-blue-200">Connexion</button>
+                            <button type="button" id="buttonLoginHeader" class="p-2 bg-red-500">
+                                <a href="deconnect.php">Deconnexion</a>
+                            </button>
                         </li>
                     </ul>
                 </nav>
