@@ -80,10 +80,24 @@ BtnRegister.addEventListener('click', async (ev) => {
 
 // Evenement pour afficher le formulaire de connexion
 BtnLogin.addEventListener('click', async (ev) => {
+    // Créer l'élément dialog
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('id', 'dialog');
+    dialog.className = 'dialog_modal';
+    formDisplayer.appendChild(dialog);
+    dialog.innerHTML = '';
    await fetch('resources/assests/fetch/login.php')
          .then(response => response.text())
             .then(data => {
-                formDisplayer.innerHTML = data;
+                dialog.innerHTML = data;
+
+                // Afficher le dialog
+                dialog.showModal();
+                document.addEventListener('click', (ev) => {
+                    if (ev.target.id === 'closeDialog') {
+                        closeModal();
+                    }
+                });
             });
                const formLogin = document.querySelector('#login-form');
                 formLogin.addEventListener('submit', (ev) => {
