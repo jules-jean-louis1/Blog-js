@@ -66,6 +66,7 @@ if (isset($_POST['update'])) {
                 <label for="avatar">Avatar</label>
                 <input type="file" name="avatar" id="avatar"  class="p-2 rounded-lg bg-slate-100">
             </div>
+            <div id="errorMsg"></div>
             <div class="flex flex-col space-y-2">
                 <button type="submit" id="update" name="update">Update</button>
             </div>
