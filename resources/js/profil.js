@@ -31,5 +31,10 @@ profilForm.addEventListener('submit', (ev) => {
             message.innerHTML = data.message;
             displayError(message);
         }
+        if (data.status === 'delete') {
+            message.innerHTML = data.message;
+            displaySuccess(message);
+            window.location.href = 'index.php';
+        }
     });
 });

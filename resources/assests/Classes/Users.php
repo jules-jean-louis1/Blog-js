@@ -72,4 +72,11 @@ class Users
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['password' => $password, 'id' => $id]);
     }
+    public function deleteUser($id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('DELETE FROM utilisateurs WHERE id = :id');
+        $req->execute(['id' => $id]);
+    }
 }

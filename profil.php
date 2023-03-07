@@ -29,6 +29,14 @@ if (isset($_POST['update'])) {
     }
     die();
 }
+if (isset($_POST['delete'])) {
+    $user = new Users();
+    $user->deleteUser($_SESSION['id']);
+    session_destroy();
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'delete', 'message' => 'Votre compte a bien été supprimé']);
+    die();
+}
 ?>
 <?php if (isset($_SESSION['login']) != null) :?>
 <!DOCTYPE html>
@@ -49,7 +57,7 @@ if (isset($_POST['update'])) {
 </header>
 <main>
     <div id="formProfil" class="flex justify-center w-1/2">
-        <form action="" method="post" id="updateprofil-form">
+        <form action="" method="post" id="updateprofil-form" class="flex flex-col space-y-2">
             <div class="flex flex-col space-y-2">
                 <label for="login">Login</label>
                 <input type="text" name="login" id="login" value="<?= $_SESSION['login'] ?>" class="p-2 rounded-lg bg-slate-100">
@@ -68,7 +76,10 @@ if (isset($_POST['update'])) {
             </div>
             <div id="errorMsg"></div>
             <div class="flex flex-col space-y-2">
-                <button type="submit" id="update" name="update">Update</button>
+                <button type="submit" id="update" name="update" class="p-2 rounded-lg bg-green-500 text-white">Update</button>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <button type="submit" id="delete" name="delete" class="p-2 rounded-lg bg-red-500 text-white">Supprimer Compte</button>
             </div>
         </form>
     </div>
