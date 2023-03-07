@@ -1,6 +1,34 @@
 <?php
 session_start();
+require_once 'resources/assests/Classes/Users.php';
 
+if (isset($_POST['update'])) {
+    $login = htmlspecialchars($_POST['login']);
+    $password = htmlspecialchars($_POST['password']);
+    $passwordConfirm = htmlspecialchars($_POST['passwordConfirm']);
+
+    $user = new Users();
+    if (!empty($login)) {
+        $user->updateLogin($login, $_SESSION['id']);
+        $_SESSION['login'] = $login;
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'loginUp', 'message' => 'Votre login a bien été modifié']);
+    }
+    if (!empty($password) && !empty($passwordConfirm)) {
+        if ($password == $passwordConfirm) {
+            $user->updatePassword($password, $_SESSION['id']);
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'passwordUp', 'message' => 'Votre mot de passe a bien été modifié']);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'error', 'message' => 'Les mots de passe ne correspondent pas']);
+        }
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Veuillez remplir tous les champs']);
+    }
+    die();
+}
 ?>
 <?php if (isset($_SESSION['login']) != null) :?>
 <!DOCTYPE html>
@@ -37,6 +65,9 @@ session_start();
             <div class="flex flex-col space-y-2">
                 <label for="avatar">Avatar</label>
                 <input type="file" name="avatar" id="avatar"  class="p-2 rounded-lg bg-slate-100">
+            </div>
+            <div class="flex flex-col space-y-2">
+                <button type="submit" id="update" name="update">Update</button>
             </div>
         </form>
     </div>

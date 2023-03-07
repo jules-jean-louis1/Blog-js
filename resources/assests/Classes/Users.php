@@ -57,4 +57,19 @@ class Users
             return false;
         }
     }
+    public function updateLogin($login, $id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE utilisateurs SET login = :login WHERE id = :id');
+        $req->execute(['login' => $login, 'id' => $id]);
+    }
+    public function updatePassword($password, $id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE utilisateurs SET password = :password WHERE id = :id');
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $req->execute(['password' => $password, 'id' => $id]);
+    }
 }

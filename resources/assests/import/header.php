@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <div id="containerHeader">
     <div id="wapperHeader" class="flex justify-between items-center p-2">
         <div id="logo" class="p-2 rounded-lg bg-slate-100">
