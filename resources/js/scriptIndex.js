@@ -16,11 +16,20 @@ function displaySuccess(message) {
 }
 // Evenement pour afficher le formulaire d'inscription
 BtnRegister.addEventListener('click', async (ev) => {
+    // Créer l'élément dialog
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('id', 'dialog');
+    formDisplayer.appendChild(dialog);
+    dialog.innerHTML = '';
     // Affichage du formulaire d'inscription
    await fetch('resources/assests/fetch/register.php')
        .then(response => response.text())
          .then(data => {
-            formDisplayer.innerHTML = data;
+            // Insérer le contenu de la réponse dans l'élément dialog
+             dialog.innerHTML = data;
+
+             // Afficher le dialog
+             dialog.showModal();
          });
         const formRegister = document.querySelector('#resgister-form');
         formRegister.addEventListener('submit', (ev) => {
