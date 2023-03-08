@@ -1,5 +1,7 @@
 const TableDisplay = document.querySelector('#tableauTbody');
 const Message = document.querySelector('#errorMsg');
+
+
 // Fonction pour la gestion des messages d'erreurs
 function displayError(message) {
     message.classList.add('alert-danger');
@@ -28,24 +30,47 @@ function deleteUsers(id) {
             });
     }
 }
+// Fonction pour modifier les droits d'un utilisateur
+
 
 const GetUsers = async () => {
     await fetch('resources/assests/fetch/fetchUserDashboard.php')
         .then(response => response.json())
         .then(data => {
-          TableDisplay.innerHTML = '';
+            TableDisplay.innerHTML = '';
             data.forEach(user => {
+                let optionHtml = '';
+                if (user.droits === 'administrateur') {
+                    optionHtml = `
+                        <option value="moderateur">moderateur</option>
+                        <option value="utilisateur">utilisateur</option>
+                    `;
+                } else if (user.droits === 'moderateur') {
+                    optionHtml = `
+                        <option value="administrateur">administrateur</option>
+                        <option value="utilisateur">utilisateur</option>
+                    `;
+                } else if (user.droits === 'utilisateur') {
+                    optionHtml = `
+                        <option value="administrateur">administrateur</option>
+                        <option value="moderateur">moderateur</option>
+                    `;
+                }
                 TableDisplay.innerHTML += `
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.login}</td>
                     <td>
-                        <form action="" method="post">
-                            <input type="hidden" name="id" value="${user.id}">
+                        <form action="" method="post" id="updateDroits"  data-id="${user.id}" class="flex">
                             <select name="droits" id="droits" class="p-2 bg-slate-100 rounded-lg">
-                                <option value="">${user.droits}</option>
-                                <option value="administrateur">administrateur</option>
-                                <option value="utilisateur">utilisateur</option>
+                                <option value="${user.droits}">${user.droits}</option>
+                                ${optionHtml}
+                            </select>
+                            <div id="btnSubmit">
+                                <button type="submit" class="bg-green-500 p-2 rounded-lg text-white" name="btnUpdateDroits" id="btnUpdateDroits">
+                                       Modifier
+                                </button>
+                            </div>
                         </form>
                     </td>
                     <td>
@@ -57,5 +82,26 @@ const GetUsers = async () => {
                 `;
             });
         });
+    // Ajouter un gestionnaire d'événements de formulaire pour la mise à jour des droits d'utilisateur
+    const formUpdate = document.querySelector('#updateDroits');
+    formUpdate.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        let userId = ev.target.closest('form').getAttribute('data-id');
+        let droits = ev.target.querySelector('#droits').value;
+        fetch(`resources/assests/fetch/updateDroits.php?id=${userId}&droits=${droits}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Message.innerHTML = data.message;
+                    displaySuccess(Message);
+                    GetUsers();
+                }
+                if (data.status === 'error') {
+                    Message.innerHTML = data.message;
+                    displayError(Message);
+                }
+            });
+    });
 };
+
 GetUsers();

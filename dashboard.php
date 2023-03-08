@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once 'resources/assests/Classes/Users.php';
+
+
+
 ?>
 <?php if (isset($_SESSION['droits']) == 'administrateur') : ?>
     <!DOCTYPE html>
@@ -28,9 +31,9 @@ require_once 'resources/assests/Classes/Users.php';
                                 Dashboard
                             </h1>
                         </div>
-                        <div id="tableauUser">
+                        <div id="tableauUser" class="w-full">
                             <div id="errorMsg"></div>
-                            <table class="table-auto">
+                            <table class="w-full">
                                 <thead>
                                     <tr>
                                         <th class="px-4 py-2">ID</th>
@@ -39,8 +42,7 @@ require_once 'resources/assests/Classes/Users.php';
                                         <th class="px-4 py-2">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableauTbody">
-                                </tbody>
+                                <tbody id="tableauTbody" class="w-full"></tbody>
                             </table>
                         </div>
                     </div>

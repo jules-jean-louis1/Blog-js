@@ -89,4 +89,11 @@ class Users
         $result = json_encode($result);
         return $result;
     }
+    public function updateDroits($id, $droits)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE `utilisateurs` SET `droits` = :droits WHERE `utilisateurs`.`id` = :id');
+        $req->execute(['droits' => $droits, 'id' => $id]);
+    }
 }
