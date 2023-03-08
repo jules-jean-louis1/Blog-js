@@ -29,6 +29,7 @@ require_once 'resources/assests/Classes/Users.php';
                             </h1>
                         </div>
                         <div id="tableauUser">
+                            <div id="errorMsg"></div>
                             <table class="table-auto">
                                 <thead>
                                     <tr>

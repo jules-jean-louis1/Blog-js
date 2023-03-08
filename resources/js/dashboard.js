@@ -1,6 +1,31 @@
 const TableDisplay = document.querySelector('#tableauTbody');
-
+const Message = document.querySelector('#errorMsg');
+// Fonction pour la gestion des messages d'erreurs
+function displayError(message) {
+    message.classList.add('alert-danger');
+    message.classList.remove('alert-success');
+}
+// Fonction pour la gestion des messages de success
+function displaySuccess(message) {
+    message.classList.add('alert-success');
+    message.classList.remove('alert-danger');
+}
 // Fonction pour supprimer un utilisateur
+const deleteUser = async (id) => {
+    await fetch('resources/assests/fetch/deleteUser.php?id=${id}')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Message.innerHTML = data.message;
+                displaySuccess(Message);
+                GetUsers();
+            }
+            if (data.status === 'error') {
+                displayError(Message);
+                Message.innerHTML = data.message;
+            }
+        });
+}
 const GetUsers = async () => {
     await fetch('resources/assests/fetch/fetchUserDashboard.php')
         .then(response => response.json())
