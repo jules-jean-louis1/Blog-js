@@ -9,9 +9,15 @@
                 <nav>
                     <ul class="flex space-x-2">
                         <li>
+                            <?php if ($_SESSION['droits'] == 'administrateur') : ?>
+                                <button type="button" id="buttonRegisterHeader" class="p-2 bg-green-500">
+                                    <a href="dashboard.php"><?= $_SESSION['login'] ?></a>
+                                </button>
+                            <?php else: ?>
                             <button type="button" id="buttonRegisterHeader" class="p-2 bg-blue-400">
-                                <a href="pages/profil.php"><?= $_SESSION['login'] ?></a>
+                                <a href="profil.php"><?= $_SESSION['login'] ?></a>
                             </button>
+                            <?php endif; ?>
                         </li>
                         <li>
                             <button type="button" id="buttonLoginHeader" class="p-2 bg-red-500">

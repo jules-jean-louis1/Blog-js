@@ -79,4 +79,14 @@ class Users
         $req = $bdd->prepare('DELETE FROM utilisateurs WHERE id = :id');
         $req->execute(['id' => $id]);
     }
+    public function getAllUsers()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT * FROM utilisateurs');
+        $req->execute();
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        $result = json_encode($result);
+        return $result;
+    }
 }
