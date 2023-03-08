@@ -57,10 +57,10 @@ const GetUsers = async () => {
                     `;
                 }
                 TableDisplay.innerHTML += `
-                <tr>
-                    <td>${user.id}</td>
-                    <td>${user.login}</td>
-                    <td>
+                <tr class="border-2 ">
+                    <td class="px-4 py-2 text-center">${user.id}</td>
+                    <td class="px-4 py-2 text-center">${user.login}</td>
+                    <td class="px-4 py-2">
                         <form action="" method="post" id="updateDroits"  data-id="${user.id}" class="flex">
                             <select name="droits" id="droits" class="p-2 bg-slate-100 rounded-lg">
                                 <option value="${user.droits}">${user.droits}</option>
@@ -73,7 +73,7 @@ const GetUsers = async () => {
                             </div>
                         </form>
                     </td>
-                    <td>
+                    <td class="px-4 py-2">
                         <button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
                             Supprimer
                         </button>

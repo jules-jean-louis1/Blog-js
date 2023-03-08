@@ -31,19 +31,21 @@ require_once 'resources/assests/Classes/Users.php';
                                 Dashboard
                             </h1>
                         </div>
-                        <div id="tableauUser" class="w-full">
-                            <div id="errorMsg"></div>
-                            <table class="w-full">
-                                <thead>
+                        <div id="tableauUser" class="flex justify-center">
+                            <div class="w-[80%] flex flex-col items-center justify-center">
+                                <div id="errorMsg"></div>
+                                <table class="w-full border-2">
+                                    <thead>
                                     <tr>
                                         <th class="px-4 py-2">ID</th>
                                         <th class="px-4 py-2">Login</th>
                                         <th class="px-4 py-2">Droits</th>
                                         <th class="px-4 py-2">Action</th>
                                     </tr>
-                                </thead>
-                                <tbody id="tableauTbody" class="w-full"></tbody>
-                            </table>
+                                    </thead>
+                                    <tbody id="tableauTbody" class="w-full border-2"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </section>
