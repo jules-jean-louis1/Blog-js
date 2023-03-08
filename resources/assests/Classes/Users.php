@@ -33,7 +33,7 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits) VALUES (:login, :password , 0)');
+        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits) VALUES (:login, :password , "utilisateur")');
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['login' => $login, 'password' => $password]);
     }

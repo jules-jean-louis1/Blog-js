@@ -1,6 +1,18 @@
 Login : Jules
 Passw : 1234a
 
+admin : admin
+passw : admin1
+
+rôle prevus sur le site :
+
+    - administrateur
+    - moderateur
+    - utilisateur
+
+    - administrateur : peut tout faire
+    - moderateur : peut modifier les articles et les commentaires
+    - utilisateur : peut commenter les articles
 
 parametres table:
     Table "utilisateurs" avec les champs suivants :
