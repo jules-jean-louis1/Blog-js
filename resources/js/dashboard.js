@@ -11,21 +11,24 @@ function displaySuccess(message) {
     message.classList.remove('alert-danger');
 }
 // Fonction pour supprimer un utilisateur
-const deleteUser = async (id) => {
-    await fetch('resources/assests/fetch/deleteUser.php?id=${id}')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                Message.innerHTML = data.message;
-                displaySuccess(Message);
-                GetUsers();
-            }
-            if (data.status === 'error') {
-                displayError(Message);
-                Message.innerHTML = data.message;
-            }
-        });
+function deleteUsers(id) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+        fetch(`resources/assests/fetch/deleteUser.php?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Message.innerHTML = data.message;
+                    displaySuccess(Message);
+                    GetUsers();
+                }
+                if (data.status === 'error') {
+                    displayError(Message);
+                    Message.innerHTML = data.message;
+                }
+            });
+    }
 }
+
 const GetUsers = async () => {
     await fetch('resources/assests/fetch/fetchUserDashboard.php')
         .then(response => response.json())
@@ -46,7 +49,7 @@ const GetUsers = async () => {
                         </form>
                     </td>
                     <td>
-                        <button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUser(${user.id})">
+                        <button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
                             Supprimer
                         </button>
                     </td>
