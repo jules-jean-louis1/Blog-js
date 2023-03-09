@@ -1,0 +1,76 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+
+#dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Message d'erreur */
+.alert-success {
+    color: #fff;
+    background: #238636;
+    /*    border: 1px solid rgba(240,246,252,0.1);*/
+    box-shadow: 0 0 transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+.alert-danger {
+    color: #fff;
+    background: #f85149;
+    border: 1px solid rgba(240,246,252,0.1);
+    box-shadow: 0 0 transparent;
+    padding: 5px;
+    border-radius: 5px;
+}
+.messageAlert {
+    background-image: linear-gradient(rgba(56, 139, 253, 0.15), rgba(56, 139, 253, 0.15));
+    padding: 13px;
+    border: 1px solid rgba(56,139, 253, 0.4);
+    color: #c1d1d9;
+}
+.hidden {
+    transition: ease-out 1.5s;
+    opacity: 0;
+}
+
+/* Article */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #fff;
+    z-index: 10;
+    transition: 0.25s ease-in-out;
+}
+.modal.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+#overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 0.25s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+#overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+#formCreateArticle {
+     display: none;
+ }

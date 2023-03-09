@@ -11,7 +11,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer type="module" src="resources/js/article.js"></script>
-    <link rel="stylesheet" href="resources/style/index.css">
+    <link rel="stylesheet" href="resources/style/articles.css">
     <title>Article</title>
 </head>
 <body>
@@ -20,10 +20,10 @@ session_start();
 </header>
 <main>
     <section>
-        <div id="containerCreateArticle">
-            <div id="titleArticlePage">
-                <h1 class="text-xl font-bold">Ecrire un article</h1>
-            </div>
+        <div id="containerCreateArticle" <?php if (isset($_SESSION['droits']) == 'administrateur'|| isset($_SESSION['droits']) == 'moderateur') {echo 'style="display:block;"';} else {echo 'style="display:none;"';}  ?>>
+                <div id="titleArticlePage">
+                    <h1 class="text-xl font-bold">Ecrire un article</h1>
+                </div>
             <div id="btncreeArticle">
                 <button data-modal-target="#modal" type="button" id="buttonCreateArticle"
                         class="p-2 bg-blue-400 rounded-lg">Ecrire un article
@@ -81,8 +81,15 @@ session_start();
                 <form action="resources/assests/fetch/getArticles.php" method="post" class="border-2 rounded-lg p-2">
                     <div class="flex space-x-2">
                         <div class="py-2">
-                            <label for="category2" class="font-semibold text-lg">Filtrer les articles par catégorie :</label>
+                            <label for="category2" class="font-semibold text-lg">Filtrer :</label>
                             <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
+                            </select>
+                        </div>
+                        <div class="py-2">
+                            <label for="order" class="font-semibold text-lg">Date :</label>
+                            <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg">
+                                <option value="ASC">+ récents</option>
+                                <option value="DESC">+ anciens</option>
                             </select>
                         </div>
                         <div class="py-2">

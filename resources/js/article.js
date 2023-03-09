@@ -4,6 +4,7 @@ const openModalButton = document.querySelectorAll('[data-modal-target]');
 const closeModalButton = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('overlay');
 const formCreateArticle = document.querySelector('#form-modal-article');
+const category2 = document.querySelector('#category2');
 
 const openModal = (modal) => {
     if (modal == null) return;
@@ -29,14 +30,16 @@ closeModalButton.forEach(button => {
     });
 });
 
-formCreateArticle.addEventListener('submit', (e) => {
+formCreateArticle.addEventListener('submit', async (e) => {
     e.preventDefault();
-    fetch('resources/assests/fetch/createArticle.php', {
+    await fetch('resources/assests/fetch/createArticle.php', {
         method: 'POST',
         body: new FormData(formCreateArticle)
     })
         .then(response => response.json())
         .then(data => {
+            let category = document.querySelector('#category');
+            getCategory(category)
             let message = document.querySelector('#errorMsg');
             if (data.status == 'success') {
                 message.innerHTML = data.message;
@@ -50,17 +53,14 @@ formCreateArticle.addEventListener('submit', (e) => {
             }
         })
 });
-
-function  getCategory () {
+// Fonction pour la récupération des catégories
+function  getCategory (category) {
     fetch('resources/assests/fetch/fetchCategory.php')
         .then(response => response.json())
         .then(data => {
-            let category = document.querySelector('#category');
-            let category2 = document.querySelector('#category2');
             data.forEach(element => {
                 category.innerHTML += `<option value="${element.name}">${element.name}</option>`;
-                category2.innerHTML += `<option value="${element.id}">${element.name}</option>`;
             });
         })
 }
-getCategory();
+getCategory(category2);
