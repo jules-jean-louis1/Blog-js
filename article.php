@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -56,11 +57,6 @@ session_start();
                                 <div class="flex flex-col">
                                     <label for="category" class="font-semibold text-lg">Catégorie</label>
                                     <select name="category" id="category" class="bg-slate-100 p-2 rounded-lg">
-                                        <option value="1">PHP</option>
-                                        <option value="2">JavaScript</option>
-                                        <option value="3">HTML</option>
-                                        <option value="4">CSS</option>
-                                        <option value="5">SQL</option>
                                     </select>
                                 </div>
                                 <div class="py-2">
@@ -82,16 +78,11 @@ session_start();
     <section>
         <div id="containerArticle">
             <div id="containerSelectCategory" class="flex justify-center">
-                <form action="resources/assests/fetch/getArticle.php" method="post" class="border-2 rounded-lg p-2">
+                <form action="resources/assests/fetch/getArticles.php" method="post" class="border-2 rounded-lg p-2">
                     <div class="flex space-x-2">
                         <div class="py-2">
-                            <label for="category" class="font-semibold text-lg">Filtrer les articles par catégorie :</label>
-                            <select name="category" id="category" class="bg-slate-100 p-2 rounded-lg">
-                                <option value="1">PHP</option>
-                                <option value="2">JavaScript</option>
-                                <option value="3">HTML</option>
-                                <option value="4">CSS</option>
-                                <option value="5">SQL</option>
+                            <label for="category2" class="font-semibold text-lg">Filtrer les articles par catégorie :</label>
+                            <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
                             </select>
                         </div>
                         <div class="py-2">

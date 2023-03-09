@@ -50,3 +50,17 @@ formCreateArticle.addEventListener('submit', (e) => {
             }
         })
 });
+
+function  getCategory () {
+    fetch('resources/assests/fetch/fetchCategory.php')
+        .then(response => response.json())
+        .then(data => {
+            let category = document.querySelector('#category');
+            let category2 = document.querySelector('#category2');
+            data.forEach(element => {
+                category.innerHTML += `<option value="${element.name}">${element.name}</option>`;
+                category2.innerHTML += `<option value="${element.id}">${element.name}</option>`;
+            });
+        })
+}
+getCategory();

@@ -15,6 +15,16 @@ class Articles
         $req = $bdd->prepare('INSERT INTO articles (title, content, category_id, author_id, created_at) VALUES (:title, :content, :category_id, :author_id, NOW())');
         $req->execute(['title' => $title, 'content' => $content, 'category_id' => $category_id, 'author_id' => $author_id]);
     }
+    public function getCategory()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT * FROM categories');
+        $req->execute();
+        $categories = $req->fetchAll(PDO::FETCH_ASSOC);
+        $categories = json_encode($categories);
+        return $categories;
+    }
     public function getArticles($page, $limit, $category = null) {
         $db = new Database();
         $bdd = $db->getBdd();
