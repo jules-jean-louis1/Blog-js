@@ -20,7 +20,9 @@ session_start();
 </header>
 <main>
     <section>
-        <div id="containerCreateArticle" <?php if (isset($_SESSION['droits']) == 'administrateur'|| isset($_SESSION['droits']) == 'moderateur') {echo 'style="display:block;"';} else {echo 'style="display:none;"';}  ?>>
+        <div id="containerCreateArticle">
+            <?php if (isset($_SESSION['droits']) && ($_SESSION['droits'] == 'administrateur' || $_SESSION['droits'] == 'moderateur')) { ?>
+            <!-- Le code pour afficher l'interface d'écriture d'article -->
                 <div id="titleArticlePage">
                     <h1 class="text-xl font-bold">Ecrire un article</h1>
                 </div>
@@ -74,6 +76,10 @@ session_start();
             </div>
             <div id="overlay"></div>
         </div>
+        <?php } elseif (isset($_SESSION['droits']) && $_SESSION['droits'] == 'utilisateur') { ?>
+            <!-- Le code pour afficher un message indiquant que l'utilisateur n'a pas les droits pour écrire un article -->
+        <?php } else { ?>
+        <?php } ?>
     </section>
     <section>
         <div id="containerArticle">
