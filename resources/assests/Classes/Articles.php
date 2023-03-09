@@ -53,4 +53,17 @@ class Articles
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $articles;
     }
+    public function searchArticle($search)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at
+                              FROM articles
+                              INNER JOIN categories ON articles.category_id = categories.id
+                              INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
+                              WHERE articles.title LIKE :search OR articles.content LIKE :search');
+        $req->execute(['search' => '%' . $search . '%']);
+        $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $articles;
+    }
 }

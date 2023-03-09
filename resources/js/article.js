@@ -5,6 +5,7 @@ const closeModalButton = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('overlay');
 const formCreateArticle = document.querySelector('#form-modal-article');
 const category2 = document.querySelector('#category2');
+const search = document.querySelector("#searchInput");
 
 const openModal = (modal) => {
     if (modal == null) return;
@@ -72,3 +73,45 @@ function  getCategory (category) {
 }
 
 getCategory(category2);
+
+// Fonction pour la recherche d'article
+async function getElement() {
+    let query = search.value;
+    await fetch('resources/assests/fetch/searchArticle.php?query='+query)
+    .then(response => response.json())
+    .then(data => {
+        let results = document.querySelector("#results");
+        results.innerHTML = "";
+        if (data.status == "empty") {
+            let result = document.createElement("div");
+            result.setAttribute("id", "results");
+            result.innerHTML = data.message;
+            results.appendChild(result);
+        } else {
+            for (const element of data.articles) {
+                // Créer les éléments HTML avec les informations de l'article
+                let artTitle = document.createElement("h4");
+                artTitle.setAttribute("id", "artTitle");
+                artTitle.textContent = "Titre : " + element.title;
+
+                let Qcate = document.createElement("p");
+                Qcate.setAttribute("id", "Qcate");
+                Qcate.textContent = "Catégorie : " + element.category_name;
+
+                let author = document.createElement("p");
+                author.setAttribute("id", "author");
+                author.textContent = "Auteur : " + element.author_login;
+
+                // Ajouter les éléments HTML créés à la page
+                results.appendChild(artTitle);
+                results.appendChild(Qcate);
+                results.appendChild(author);
+            }
+        }
+        if (query == "") {
+            results.innerHTML = "";
+        }
+    })
+}
+search.addEventListener("input", getElement);
+//La fonction getElement commence par récupérer la valeur actuelle de l'input en utilisant search.value.

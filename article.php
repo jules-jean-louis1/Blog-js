@@ -83,28 +83,39 @@ session_start();
     </section>
     <section>
         <div id="containerArticle">
-            <div id="containerSelectCategory" class="flex justify-center">
-                <form action="resources/assests/fetch/getArticles.php" method="post" class="border-2 rounded-lg p-2">
-                    <div class="flex space-x-2">
-                        <div class="py-2">
-                            <label for="category2" class="font-semibold text-lg">Filtrer :</label>
-                            <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
-                            </select>
+            <div id="containerSelectCategory" class="flex justify-center items-center">
+                <div class="flex items-center border-2 rounded-lg p-2">
+                    <form action="" method="post">
+                        <input type="search" name="search" id="searchInput" placeholder="Rechecher un article" autofocus
+                               autocomplete="off" required
+                               class="rounded-lg bg-slate-100 p-2 py-3">
+                        <button type="submit" class="p-2 bg-blue-400 rounded-lg text-white">
+                            &rArr;
+                        </button>
+                        <div id="results"></div>
+                    </form>
+                    <form action="resources/assests/fetch/getArticles.php" method="post">
+                        <div class="flex space-x-2">
+                            <div class="py-2">
+                                <label for="category2" class="font-semibold text-lg">Filtrer :</label>
+                                <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
+                                </select>
+                            </div>
+                            <div class="py-2">
+                                <label for="order" class="font-semibold text-lg">Date :</label>
+                                <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg">
+                                    <option value="ASC">+ récents</option>
+                                    <option value="DESC">+ anciens</option>
+                                </select>
+                            </div>
+                            <div class="py-2">
+                                <button type="submit" id="buttonCreateArticle"
+                                        class="p-2 bg-blue-400 rounded-lg text-white">Afficher les articles
+                                </button>
+                            </div>
                         </div>
-                        <div class="py-2">
-                            <label for="order" class="font-semibold text-lg">Date :</label>
-                            <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg">
-                                <option value="ASC">+ récents</option>
-                                <option value="DESC">+ anciens</option>
-                            </select>
-                        </div>
-                        <div class="py-2">
-                            <button type="submit" id="buttonCreateArticle"
-                                    class="p-2 bg-blue-400 rounded-lg text-white">Afficher les articles
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
