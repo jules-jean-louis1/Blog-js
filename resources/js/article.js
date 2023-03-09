@@ -90,6 +90,8 @@ async function getElement() {
         } else {
             for (const element of data.articles) {
                 // Créer les éléments HTML avec les informations de l'article
+                let result = document.createElement("div");
+                result.setAttribute("id", "result");
                 let artTitle = document.createElement("h4");
                 artTitle.setAttribute("id", "artTitle");
                 artTitle.textContent = "Titre : " + element.title;
@@ -103,9 +105,10 @@ async function getElement() {
                 author.textContent = "Auteur : " + element.author_login;
 
                 // Ajouter les éléments HTML créés à la page
-                results.appendChild(artTitle);
-                results.appendChild(Qcate);
-                results.appendChild(author);
+                results.appendChild(result);
+                result.appendChild(artTitle);
+                result.appendChild(Qcate);
+                result.appendChild(author);
             }
         }
         if (query == "") {
