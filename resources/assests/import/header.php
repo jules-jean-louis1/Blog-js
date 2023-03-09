@@ -11,6 +11,11 @@
                 <nav>
                     <ul class="flex space-x-2">
                         <li>
+                            <button type="button" id="buttonArticle" class="p-2 bg-blue-400">
+                                <a href="article.php">Article</a>
+                            </button>
+                        </li>
+                        <li>
                             <?php if ($_SESSION['droits'] == 'administrateur') : ?>
                                 <button type="button" id="buttonRegisterHeader" class="p-2 bg-green-500">
                                     <a href="dashboard.php"><?= $_SESSION['login'] ?></a>
@@ -31,6 +36,11 @@
                 <?php else : ?>
                     <nav>
                         <ul class="flex space-x-2">
+                            <li>
+                                <button type="button" id="buttonArticle" class="p-2 bg-blue-400">
+                                    <a href="article.php">Article</a>
+                                </button>
+                            </li>
                             <li>
                                 <button type="button" id="buttonRegisterHeader" class="p-2 bg-blue-400">Inscription</button>
                             </li>
