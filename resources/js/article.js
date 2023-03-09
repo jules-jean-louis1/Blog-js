@@ -1,6 +1,9 @@
+import { displayError, displaySuccess ,formatDate } from './function/function.js';
+
 const openModalButton = document.querySelectorAll('[data-modal-target]');
 const closeModalButton = document.querySelectorAll('[data-close-button]');
 const overlay = document.getElementById('overlay');
+const formCreateArticle = document.querySelector('#form-modal-article');
 
 const openModal = (modal) => {
     if (modal == null) return;
@@ -24,4 +27,26 @@ closeModalButton.forEach(button => {
         const modal = button.closest('.modal');
         closeModal(modal);
     });
+});
+
+formCreateArticle.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fetch('resources/assests/fetch/createArticle.php', {
+        method: 'POST',
+        body: new FormData(formCreateArticle)
+    })
+        .then(response => response.json())
+        .then(data => {
+            let message = document.querySelector('#errorMsg');
+            if (data.status == 'success') {
+                message.innerHTML = data.message;
+                displaySuccess(message);
+                const modal = document.querySelector('#modal-article');
+                closeModal(modal);
+            }
+            else if (data.status == 'empty') {
+                message.innerHTML = data.message;
+                displayError(message);
+            }
+        })
 });
