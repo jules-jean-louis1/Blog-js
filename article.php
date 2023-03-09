@@ -19,35 +19,33 @@ session_start();
 </header>
 <main>
     <div id="containerCreateArticle">
-        <div id="btncreearticle">
-            <button type="button" id="buttonCreateArticle" class="p-2 bg-blue-400 rounded-lg">Ecrire un article</button>
+        <div id="btncreeArticle">
+            <button data-modal-target="#modal" type="button" id="buttonCreateArticle" class="p-2 bg-blue-400 rounded-lg">Ecrire un article</button>
         </div>
         <div id="containerFormArticle">
-            <div class="modal" id="modal">
-                <div id="modal-header" class="flex justify-between">
+            <div class="modal px-4 py-5 rounded-lg bg-[#fff] w-[85%] border-2 border-slate-200" id="modal">
+                <div id="modal-header" class="flex justify-between items-center">
                     <div id="modal-title">
                         <h3 class="text-2xl font-bold">
                             <span>Créer un article</span>
                         </h3>
                     </div>
-                    <button type="button" id="closeModal" class="p-2 bg-red-400">&times;</button>
+                    <button data-close-button type="button" id="closeModal" class="text-slate-600 hover:bg-slate-200 rounded-lg font-semibold p-2"><!--&times;-->Fermer</button>
                 </div>
                 <div class="modal-content">
                     <form action="" method="post" id="form-dialog-article">
                         <div id="warpperArticleDialog">
                             <div class="flex flex-col">
-                                <label for="title" class="font-semibold text-lg">Titre</label>
                                 <input type="text" name="title" id="title"
-                                       class="border-2 border-gray-300 bg-slate-100 p-2 rounded-lg">
+                                       class="bg-slate-100 p-2 rounded-t-lg" placeholder="Titre">
                             </div>
                             <div class="flex flex-col">
-                                <label for="content" class="font-semibold text-lg">Contenu</label>
                                 <textarea name="content" id="content" cols="30" rows="10"
-                                          class="border-2 border-gray-300 bg-slate-100 p-2 rounded-lg"></textarea>
+                                          class="bg-slate-100 p-2 rounded-b-lg" placeholder="Contenu de l'article"></textarea>
                             </div>
                             <div class="flex flex-col">
                                 <label for="category" class="font-semibold text-lg">Catégorie</label>
-                                <select name="category" id="category" class="border-2 border-gray-300 bg-slate-100 p-2 rounded-lg">
+                                <select name="category" id="category" class="bg-slate-100 p-2 rounded-lg">
                                     <option value="1">PHP</option>
                                     <option value="2">JavaScript</option>
                                     <option value="3">HTML</option>
@@ -55,8 +53,8 @@ session_start();
                                     <option value="5">SQL</option>
                                 </select>
                             </div>
-                            <div class="flex flex-col">
-                                <button type="submit" id="buttonCreateArticle" class="p-2 bg-blue-400">Poster cette Article</button>
+                            <div class="flex flex-col py-3">
+                                <button type="submit" id="buttonCreateArticle" class="p-2 bg-blue-400 rounded-lg text-white">Poster cette Article</button>
                             </div>
                         </div>
                     </form>
@@ -65,6 +63,7 @@ session_start();
         </div>
         <div id="overlay"></div>
     </div>
+
 </main>
 <footer>
     <?php include_once 'resources/assests/import/footer.php' ?>

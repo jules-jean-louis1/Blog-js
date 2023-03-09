@@ -43,19 +43,23 @@
 }
 
 /* Article */
-#modal {
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
     background: #fff;
     z-index: 10;
-    transition: opacity 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
 }
-
+.modal.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
 #overlay {
     position: fixed;
     opacity: 0;
+    transition: 0.25s ease-in-out;
     top: 0;
     left: 0;
     right: 0;
@@ -63,7 +67,7 @@
     background: rgba(0, 0, 0, 0.8);
     pointer-events: none;
 }
-#overlay:active {
+#overlay.active {
     opacity: 1;
     pointer-events: all;
 }
