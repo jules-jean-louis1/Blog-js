@@ -57,7 +57,7 @@ class Articles
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('SELECT articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at
+        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at
                               FROM articles
                               INNER JOIN categories ON articles.category_id = categories.id
                               INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
@@ -65,5 +65,18 @@ class Articles
         $req->execute(['search' => '%' . $search . '%']);
         $articles = $req->fetchAll(PDO::FETCH_ASSOC);
         return $articles;
+    }
+    public function getSpecificArticle($id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
+                              FROM articles
+                              INNER JOIN categories ON articles.category_id = categories.id
+                              INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
+                              WHERE articles.id = :id');
+        $req->execute(['id' => $id]);
+        $article = $req->fetch(PDO::FETCH_ASSOC);
+        return $article;
     }
 }

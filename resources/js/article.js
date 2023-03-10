@@ -104,11 +104,15 @@ async function getElement() {
                 author.setAttribute("id", "author");
                 author.textContent = "Auteur : " + element.author_login;
 
+                result.addEventListener("click", () => {
+                    window.location.href = "article.php?id=" + element.id;
+                });
                 // Ajouter les éléments HTML créés à la page
                 results.appendChild(result);
                 result.appendChild(artTitle);
                 result.appendChild(Qcate);
                 result.appendChild(author);
+
             }
         }
         if (query == "") {
@@ -116,5 +120,49 @@ async function getElement() {
         }
     })
 }
-search.addEventListener("input", getElement);
 //La fonction getElement commence par récupérer la valeur actuelle de l'input en utilisant search.value.
+search.addEventListener("input", getElement);
+
+// Fonction pour la récupération des articles quand on clique dessus
+async function getArticle(id) {
+    await fetch('searchArticle.php?id=' + id)
+        .then(response => response.json())
+        .then(data => {
+          let article = document.querySelector("#article");
+          if (data.status === 'empty') {
+            article.innerHTML = data.message;
+          } else {
+              let articleHTML = "";
+              for (const art of data.articles) {
+                  // Créer le contenu HTML pour l'article
+                  articleHTML += `
+                    <div id="containerDarticles" class="flex">
+                      <div id="iconeMoreSearch">
+                        <div id="comentaireArticleMoreSearch"></div>
+                      </div>
+                      <div id="articlesMoreSearch" class="flex flex-col">
+                        <div id="infoPost" class="flex flex-col">
+                          <h2>${art.author_login}</h2>
+                          <p class="flex flex-row">
+                            Poster le <time class="date">${art.created_at}</time>
+                            MaJ le <time class="date">${art.updated_at}</time>
+                          </p>
+                        </div>
+                        <div id="title_articleMoreSearch">
+                          <h1>${art.title}</h1>
+                        </div>
+                        <div id="content_articleMoreSearch">
+                          <p>${art.content}</p>
+                        </div>
+                        <div id="commentsOfArticles"></div>
+                      </div>
+                      <div id="infoMoreSearch"></div>
+                    </div>
+                  `;
+              }
+                article.innerHTML = articleHTML;
+          }
+        })
+}
+
+

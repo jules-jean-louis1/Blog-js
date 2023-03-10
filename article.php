@@ -110,7 +110,8 @@ session_start();
                             </div>
                             <div class="py-2">
                                 <button type="submit" id="buttonCreateArticle"
-                                        class="p-2 bg-blue-400 rounded-lg text-white">Afficher les articles
+                                        class="p-2 bg-blue-400 rounded-lg text-white">
+                                    Filtrer
                                 </button>
                             </div>
                         </div>
