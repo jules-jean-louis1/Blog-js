@@ -81,6 +81,7 @@ async function getComments(id) {
             if(data.status === 'empty') {
                 commentaires.innerHTML = data.message;
             } else {
+                commentaires.innerHTML = "";
                 for (const comment of data.comments) {
                     let formattedDateCreate = formatDate(comment.created_at);
                     // Création de la div qui contiendra les commentaires
