@@ -1,3 +1,6 @@
+const BtnAddCommentForm = document.querySelector("#commentForm");
+const formCommentDisplay = document.querySelector("#commentFormDisplay");
+
 // Récupérer l'ID à partir de la query string
 const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
@@ -12,6 +15,11 @@ function formatDate(timestamp) {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${month} ${day}, ${year} à ${hours}:${minutes}`;
+}
+// Fonction qui recupère l'id du commentaire pour répondre
+function replyComment(commentId) {
+    document.querySelector("#commentId").value = commentId;
+    document.getElementById("comment").focus();
 }
 // Fonction pour la récupération des articles quand on clique dessus
 async function getArticle(id) {
@@ -63,19 +71,21 @@ async function getArticle(id) {
 }
 
 // Fonction de récupération des commentaires
+let commentsLoaded = false;
+
 async function getComments(id) {
     let commentaires = document.querySelector("#commentsOfArticles");
     await fetch('resources/assests/fetch/comments/listComments.php?id=' + id)
         .then(response => response.json())
         .then(data => {
             if(data.status === 'empty') {
-                comments.innerHTML = data.message;
+                commentaires.innerHTML = data.message;
             } else {
                 for (const comment of data.comments) {
                     let formattedDateCreate = formatDate(comment.created_at);
                     // Création de la div qui contiendra les commentaires
                     let commentRow = document.createElement("div");
-                    commentRow.classList.add("flex", "flex-col", "border-2", "border-gray-200", "rounded-lg", "shadow-md", "bg-[#1c1f26]", "p-4", "m-2");
+                    commentRow.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#1c1f26]","hover:bg-[#20262d]", "p-4", "m-2");
                     commentRow.setAttribute("id", "commentRow");
                         // Création de la div qui contiendra les infos du commentaire
                         let commentInfo = document.createElement("div");
@@ -83,26 +93,26 @@ async function getComments(id) {
                         commentInfo.setAttribute("id", "commentInfo");
                             // Span qui contiendra le label "Par"
                             let commentRowLabel = document.createElement("span");
-                            commentRowLabel.classList.add("font-lg");
+                            commentRowLabel.classList.add("font-lg", "text-[#a8b3cf]");
                             commentRowLabel.setAttribute("id", "commentRowLabel");
                             commentRowLabel.textContent = "Par";
                             // Span qui contiendra le nom de l'auteur du commentaire
                             let commentAuthor = document.createElement("span");
-                            commentAuthor.classList.add("font-bold");
+                            commentAuthor.classList.add("font-bold", "text-[#fff]");
                             commentAuthor.setAttribute("id", "commentAuthor");
                             commentAuthor.textContent = comment.login;
                             // Span qui contiendra la date de création du commentaire
                             let commentDate = document.createElement("span");
-                            commentDate.classList.add("font-sm");
+                            commentDate.classList.add("font-sm", "text-[#a8b3cf]");
                             commentDate.setAttribute("id", "commentDate");
                             commentDate.textContent = formattedDateCreate;
                         // Création de la div qui contiendra le contenu du commentaire
                         let commentContent = document.createElement("div");
-                        commentContent.classList.add("bg-slate-100", "m-2", "p-2", "rounded-lg");
+                        commentContent.classList.add("m-2", "p-2", "rounded-lg");
                         commentContent.setAttribute("id", "commentContent");
                             // Paragraphe qui contiendra le contenu du commentaire
                             let commentContentP = document.createElement("p");
-                            commentContentP.classList.add("font-sm");
+                            commentContentP.classList.add("font-sm", "text-[#fff]");
                             commentContentP.setAttribute("id", "commentContentP");
                             commentContentP.textContent = comment.content;
                         // Création de la div qui contiendra les boutons de modification et de suppression
@@ -145,6 +155,76 @@ async function getComments(id) {
         })
 }
 
+
+
+// Fonction qui permet d'ajouter un commentaire
+function createFormAddComments(parent) {
+    const FormForAddComments = document.createElement('form');
+    FormForAddComments.action = '';
+    FormForAddComments.method = 'post';
+    FormForAddComments.id = 'FormForAddComments';
+    FormForAddComments.classList.add('border-2');
+
+    const containerFormAddComments = document.createElement('div');
+    containerFormAddComments.id = 'containerFormAddComments';
+    containerFormAddComments.classList.add('flex', 'flex-col');
+
+    const commentIdInput = document.createElement('input');
+    commentIdInput.type = 'hidden';
+    commentIdInput.name = 'comment_id';
+    commentIdInput.id = 'commentId';
+
+    const commentArticleIdInput = document.createElement('input');
+    commentArticleIdInput.type = 'hidden';
+    commentArticleIdInput.name = 'article_id';
+    commentArticleIdInput.id = 'ArticleId';
+    commentArticleIdInput.value = id;
+
+    const commentTextarea = document.createElement('textarea');
+    commentTextarea.name = 'comment';
+    commentTextarea.id = 'comment';
+    commentTextarea.cols = '30';
+    commentTextarea.rows = '10';
+    commentTextarea.placeholder = 'Publier un Commentaire';
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.classList.add('border-2');
+    submitButton.textContent = 'Publier';
+
+    containerFormAddComments.appendChild(commentIdInput);
+    containerFormAddComments.appendChild(commentArticleIdInput);
+    containerFormAddComments.appendChild(commentTextarea);
+    containerFormAddComments.appendChild(submitButton);
+
+    FormForAddComments.appendChild(containerFormAddComments);
+    parent.appendChild(FormForAddComments);
+}
+
+BtnAddCommentForm.addEventListener('click', async () =>{
+    createFormAddComments(formCommentDisplay);
+    const formComment = document.querySelector("#FormForAddComments");
+    formComment.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await fetch('search.php', {
+            method: 'POST',
+            body: new FormData(formComment)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    formCommentDisplay.innerHTML = data.message;
+                    formCommentDisplay.classList.add('messageAlert');
+                    getComments(id);
+                } else {
+                    formCommentDisplay.innerHTML = data.message;
+                    formCommentDisplay.classList.add('messageAlert');
+                }
+
+            })
+
+    })
+});
 getArticle(id);
 getComments(id);
 

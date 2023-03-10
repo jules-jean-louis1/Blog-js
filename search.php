@@ -1,5 +1,29 @@
 <?php
 session_start();
+require_once 'resources/assests/Classes/Comments.php';
+
+
+if (isset($_POST['comment'])) {
+    $comment_id = intval($_POST['comment_id']);
+    $content = htmlspecialchars($_POST['comment']);
+    $idArticle = intval($_POST['article_id']);
+    $user_id = $_SESSION['id'];
+
+    if (!empty($content)) {
+        $comment = new Comments();
+        $comments = $comment->addComment($comment_id, $content, $idArticle, $user_id);
+        header('Content-Type: application/json');
+        if ($comments) {
+            echo json_encode(['status' => 'error', 'comments' => 'Une erreur est survenue']);
+        } else {
+            echo json_encode(['status' => 'success', 'message' => 'Commentaire ajouté avec succès']);
+        }
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'empty', 'message' => 'Veuillez remplir tous les champs']);
+    }
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,6 +43,10 @@ session_start();
 </header>
 <main>
     <div id="article"></div>
+    <div id="commentContainer">
+        <button id="commentForm">Ajouter un commentaire</button>
+        <div id="commentFormDisplay"></div>
+    </div>
     <div id="commentsOfArticles"></div>
 </main>
 </body>
