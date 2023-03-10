@@ -22,7 +22,7 @@ openModalButton.forEach(button => {
     button.addEventListener('click', () => {
         const modal = document.querySelector(button.dataset.modalTarget);
         let category = document.querySelector('#category');
-        getCategory(category);
+        getCategoryForForm (category);
         openModal(modal);
     });
 });
@@ -71,6 +71,15 @@ function  getCategory (category) {
             });
         })
 }
+function  getCategoryForForm (category) {
+    fetch('resources/assests/fetch/fetchCategory.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(element => {
+                category.innerHTML += `<option value="${element.id}">${element.name}</option>`;
+            });
+        })
+}
 
 getCategory(category2);
 
@@ -105,7 +114,7 @@ async function getElement() {
                 author.textContent = "Auteur : " + element.author_login;
 
                 result.addEventListener("click", () => {
-                    window.location.href = "article.php?id=" + element.id;
+                    window.location.href = "search.php?id=" + element.id;
                 });
                 // Ajouter les éléments HTML créés à la page
                 results.appendChild(result);
@@ -125,7 +134,7 @@ search.addEventListener("input", getElement);
 
 // Fonction pour la récupération des articles quand on clique dessus
 async function getArticle(id) {
-    await fetch('searchArticle.php?id=' + id)
+    await fetch('resources/assests/fetch/articles/fetchDisplayArticle.php?id=' + id)
         .then(response => response.json())
         .then(data => {
           let article = document.querySelector("#article");
