@@ -15,7 +15,7 @@ session_start();
     <title>Article</title>
 </head>
 <body>
-<header>
+<header class="border-b-[1px] border-[#52586633]">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
 <main>
@@ -84,15 +84,18 @@ session_start();
     <section>
         <div id="containerArticle">
             <div id="containerSelectCategory" class="flex justify-center items-center">
-                <div class="flex items-center border-2 rounded-lg p-2">
+                <div class="flex flex-row items-start rounded-lg p-2">
                     <form action="" method="post">
-                        <input type="search" name="search" id="searchInput" placeholder="Rechecher un article" autofocus
-                               autocomplete="off" required
-                               class="rounded-lg bg-slate-100 p-2 py-3">
-                        <button type="submit" class="p-2 bg-blue-400 rounded-lg text-white">
-                            &rArr;
-                        </button>
-                        <div id="results"></div>
+                        <div class="flex items-center">
+                            <input type="search" name="search" id="searchInput"
+                                                               placeholder="Rechecher un article" autofocus
+                                                               autocomplete="off" required
+                                                               class="rounded-lg bg-slate-100 p-2 py-3">
+                            <button type="submit" class="p-2 bg-blue-400 rounded-lg text-white">
+                                <img src="resources/images/icon/search.svg">
+                            </button>
+                        </div>
+                        <ul id="results"></ul>
                     </form>
                     <form action="resources/assests/fetch/getArticles.php" method="post">
                         <div class="flex space-x-2">

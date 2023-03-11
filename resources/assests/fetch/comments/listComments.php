@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $comments = $comment->getComments($id);
     header('Content-Type: application/json');
     if (empty($comments)) {
-        echo json_encode(['status' => 'empty', 'message' => 'Aucun Commentaire n\'a était trouvé']);
+        echo json_encode(['status' => 'empty', 'message' => 'Aucun Commentaire n\'a était encore posté']);
     } else {
         echo json_encode(['status' => 'success', 'comments' => $comments]);
     }

@@ -16,7 +16,7 @@ session_start();
     <title>Blog</title>
 </head>
 <body>
-<header>
+<header class="border-b-[1px] border-[#52586633]">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
     <main>

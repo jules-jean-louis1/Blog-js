@@ -101,6 +101,7 @@ async function getElement() {
                 // Créer les éléments HTML avec les informations de l'article
                 let result = document.createElement("div");
                 result.setAttribute("id", "result");
+                result.setAttribute("class", "hover:bg-gray-100 cursor-pointer p-2 my-[2px] rounded-lg border-[1px] border-[#52586633]");
                 let artTitle = document.createElement("h4");
                 artTitle.setAttribute("id", "artTitle");
                 artTitle.textContent = "Titre : " + element.title;

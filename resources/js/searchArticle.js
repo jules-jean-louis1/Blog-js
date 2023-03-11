@@ -345,6 +345,7 @@ function AddCommentForm() {
                     } else {
                         formCommentDisplay.innerHTML = data.message;
                         formCommentDisplay.classList.add('messageAlert');
+
                     }
 
                 })
