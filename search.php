@@ -43,9 +43,11 @@ if (isset($_POST['comment'])) {
 </header>
 <main>
     <div id="article"></div>
-    <div id="commentContainer">
-        <button id="commentForm">Ajouter un commentaire</button>
-        <div id="commentFormDisplay"></div>
+    <div id="commentContainer" class="flex flex-col items-center">
+        <div class="w-[80%]">
+            <button id="commentForm" class="p-2 bg-purple-400">Ajouter un commentaire</button>
+            <div id="commentFormDisplay"></div>
+        </div>
     </div>
     <div id="commentsOfArticles"></div>
 </main>
