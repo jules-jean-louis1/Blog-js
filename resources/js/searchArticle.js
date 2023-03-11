@@ -88,7 +88,7 @@ async function getComments(id) {
                         let formattedDateCreate = formatDate(comment.created_at);
                         // Création de la div qui contiendra les commentaires
                         let commentRow = document.createElement("div");
-                        commentRow.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#1c1f26]", "hover:bg-[#20262d]", "p-4", "m-2");
+                        commentRow.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-[2em]", "shadow-md", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-4");
                         commentRow.setAttribute("id", "commentRow");
                         // Création de la div qui contiendra les infos du commentaire
                         let commentInfo = document.createElement("div");
@@ -96,17 +96,17 @@ async function getComments(id) {
                         commentInfo.setAttribute("id", "commentInfo");
                         // Span qui contiendra le label "Par"
                         let commentRowLabel = document.createElement("span");
-                        commentRowLabel.classList.add("font-lg", "text-[#a8b3cf]");
+                        commentRowLabel.classList.add("font-lg", "text-[#526866a3]");
                         commentRowLabel.setAttribute("id", "commentRowLabel");
                         commentRowLabel.textContent = "Par";
                         // Span qui contiendra le nom de l'auteur du commentaire
                         let commentAuthor = document.createElement("span");
-                        commentAuthor.classList.add("font-bold", "text-[#fff]");
+                        commentAuthor.classList.add("font-bold", "text-[#000]");
                         commentAuthor.setAttribute("id", "commentAuthor");
                         commentAuthor.textContent = comment.login;
                         // Span qui contiendra la date de création du commentaire
                         let commentDate = document.createElement("span");
-                        commentDate.classList.add("font-sm", "text-[#a8b3cf]");
+                        commentDate.classList.add("font-sm", "text-[#526866a3]");
                         commentDate.setAttribute("id", "commentDate");
                         commentDate.textContent = formattedDateCreate;
                         // Création de la div qui contiendra le contenu du commentaire
@@ -115,7 +115,7 @@ async function getComments(id) {
                         commentContent.setAttribute("id", "commentContent");
                         // Paragraphe qui contiendra le contenu du commentaire
                         let commentContentP = document.createElement("p");
-                        commentContentP.classList.add("font-sm", "text-[#fff]");
+                        commentContentP.classList.add("font-sm", "text-[#000]");
                         commentContentP.setAttribute("id", "commentContentP");
                         commentContentP.textContent = comment.content;
                         // Création de la div qui contiendra les boutons de modification et de suppression
@@ -124,22 +124,30 @@ async function getComments(id) {
                         commentButtons.setAttribute("id", "commentButtons");
                         // Bouton de Reponse du commentaire
                         let commentReplyButton = document.createElement("button");
-                        commentReplyButton.classList.add("bg-green-500", "hover:bg-green-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                        commentReplyButton.classList.add("hover:bg-[#1ddc6f3d]", "text-white", "font-bold", "p-2", "rounded-lg");
                         commentReplyButton.setAttribute("id", "commentReplyButton");
-                        commentReplyButton.textContent = "Répondre";
-                        // commentReplyButton.setAttribute("onclick", "replyComment(" + comment.id + ")");
+                             // Icon du bouton de réponse
+                             let CommentReplyButtonIcon = document.createElement("img");
+                             CommentReplyButtonIcon.setAttribute("src", "resources/images/icon/comments.svg");
+                             CommentReplyButtonIcon.setAttribute("class", "green-reply");
                         // Bouton de modification du commentaire
                         let commentEditButton = document.createElement("button");
-                        commentEditButton.classList.add("bg-blue-500", "hover:bg-blue-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                        commentEditButton.classList.add("hover:bg-[#0dcfdc3d]", "text-white", "font-bold", "p-2", "rounded-lg");
                         commentEditButton.setAttribute("id", "commentEditButton");
-                        commentEditButton.textContent = "Modifier";
                         commentEditButton.setAttribute("onclick", "editComment(" + comment.id + ")");
+                             // Icon du bouton de modification
+                             let CommentEditButtonIcon = document.createElement("img");
+                             CommentEditButtonIcon.setAttribute("src", "resources/images/icon/edit1.svg");
+                             CommentEditButtonIcon.setAttribute("class", "blue-edit");
                         // Bouton de suppression du commentaire
                         let commentDeleteButton = document.createElement("button");
-                        commentDeleteButton.classList.add("bg-red-500", "hover:bg-red-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                        commentDeleteButton.classList.add("hover:bg-[#5E0700]", "text-white", "font-bold", "p-2", "rounded-lg");
                         commentDeleteButton.setAttribute("id", "commentDeleteButton");
-                        commentDeleteButton.textContent = "Supprimer";
                         commentDeleteButton.setAttribute("onclick", "deleteComment(" + comment.id + ")");
+                             // Icon du bouton de suppression
+                             let subCommentDeleteButtonIcon = document.createElement("img");
+                             subCommentDeleteButtonIcon.setAttribute("src", "resources/images/icon/trashcan.svg");
+                             subCommentDeleteButtonIcon.setAttribute("class", "red-delete");
 
                         let replyList = document.createElement("ul");
                         replyList.classList.add("ml-8", "mb-4");
@@ -159,15 +167,18 @@ async function getComments(id) {
                         commentContent.appendChild(commentContentP);
                         commentRow.appendChild(commentButtons);
                         commentButtons.appendChild(commentReplyButton);
+                        commentReplyButton.appendChild(CommentReplyButtonIcon);
                         commentButtons.appendChild(commentEditButton);
+                        commentEditButton.appendChild(CommentEditButtonIcon);
                         commentButtons.appendChild(commentDeleteButton);
+                        commentDeleteButton.appendChild(subCommentDeleteButtonIcon);
                         commentRow.appendChild(replyList);
 
                         // Appel de la fonction de récupération des réponses aux commentaires
                          for (const subComment of data.comments) {
                              if (subComment.parent_comment_id == comment.id && subComment.id != subComment.parent_comment_id) { // si le commentaire est une réponse à ce commentaire parent
                                  let subLi = document.createElement("li");
-                                 subLi.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#1c1f26]", "hover:bg-[#20262d]", "p-4", "m-2");
+                                 subLi.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-[2em]", "shadow-md", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
                                  subLi.setAttribute("id", "comment-" + subComment.id);
 
                                     let subCommentInfo = document.createElement("div");
@@ -175,17 +186,17 @@ async function getComments(id) {
                                     subCommentInfo.setAttribute("id", "subCommentInfo");
                                     // Span qui contiendra le label "Par"
                                     let subCommentRowLabel = document.createElement("span");
-                                    subCommentRowLabel.classList.add("font-lg", "text-[#a8b3cf]");
+                                    subCommentRowLabel.classList.add("font-lg", "text-[#526866a3]");
                                     subCommentRowLabel.setAttribute("id", "subCommentRowLabel");
                                     subCommentRowLabel.textContent = "Par";
                                     // Span qui contiendra le nom de l'auteur du commentaire
                                     let subCommentAuthor = document.createElement("span");
-                                    subCommentAuthor.classList.add("font-bold", "text-[#fff]");
+                                    subCommentAuthor.classList.add("font-bold", "text-[#000]");
                                     subCommentAuthor.setAttribute("id", "subCommentAuthor");
                                     subCommentAuthor.textContent = subComment.login;
                                     // Span qui contiendra la date de création du commentaire
                                     let subCommentDate = document.createElement("span");
-                                    subCommentDate.classList.add("font-sm", "text-[#a8b3cf]");
+                                    subCommentDate.classList.add("font-sm", "text-[#526866a3]");
                                     subCommentDate.setAttribute("id", "subCommentDate");
                                     subCommentDate.textContent = formattedDateCreate;
                                     // Création de la div qui contiendra le contenu du commentaire
@@ -194,7 +205,7 @@ async function getComments(id) {
                                     subCommentContent.setAttribute("id", "subCommentContent");
                                     // Paragraphe qui contiendra le contenu du commentaire
                                     let subCommentContentP = document.createElement("p");
-                                    subCommentContentP.classList.add("font-sm", "text-[#fff]");
+                                    subCommentContentP.classList.add("font-sm", "text-[#000]");
                                     subCommentContentP.setAttribute("id", "subCommentContentP");
                                     subCommentContentP.textContent = subComment.content;
                                     // Création de la div qui contiendra les boutons de modification et de suppression
@@ -203,19 +214,28 @@ async function getComments(id) {
                                     subCommentButtons.setAttribute("id", "subCommentButtons");
                                     // Bouton de Reponse du commentaire
                                     let subCommentReplyButton = document.createElement("button");
-                                    subCommentReplyButton.classList.add("bg-green-500", "hover:bg-green-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                                    subCommentReplyButton.classList.add("hover:bg-[#1ddc6f3d]", "text-white", "font-bold", "p-2", "rounded-lg");
                                     subCommentReplyButton.setAttribute("id", "subCommentReplyButton");
-                                    subCommentReplyButton.textContent = "Répondre";
+                                    // Icon du bouton de réponse
+                                    let subCommentReplyButtonIcon = document.createElement("img");
+                                    subCommentReplyButtonIcon.setAttribute("src", "resources/images/icon/comments.svg");
+                                    subCommentReplyButtonIcon.setAttribute("class", "green-reply");
                                     // Bouton de modification du commentaire
                                     let subCommentEditButton = document.createElement("button");
-                                    subCommentEditButton.classList.add("bg-blue-500", "hover:bg-blue-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                                    subCommentEditButton.classList.add("hover:bg-[#0dcfdc3d]", "text-white", "font-bold", "p-2", "rounded-lg");
                                     subCommentEditButton.setAttribute("id", "subCommentEditButton");
-                                    subCommentEditButton.textContent = "Modifier";
+                                    // Icon du bouton de modification
+                                    let subCommentEditButtonIcon = document.createElement("img");
+                                    subCommentEditButtonIcon.setAttribute("src", "resources/images/icon/edit1.svg");
+                                    subCommentEditButtonIcon.setAttribute("class", "blue-edit");
                                     // Bouton de suppression du commentaire
                                     let subCommentDeleteButton = document.createElement("button");
-                                    subCommentDeleteButton.classList.add("bg-red-500", "hover:bg-red-700", "text-white", "font-bold", "py-2", "px-4", "rounded", "m-2");
+                                    subCommentDeleteButton.classList.add("hover:bg-[#5E0700]", "text-white", "font-bold", "p-2", "rounded-lg");
                                     subCommentDeleteButton.setAttribute("id", "subCommentDeleteButton");
-                                    subCommentDeleteButton.textContent = "Supprimer";
+                                    // Icon du bouton de suppression
+                                    let subCommentDeleteButtonIcon = document.createElement("img");
+                                    subCommentDeleteButtonIcon.setAttribute("src", "resources/images/icon/trashcan.svg");
+                                    subCommentDeleteButtonIcon.setAttribute("class", "red-delete");
                                     // Ajout fonction sur les boutons
                                     subCommentReplyButton.addEventListener('click', function () {
                                         AddCommentForm();
@@ -231,8 +251,11 @@ async function getComments(id) {
                                     subCommentContent.appendChild(subCommentContentP);
                                     subLi.appendChild(subCommentButtons);
                                     subCommentButtons.appendChild(subCommentReplyButton);
+                                    subCommentReplyButton.appendChild(subCommentReplyButtonIcon);
                                     subCommentButtons.appendChild(subCommentEditButton);
+                                    subCommentEditButton.appendChild(subCommentEditButtonIcon);
                                     subCommentButtons.appendChild(subCommentDeleteButton);
+                                    subCommentDeleteButton.appendChild(subCommentDeleteButtonIcon);
 
                              }
                          }

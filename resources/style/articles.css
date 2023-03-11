@@ -74,3 +74,32 @@
 #formCreateArticle {
      display: none;
  }
+/* Bouton ajout Commentaires */
+#commentForm {
+    box-shadow: 0 6px 6px -2px #c029f066;
+}
+/* Color of SVG */
+.green-reply, .blue-edit, .red-delete {
+    filter: invert(29%) sepia(2%) saturate(4623%) hue-rotate(184deg) brightness(98%) contrast(73%);
+}
+
+#subCommentReplyButton:hover > .green-reply {
+    filter: invert(70%) sepia(49%) saturate(564%) hue-rotate(95deg) brightness(97%) contrast(96%);
+}
+
+#subCommentEditButton:hover > .blue-edit {
+    filter: invert(80%) sepia(63%) saturate(1356%) hue-rotate(140deg) brightness(95%) contrast(89%);
+}
+#subCommentDeleteButton:hover > .red-delete {
+    filter: invert(31%) sepia(69%) saturate(4555%) hue-rotate(347deg) brightness(89%) contrast(114%);
+}
+/* Color Button Comment */
+#commentReplyButton:hover > .green-reply {
+    filter: invert(70%) sepia(49%) saturate(564%) hue-rotate(95deg) brightness(97%) contrast(96%);
+}
+#commentEditButton:hover > .blue-edit {
+    filter: invert(80%) sepia(63%) saturate(1356%) hue-rotate(140deg) brightness(95%) contrast(89%);
+}
+#commentDeleteButton:hover > .red-delete {
+    filter: invert(31%) sepia(69%) saturate(4555%) hue-rotate(347deg) brightness(89%) contrast(114%);
+}
