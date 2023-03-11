@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 /* HEADER */
@@ -35,7 +37,8 @@
     background-image: linear-gradient(rgba(56, 139, 253, 0.15), rgba(56, 139, 253, 0.15));
     padding: 13px;
     border: 1px solid rgba(56,139, 253, 0.4);
-    color: #c1d1d9;
+    border-radius: 0.5rem;
+    color: #526866a3;
 }
 .hidden {
     transition: ease-out 1.5s;
@@ -78,6 +81,13 @@
 #commentForm {
     box-shadow: 0 6px 6px -2px #c029f066;
 }
+textarea {
+    resize: none;
+}
+#comment {
+    resize: none;
+}
+
 /* Color of SVG */
 .green-reply, .blue-edit, .red-delete {
     filter: invert(29%) sepia(2%) saturate(4623%) hue-rotate(184deg) brightness(98%) contrast(73%);

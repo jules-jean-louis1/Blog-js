@@ -39,7 +39,7 @@ async function getArticle(id) {
                 let formattedDateU = formatDate(art.updated_at);
                 articleHTML = `
           <div id="containerDarticles" class="flex justify-center">
-                <div class="border-2 border-gray-200 rounded-lg shadow-md p-4">
+                <div class="p-4">
                     <div id="iconeMoreSearch">
                       <div id="comentaireArticleMoreSearch"></div>
                     </div>
@@ -47,7 +47,7 @@ async function getArticle(id) {
                       <div id="infoPost" class="flex flex-col">
                         <h2 class="text-xl font-bold">${art.author_login}</h2>
                         <p class="flex flex-row">
-                          Poster en<time class="date">${formattedDateC}</time>`
+                          Poster · <time class="date">${formattedDateC}</time>`
                         if (art.updated_at != null) {
                             articleHTML += `
                           MaJ le <time class="date">${formattedDateU}</time>
@@ -55,11 +55,14 @@ async function getArticle(id) {
                         }
                         articleHTML += `
                         </p>
+                        <p class="flex flex-row">
+                            <span class="bg-[#EAEBEC] rounded-lg p-[1px] text-[#526866a3] font-bold">#${art.category_name}</span>
+                        </p>
                       </div>
-                      <div id="title_articleMoreSearch" class="bg-slate-100 m-2 p-2 rounded-lg">
+                      <div id="title_articleMoreSearch" class="my-2 p-2 rounded-lg">
                             <h1 class="text-4xl font-bold">${art.title}</h1>
                       </div>
-                      <div id="content_articleMoreSearch" class="bg-slate-100 m-2 p-2 rounded-lg">
+                      <div id="content_articleMoreSearch" class="m-2 p-2 rounded-lg">
                             <p>${art.content}</p>
                       </div>
                     </div>
@@ -278,7 +281,7 @@ function createFormAddComments(parent) {
     FormForAddComments.action = '';
     FormForAddComments.method = 'post';
     FormForAddComments.id = 'FormForAddComments';
-    FormForAddComments.classList.add('border-2');
+    // FormForAddComments.classList.add('');
 
     const containerFormAddComments = document.createElement('div');
     containerFormAddComments.id = 'containerFormAddComments';
@@ -299,18 +302,22 @@ function createFormAddComments(parent) {
     commentTextarea.name = 'comment';
     commentTextarea.id = 'comment';
     commentTextarea.cols = '30';
-    commentTextarea.rows = '10';
+    commentTextarea.rows = '5';
     commentTextarea.placeholder = 'Publier un Commentaire';
+    commentTextarea.classList.add('bg-[#eaebec]', 'p-2', 'rounded-lg')
+
+    const containerSubmitButton = document.createElement('div');
 
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
-    submitButton.classList.add('border-2');
+    submitButton.classList.add('bg-[#04b43533]', 'hover:bg-[#15ce5c]', 'text-[#526866a3]', 'hover:text-[#fff]', 'font-bold', 'p-2', 'rounded-lg', 'mt-2');
     submitButton.textContent = 'Publier';
 
     containerFormAddComments.appendChild(commentIdInput);
     containerFormAddComments.appendChild(commentArticleIdInput);
     containerFormAddComments.appendChild(commentTextarea);
-    containerFormAddComments.appendChild(submitButton);
+    containerFormAddComments.appendChild(containerSubmitButton);
+    containerSubmitButton.appendChild(submitButton);
 
     FormForAddComments.appendChild(containerFormAddComments);
     parent.appendChild(FormForAddComments);
