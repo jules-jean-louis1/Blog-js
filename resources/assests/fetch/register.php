@@ -34,17 +34,22 @@ if (isset($_POST['login'])) {
 }
 ?>
 
-<form action="" method="post" id="resgister-form" class="px-4 py-5 flex flex-col space-y-2">
-    <div id="containerCloseDialog">
-        <button type="button" id="closeDialog" class="p-2 bg-slate-200">X</button>
+<form action="" method="post" id="resgister-form" class="rounded-lg h-full max-h-[calc(100vh-2.5rem)]
+                mobileL:h-[40rem] mobileL:max-h-[calc(100vh-5rem)]
+                w-[26.25rem] px-4 py-5 flex flex-col space-y-2">
+    <div id="containerCloseDialog" class="flex flex-row justify-between items-center">
+        <p>
+            <span class="text-lg font-bold">Inscrivez-vous sur Blog</span>
+        </p>
+        <button type="button" id="closeDialog" class="p-2 bg-slate-200 rounded-full hover:text-black">&times;</button>
     </div>
     <div class="flex flex-col">
         <label for="login">Login</label>
-        <input type="text" name="login" id="login" placeholder="login" class="p-2 bg-slate-100">
+        <input type="text" name="login" id="login" placeholder="login" class="p-2 bg-slate-100 rounded-lg">
     </div>
     <div class="flex flex-col">
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" placeholder="password" class="p-2 bg-slate-100">
+        <input type="password" name="password" id="password" placeholder="password" class="p-2 bg-slate-100 rounded-lg">
     </div>
     <div class="flex flex-col">
         <label for="passwordConfirm">Confirmer le mot de passe</label>
@@ -52,6 +57,6 @@ if (isset($_POST['login'])) {
     </div>
     <div id="errorMsg"></div>
     <div id="containerSubmit">
-        <button type="submit" name="submit" id="submit" class="p-2 bg-slate-200">Inscription</button>
+        <button type="submit" name="submit" id="submit" class="p-2 rounded-lg bg-[#AC1DE4] font-semibold text-white">Inscription</button>
     </div>
 </form>

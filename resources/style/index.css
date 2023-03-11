@@ -57,6 +57,11 @@
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
 }
+.dialog_modal {
+    border-radius: 0.5rem;
+    background-color: #EAEBEC;
+    border: 1px solid #a8b3cf;
+}
 #overlay {
     position: fixed;
     opacity: 0;
