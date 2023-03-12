@@ -1,4 +1,7 @@
 import { displayError, displaySuccess ,formatDate } from './function/function.js';
+// Récupérer l'ID à partir de la query string
+const searchParams = new URLSearchParams(window.location.search);
+const page = searchParams.get("page");
 
 const openModalButton = document.querySelectorAll('[data-modal-target]');
 const closeModalButton = document.querySelectorAll('[data-close-button]');
@@ -6,6 +9,8 @@ const overlay = document.getElementById('overlay');
 const formCreateArticle = document.querySelector('#form-modal-article');
 const category2 = document.querySelector('#category2');
 const search = document.querySelector("#searchInput");
+const BtnFilter = document.querySelector("#buttonFilterArticle");
+const formFilterArticles = document.querySelector("#FormFilterArticles");
 
 const openModal = (modal) => {
     if (modal == null) return;
@@ -99,20 +104,26 @@ async function getElement() {
         } else {
             for (const element of data.articles) {
                 // Créer les éléments HTML avec les informations de l'article
-                let result = document.createElement("div");
+                let result = document.createElement("li");
                 result.setAttribute("id", "result");
                 result.setAttribute("class", "hover:bg-gray-100 cursor-pointer p-2 my-[2px] rounded-lg border-[1px] border-[#52586633]");
                 let artTitle = document.createElement("h4");
                 artTitle.setAttribute("id", "artTitle");
-                artTitle.textContent = "Titre : " + element.title;
+                artTitle.setAttribute("class", "font-bold");
+                artTitle.textContent = element.title;
+
+                // Div pour les catégories + auteur
+                let divCate = document.createElement("div");
+                divCate.setAttribute("class", "flex flex-row space-x-2 items-center mt-2");
 
                 let Qcate = document.createElement("p");
                 Qcate.setAttribute("id", "Qcate");
-                Qcate.textContent = "Catégorie : " + element.category_name;
+                Qcate.setAttribute("class", "text-[#525866] text-sm");
+                Qcate.textContent = "#" + element.category_name;
 
                 let author = document.createElement("p");
                 author.setAttribute("id", "author");
-                author.textContent = "Auteur : " + element.author_login;
+                author.textContent = "Par " + element.author_login;
 
                 result.addEventListener("click", () => {
                     window.location.href = "search.php?id=" + element.id;
@@ -120,8 +131,9 @@ async function getElement() {
                 // Ajouter les éléments HTML créés à la page
                 results.appendChild(result);
                 result.appendChild(artTitle);
-                result.appendChild(Qcate);
-                result.appendChild(author);
+                result.appendChild(divCate);
+                divCate.appendChild(author);
+                divCate.appendChild(Qcate);
 
             }
         }
@@ -175,4 +187,83 @@ async function getArticle(id) {
         })
 }
 
+// Fonction pour afficher le nombre de pages
+async function getPages() {
+    await fetch('resources/assests/fetch/articles/countPage.php')
+        .then(response => response.json())
+        .then(data => {
+            let pages = document.querySelector("#pages");
+            let pagesHTML = "";
+            for (let i = 0; i < data.pages.length; i++) {
+                const page = data.pages[i];
+                pagesHTML += `
+                            <li class="page-item border-[1px] p-2 rounded-lg">
+                                <!--Penser a changer le href pour la page pour index-->
+                                <a class="page-link" href="article.php?page=${page}">${page}</a>
+                            </li>
+                          `;
+            }
+
+            pages.innerHTML = pagesHTML;
+        })
+}
+
+// Fonction pour afficher les articles
+/*async function getArticles(page) {
+    await fetch('article.php?page=' + page)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let articlesDisplay = document.querySelector("#articlesContainerDisplay");
+            for (articles of data) {
+
+            }
+        })
+}
+getArticles(page);*/
+
+let category = 'all';
+let order = 'ASC';
+async function getArticles(page, category, order) {
+    const params = new URLSearchParams();
+    params.append("page", page);
+    params.append("category2", category);
+    params.append("order", order);
+
+    const response = await fetch(`resources/assests/fetch/articles/getArticles.php?${params.toString()}`);
+    const data = await response.json();
+
+    let articlesDisplay = document.querySelector("#articlesContainerDisplay");
+    articlesDisplay.innerHTML = "";
+    if (data.status === 'find') {
+        for (const articles of data.articles) {
+            // Créer le contenu HTML pour l'article
+            let articleContainer = document.createElement("div");
+            articleContainer.setAttribute("class", "flex flex-col items-center");
+            articleContainer.textContent = articles.title;
+
+            // Ajouter le contenu HTML à la page
+            articlesDisplay.appendChild(articleContainer);
+        }
+    } else {
+        let articleContainer = document.createElement("div");
+        articleContainer.setAttribute("class", "flex flex-col items-center");
+        articleContainer.textContent = data.message;
+
+        // Ajouter le contenu HTML à la page
+        articlesDisplay.appendChild(articleContainer);
+    }
+
+}
+
+getArticles(page, category, order);
+
+formFilterArticles.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const formData = new FormData(formFilterArticles);
+    const category = formFilterArticles.querySelector("#category2").value;
+    const order = formFilterArticles.querySelector("#order").value;
+    getArticles(page, category, order);
+});
+getPages();
 

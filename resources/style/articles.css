@@ -7,6 +7,9 @@
     font-family: 'Inter', sans-serif;
 }
 
+li {
+    list-style: none;
+}
 /* HEADER */
 
 #dialog {
@@ -77,6 +80,29 @@
 #formCreateArticle {
      display: none;
  }
+/*#results {
+    position: absolute;
+    width: 30%;
+    top: 20%;
+    left: 190px;
+    z-index: 10;
+    background-color: #ffffff;
+    padding: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#results li {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #52586633;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#results li:hover {
+    background-color: #e5e7eb;
+}*/
 /* Bouton ajout Commentaires */
 #commentForm {
     box-shadow: 0 6px 6px -2px #c029f066;

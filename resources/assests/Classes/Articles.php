@@ -25,27 +25,48 @@ class Articles
         $categories = json_encode($categories);
         return $categories;
     }
-    public function getArticles($page, $limit, $category = null) {
+    public function numberPage()
+    {
         $db = new Database();
         $bdd = $db->getBdd();
+
+        // Compter le nombre total d'articles
+        $countQuery = "SELECT COUNT(*) as count FROM articles";
+        $countResult = $bdd->query($countQuery)->fetch(PDO::FETCH_ASSOC);
+        $count = $countResult['count'];
+
+        // Calculer le nombre total de pages
+        $pages = ceil($count / 10); // 10 est le nombre d'articles par page que vous souhaitez afficher
+
+        return $pages;
+    }
+    public function getArticles($page, $category, $order)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+
+        // Nombre d'articles par page
+        $limit = 10;
+
+        // Calcul de l'offset en fonction de la page demandée
         $offset = ($page - 1) * $limit;
 
-        $req = 'SELECT articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at
-                FROM articles
-                INNER JOIN categories ON articles.category_id = categories.id
-                INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id';
+        $req = 'SELECT articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
+        FROM articles
+        INNER JOIN categories ON articles.category_id = categories.id
+        INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id';
 
-        if ($category) {
+        if ($category && $category != "all") {
             $req .= ' WHERE categories.name = :category';
         }
 
-        $req .= ' LIMIT :limit OFFSET :offset';
+        $req .= " ORDER BY articles.created_at $order LIMIT :limit OFFSET :offset";
 
         $stmt = $bdd->prepare($req);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 
-        if ($category) {
+        if ($category && $category != "all") {
             $stmt->bindParam(':category', $category, PDO::PARAM_STR);
         }
 

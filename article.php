@@ -1,5 +1,8 @@
 <?php
 session_start();
+require_once 'resources/assests/Classes/Articles.php';
+
+
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +23,7 @@ session_start();
 </header>
 <main>
     <section>
-        <div id="containerCreateArticle">
+        <div id="containerCreateArticle" class="flex justify-center items-center">
             <?php if (isset($_SESSION['droits']) && ($_SESSION['droits'] == 'administrateur' || $_SESSION['droits'] == 'moderateur')) { ?>
             <!-- Le code pour afficher l'interface d'écriture d'article -->
                 <div id="titleArticlePage">
@@ -97,11 +100,12 @@ session_start();
                         </div>
                         <ul id="results"></ul>
                     </form>
-                    <form action="resources/assests/fetch/getArticles.php" method="post">
+                    <form action="resources/assests/fetch/articles/getArticles.php" method="post" id="FormFilterArticles">
                         <div class="flex space-x-2">
                             <div class="py-2">
                                 <label for="category2" class="font-semibold text-lg">Filtrer :</label>
                                 <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
+                                    <option value="all">Aucun</option>
                                 </select>
                             </div>
                             <div class="py-2">
@@ -112,7 +116,7 @@ session_start();
                                 </select>
                             </div>
                             <div class="py-2">
-                                <button type="submit" id="buttonCreateArticle"
+                                <button type="submit" id="buttonFilter"
                                         class="p-2 bg-blue-400 rounded-lg text-white">
                                     Filtrer
                                 </button>
@@ -120,6 +124,21 @@ session_start();
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="flex justify-center">
+        <div id="containerArticlePage" class="w-[98%] lg:w-[65%]">
+            <div class="">
+                <div class="flex flex-row items-center justify-between">
+                    <h1 class="text-xl font-bold">Articles</h1>
+                    <div id="containerPagination">
+                        <div id="Paginations">
+                            <ul id="pages" class="flex space-x-2"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="articlesContainerDisplay"></div>
             </div>
         </div>
     </section>
