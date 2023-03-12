@@ -33,7 +33,7 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, user_avatar, droits, member_since) VALUES (:login, :password , "default_avatar", "utilisateur", NOW())');
+        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits, member_since) VALUES (:login, :password , "utilisateur", NOW())');
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['login' => $login, 'password' => $password]);
     }
@@ -48,7 +48,7 @@ class Users
             if (password_verify($password, $result['password'])) {
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['login'] = $result['login'];
-                $_SESSION['user_avatar'] = $result['user_avatar'];
+                /*$_SESSION['user_avatar'] = $result['user_avatar'];*/
                 $_SESSION['droits'] = $result['droits'];
                 return true;
             } else {

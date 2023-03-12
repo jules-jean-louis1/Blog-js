@@ -44,12 +44,22 @@ class Articles
     {
         $db = new Database();
         $bdd = $db->getBdd();
+// Vérifier si le numéro de page est valide
+        if (!$page || $page < 1) {
+            $page = 1;
+        }
+
 
         // Nombre d'articles par page
         $limit = 10;
 
-        // Calcul de l'offset en fonction de la page demandée
+// Calcul de l'offset en fonction de la page demandée
         $offset = ($page - 1) * $limit;
+
+// Définir l'offset à 0 si le numéro de page est inférieur à 1
+        if ($offset < 0) {
+            $offset = 0;
+        }
 
         $req = "SELECT articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
                 categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
@@ -67,6 +77,7 @@ class Articles
         $stmt = $bdd->prepare($req);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+
 
         if ($category && $category != "all") {
             $stmt->bindParam(':category', $category, PDO::PARAM_STR);
