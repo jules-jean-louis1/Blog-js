@@ -128,7 +128,7 @@ require_once 'resources/assests/Classes/Articles.php';
         </div>
     </section>
     <section class="flex justify-center">
-        <div id="containerArticlePage" class="w-[98%] lg:w-[65%]">
+        <div id="containerArticlePage" class="w-[98%] lg:w-[85%]">
             <div class="">
                 <div class="flex flex-row items-center justify-between">
                     <h1 class="text-xl font-bold">Articles</h1>
@@ -138,7 +138,7 @@ require_once 'resources/assests/Classes/Articles.php';
                         </div>
                     </div>
                 </div>
-                <div id="articlesContainerDisplay"></div>
+                <div id="articlesContainerDisplay" class="flex flex-wrap"></div>
             </div>
         </div>
     </section>

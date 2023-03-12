@@ -36,7 +36,7 @@ class Articles
         $count = $countResult['count'];
 
         // Calculer le nombre total de pages
-        $pages = ceil($count / 10); // 10 est le nombre d'articles par page que vous souhaitez afficher
+        $pages = ceil($count / 9); // 9 est le nombre d'articles par page que vous souhaitez afficher
 
         return $pages;
     }
@@ -51,10 +51,12 @@ class Articles
         // Calcul de l'offset en fonction de la page demandée
         $offset = ($page - 1) * $limit;
 
-        $req = 'SELECT articles.title, articles.content, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
-        FROM articles
-        INNER JOIN categories ON articles.category_id = categories.id
-        INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id';
+        $req = "SELECT articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
+                categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
+                FROM articles
+                INNER JOIN categories ON articles.category_id = categories.id
+                INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id";
+
 
         if ($category && $category != "all") {
             $req .= ' WHERE categories.name = :category';

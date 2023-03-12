@@ -239,11 +239,47 @@ async function getArticles(page, category, order) {
         for (const articles of data.articles) {
             // Créer le contenu HTML pour l'article
             let articleContainer = document.createElement("div");
-            articleContainer.setAttribute("class", "flex flex-col items-center");
-            articleContainer.textContent = articles.title;
+            articleContainer.setAttribute("class", "flex flex-col items-center bg-[#F5F8FC] rounded-lg ease-in duration-300 lg:w-1/3 p-3 min-h-[20.5rem]" +
+                " border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866] cursor-pointer");
+            // Titre de l'article
+            let articleTitle = document.createElement("h2");
+            articleTitle.setAttribute("class", "font-bold text-xl");
+            articleTitle.textContent = articles.title;
+            // Catégorie de l'article
+            let articleCategory = document.createElement("p");
+            articleCategory.setAttribute("class", "text-[#525866] text-sm");
+            articleCategory.textContent = "#" + articles.category_name;
+            // Auteur de l'article
+            let articleAuthor = document.createElement("p");
+            articleAuthor.setAttribute("class", "text-[#525866] text-sm");
+            articleAuthor.textContent = "Par " + articles.author_login;
+            // Date de création de l'article
+            let articleCreatedAt = document.createElement("p");
+            articleCreatedAt.setAttribute("class", "text-[#525866] text-sm");
+            articleCreatedAt.textContent = "Créé le " + articles.created_at;
+            // Date de mise à jour de l'article
+            let articleUpdatedAt = document.createElement("p");
+            articleUpdatedAt.setAttribute("class", "text-[#525866] text-sm");
+            articleUpdatedAt.textContent = "Mise à jour le " + articles.updated_at;
+            // Contenu de l'article
+            let articleContent = document.createElement("p");
+            articleContent.setAttribute("class", "text-[#525866] text-sm");
+            articleContent.textContent = articles.content_preview;
+            // Bouton pour lire l'article
+            let articleRead = document.createElement("a");
+            articleRead.setAttribute("class", "bg-[#F9A826] text-white text-sm font-bold py-2 px-4 rounded");
+            articleRead.setAttribute("href", "search.php?id=" + articles.id);
+            articleRead.textContent = "Lire l'article";
 
             // Ajouter le contenu HTML à la page
             articlesDisplay.appendChild(articleContainer);
+            articleContainer.appendChild(articleTitle);
+            articleContainer.appendChild(articleCategory);
+            articleContainer.appendChild(articleAuthor);
+            articleContainer.appendChild(articleCreatedAt);
+            articleContainer.appendChild(articleUpdatedAt);
+            articleContainer.appendChild(articleContent);
+            articleContainer.appendChild(articleRead);
         }
     } else {
         let articleContainer = document.createElement("div");
