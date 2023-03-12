@@ -1,42 +1,6 @@
 <?php
 session_start();
-require_once 'resources/assests/Classes/Users.php';
 
-if (isset($_POST['update'])) {
-    $login = htmlspecialchars($_POST['login']);
-    $password = htmlspecialchars($_POST['password']);
-    $passwordConfirm = htmlspecialchars($_POST['passwordConfirm']);
-
-    $user = new Users();
-    if (!empty($login)) {
-        $user->updateLogin($login, $_SESSION['id']);
-        $_SESSION['login'] = $login;
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'loginUp', 'message' => 'Votre login a bien été modifié']);
-    }
-    if (!empty($password) && !empty($passwordConfirm)) {
-        if ($password == $passwordConfirm) {
-            $user->updatePassword($password, $_SESSION['id']);
-            header('Content-Type: application/json');
-            echo json_encode(['status' => 'passwordUp', 'message' => 'Votre mot de passe a bien été modifié']);
-        } else {
-            header('Content-Type: application/json');
-            echo json_encode(['status' => 'error', 'message' => 'Les mots de passe ne correspondent pas']);
-        }
-    } else {
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'Veuillez remplir tous les champs']);
-    }
-    die();
-}
-if (isset($_POST['delete'])) {
-    $user = new Users();
-    $user->deleteUser($_SESSION['id']);
-    session_destroy();
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'delete', 'message' => 'Votre compte a bien été supprimé']);
-    die();
-}
 ?>
 <?php if (isset($_SESSION['login']) != null) :?>
 <!DOCTYPE html>
@@ -57,10 +21,10 @@ if (isset($_POST['delete'])) {
 </header>
 <main>
     <div id="formProfil" class="flex justify-center w-1/2">
-        <form action="" method="post" id="updateprofil-form" class="flex flex-col space-y-2">
+        <form action="resources/assests/fetch/profil/updateProfil.php" method="post" id="updateprofil-form" class="flex flex-col space-y-2">
             <div class="flex flex-col space-y-2">
                 <label for="login">Login</label>
-                <input type="text" name="login" id="login" value="<?= $_SESSION['login'] ?>" class="p-2 rounded-lg bg-slate-100">
+                <input type="text" name="login" id="login" placeholder="<?= $_SESSION['login'] ?>" class="p-2 rounded-lg bg-slate-100">
             </div>
             <div class="flex flex-col space-y-2">
                 <label for="password">Mot de passe</label>
@@ -74,7 +38,9 @@ if (isset($_POST['delete'])) {
                 <label for="avatar">Avatar</label>
                 <input type="file" name="avatar" id="avatar"  class="p-2 rounded-lg bg-slate-100">
             </div>
-            <div id="errorMsg"></div>
+            <div id="containerMessageProfil" class="h-[40px]">
+                <div id="errorMsg"></div>
+            </div>
             <div class="flex flex-col space-y-2">
                 <button type="submit" id="update" name="update" class="p-2 rounded-lg bg-green-500 text-white">Update</button>
             </div>
