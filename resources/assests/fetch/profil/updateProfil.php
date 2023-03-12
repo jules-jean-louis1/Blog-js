@@ -2,6 +2,11 @@
 session_start();
 require_once '../../Classes/Users.php';
 
+if (empty($_POST['login']) && empty($_POST['password']) && empty($_POST['passwordConfirm'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'empty', 'message' => 'Veuillez remplir au moins un champ']);
+    die();
+}
 if (!empty($_POST['login'])) {
     $login = htmlspecialchars($_POST['login']);
 
@@ -10,7 +15,7 @@ if (!empty($_POST['login'])) {
     $_SESSION['login'] = $login;
     header('Content-Type: application/json');
     echo json_encode(['status' => 'loginUp', 'message' => 'Votre login a bien été modifié']);
-
+    die();
 }
 
 if (isset($_POST['password']) && isset($_POST['passwordConfirm'])) {
@@ -36,6 +41,8 @@ if (isset($_POST['password']) && isset($_POST['passwordConfirm'])) {
         header('Content-Type: application/json');
         echo json_encode(['status' => 'empty', 'message' => 'Veuillez remplir les 2 champs du mot de passe']);
     }
+    die();
 }
+
 
 ?>

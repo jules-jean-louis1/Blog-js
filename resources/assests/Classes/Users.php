@@ -33,7 +33,7 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits) VALUES (:login, :password , "utilisateur")');
+        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, user_avatar, droits, member_since) VALUES (:login, :password , "default_avatar", "utilisateur", NOW())');
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['login' => $login, 'password' => $password]);
     }
@@ -48,6 +48,7 @@ class Users
             if (password_verify($password, $result['password'])) {
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['login'] = $result['login'];
+                $_SESSION['user_avatar'] = $result['user_avatar'];
                 $_SESSION['droits'] = $result['droits'];
                 return true;
             } else {
@@ -95,5 +96,12 @@ class Users
         $bdd = $db->getBdd();
         $req = $bdd->prepare('UPDATE `utilisateurs` SET `droits` = :droits WHERE `utilisateurs`.`id` = :id');
         $req->execute(['droits' => $droits, 'id' => $id]);
+    }
+    public function updateAvatar($id, $user_avatar)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE `utilisateurs` SET `user_avatar` = :user_avatar WHERE `utilisateurs`.`id` = :id');
+        $req->execute(['user_avatar' => $user_avatar, 'id' => $id]);
     }
 }
