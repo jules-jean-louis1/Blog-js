@@ -110,6 +110,9 @@ li {
 #commentForm , #zone_recherche{
     box-shadow: 0 6px 6px -2px #c029f066;
 }
+#buttonCreateArticle:hover {
+    box-shadow: 0 4px 4px -2px #2d313a;
+}
 textarea {
     resize: none;
 }

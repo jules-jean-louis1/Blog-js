@@ -25,6 +25,13 @@ class Articles
         $categories = json_encode($categories);
         return $categories;
     }
+    public function updateCategories($categories, $id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE categories SET name = :category_id WHERE id = :id');
+        $req->execute(['category_id' => $categories, 'id' => $id]);
+    }
     public function numberPage()
     {
         $db = new Database();

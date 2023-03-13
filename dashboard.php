@@ -27,7 +27,7 @@ require_once 'resources/assests/Classes/Users.php';
                 <section>
                     <div id="containerDash">
                         <div id="titleDashboard">
-                            <h1 class="text-6xl text-center text-blue-400">
+                            <h1 class="text-4xl text-center text-blue-400">
                                 Dashboard
                             </h1>
                         </div>
@@ -41,12 +41,24 @@ require_once 'resources/assests/Classes/Users.php';
                                         <th class="px-4 py-2">Login</th>
                                         <th class="px-4 py-2">Droits</th>
                                         <th class="px-4 py-2">Action</th>
+                                        <th class="px-4 py-2">Aricles</th>
+                                        <th class="px-4 py-2">Commentaires</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tableauTbody" class="w-full border-2"></tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </section>
+                <section>
+                    <div id="categoriesWarp">
+                        <div id="titleCategories">
+                            <h1 class="text-4xl text-blue-400">
+                                Catégories
+                            </h1>
+                        </div>
+                        <div id="containerCategory"></div>
                     </div>
                 </section>
             </article>

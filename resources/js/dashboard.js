@@ -80,6 +80,16 @@ const GetUsers = async () => {
                         </button>`
                 }
                     </td>
+                    <td class="px-4 py-2">
+                        <p>
+                            <span>${user.nb_articles}</span>
+                        </p>
+                    </td>
+                    <td class="px-4 py-2">
+                        <p>
+                            <span>${user.nb_comments}</span>
+                        </p>
+                    </td>
                 </tr>
                 `;
             });
@@ -108,6 +118,48 @@ const GetUsers = async () => {
         });
 
 };
-
+const modifyCategory = async() => {
+    const containerCategory = document.querySelector('#containerCategory');
+    await fetch('resources/assests/fetch/fetchCategory.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let optionHtml = '';
+            data.forEach(category => {
+                optionHtml += `
+                    <div class="flex justify-between items-center p-2 rounded-lg">
+                        <form action="" method="post" class="flex space-x-2" id="update_${category.id}"  data-id-cat="${category.id}">
+                            <input type="text" name="nom" id="nom" placeholder="${category.name}" class="bg-slate-100 rounded-lg p-2">
+                            <button type="submit" class="bg-green-500 p-2 rounded-lg text-white" name="btnUpdateCategory" id="btnUpdateCategory_${category.id}">
+                                Modifier
+                            </button>
+                        </form>
+                    </div>
+            `})
+            containerCategory.innerHTML = optionHtml;
+            data.forEach(category => {
+                const formUpdate = document.getElementById(`update_${category.id}`);
+                formUpdate.addEventListener('submit', (ev) => {
+                    ev.preventDefault();
+                    let categoryId = ev.target.closest('form').getAttribute('data-id-cat');
+                    let name = ev.target.querySelector('#nom').value;
+                    fetch(`resources/assests/fetch/updateCategory.php?id=${categoryId}&name=${name}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Message.innerHTML = data.message;
+                                displaySuccess(Message);
+                                modifyCategory();
+                            }
+                            if (data.status === 'error') {
+                                Message.innerHTML = data.message;
+                                displayError(Message);
+                            }
+                        });
+                });
+            });
+        });
+}
+modifyCategory();
 
 GetUsers();
