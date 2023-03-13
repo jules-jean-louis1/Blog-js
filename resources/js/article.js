@@ -278,7 +278,8 @@ async function getArticles(page, category, order) {
             articleContent.textContent = articles.content_preview;
             // Bouton pour lire l'article
             let articleRead = document.createElement("a");
-            articleRead.setAttribute("class", "bg-[#F9A826] text-white text-sm font-bold py-2 px-4 rounded");
+            articleRead.setAttribute("class", "rounded-lg bg-[#0e1217] ease-in duration-100"+
+                                                               "hover:bg-[#2d313a] font-semibold text-white py-[5px] px-2");
             articleRead.setAttribute("href", "search.php?id=" + articles.id);
             articleRead.textContent = "Lire l'article";
 

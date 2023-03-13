@@ -18,10 +18,10 @@ require_once 'resources/assests/Classes/Articles.php';
     <title>Article</title>
 </head>
 <body>
-<header class="border-b-[1px] border-[#52586633]">
+<header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main>
+<main class="lg:mt-[6%]">
     <section>
         <div id="formDisplayer"></div>
     </section>
@@ -90,30 +90,31 @@ require_once 'resources/assests/Classes/Articles.php';
     <section>
         <div id="containerArticle">
             <div id="containerSelectCategory" class="flex justify-center items-center">
-                <div class="flex flex-row items-start rounded-lg p-2">
+                <div class="flex flex-col lg:flex-row items-start rounded-lg p-2 lg:space-x-3 border-[1px] border-[#ac1de4]" id="zone_recherche">
                     <form action="" method="post">
-                        <div class="flex items-center">
+                        <div class="flex items-center space-x-2">
                             <input type="search" name="search" id="searchInput"
                                                                placeholder="Rechecher un article" autofocus
                                                                autocomplete="off" required
                                                                class="rounded-lg bg-slate-100 p-2 py-3">
-                            <button type="submit" class="p-2 bg-blue-400 rounded-lg text-white">
-                                <img src="resources/images/icon/search.svg">
+                            <button type="submit" class="p-2 bg-[#ce3df3] rounded-lg">
+                                <img src="resources/images/icon/search.svg" class="filter-white">
                             </button>
                         </div>
                         <ul id="results"></ul>
                     </form>
-                    <form action="resources/assests/fetch/articles/getArticles.php" method="post" id="FormFilterArticles">
+                    <form action="resources/assests/fetch/articles/getArticles.php" method="post" id="FormFilterArticles"
+                            >
                         <div class="flex space-x-2">
                             <div class="py-2">
-                                <label for="category2" class="font-semibold text-lg">Filtrer :</label>
-                                <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg">
+                                <label for="category2" class="font-light text-sm">Filtrer -</label>
+                                <select name="category2" id="category2" class="bg-slate-100 p-2 rounded-lg font-light text-sm">
                                     <option value="all">Aucun</option>
                                 </select>
                             </div>
                             <div class="py-2">
-                                <label for="order" class="font-semibold text-lg">Date :</label>
-                                <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg">
+                                <label for="order" class="font-light text-sm">Date -</label>
+                                <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg font-light text-sm">
                                     <option value="ASC">+ récents</option>
                                     <option value="DESC">+ anciens</option>
                                 </select>
