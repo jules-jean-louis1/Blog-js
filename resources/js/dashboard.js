@@ -32,7 +32,6 @@ function deleteUsers(id) {
 }
 // Fonction pour modifier les droits d'un utilisateur
 
-
 const GetUsers = async () => {
     await fetch('resources/assests/fetch/fetchUserDashboard.php')
         .then(response => response.json())
@@ -61,7 +60,7 @@ const GetUsers = async () => {
                     <td class="px-4 py-2 text-center">${user.id}</td>
                     <td class="px-4 py-2 text-center">${user.login}</td>
                     <td class="px-4 py-2">
-                        <form action="" method="post" id="updateDroits"  data-id="${user.id}" class="flex">
+                        <form action="resources/assests/fetch/updateDroits.php" method="post" id="updateDroits_${user.id}" data-id="${user.id}" class="flex">
                             <select name="droits" id="droits" class="p-2 bg-slate-100 rounded-lg">
                                 <option value="${user.droits}">${user.droits}</option>
                                 ${optionHtml}
@@ -72,36 +71,43 @@ const GetUsers = async () => {
                                 </button>
                             </div>
                         </form>
-                    </td>
                     <td class="px-4 py-2">
-                        <button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
-                            Supprimer
-                        </button>
+                        ${
+                    (user.droits === 'administrateur')
+                        ? ''
+                        : `<button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
+                        Supprimer
+                        </button>`
+                }
                     </td>
                 </tr>
                 `;
             });
-        });
-    // Ajouter un gestionnaire d'événements de formulaire pour la mise à jour des droits d'utilisateur
-    const formUpdate = document.querySelector('#updateDroits');
-    formUpdate.addEventListener('submit', (ev) => {
-        ev.preventDefault();
-        let userId = ev.target.closest('form').getAttribute('data-id');
-        let droits = ev.target.querySelector('#droits').value;
-        fetch(`resources/assests/fetch/updateDroits.php?id=${userId}&droits=${droits}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    Message.innerHTML = data.message;
-                    displaySuccess(Message);
-                    GetUsers();
-                }
-                if (data.status === 'error') {
-                    Message.innerHTML = data.message;
-                    displayError(Message);
-                }
+            // Ajouter un gestionnaire d'événements de formulaire pour la mise à jour des droits d'utilisateur
+            data.forEach(user => {
+                const formUpdate = document.getElementById(`updateDroits_${user.id}`);
+                formUpdate.addEventListener('submit', (ev) => {
+                    ev.preventDefault();
+                    let userId = ev.target.closest('form').getAttribute('data-id');
+                    let droits = ev.target.querySelector('#droits').value;
+                    fetch(`resources/assests/fetch/updateDroits.php?id=${userId}&droits=${droits}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Message.innerHTML = data.message;
+                                displaySuccess(Message);
+                                GetUsers();
+                            }
+                            if (data.status === 'error') {
+                                Message.innerHTML = data.message;
+                                displayError(Message);
+                            }
+                        });
+                });
             });
-    });
+        });
+
 };
+
 
 GetUsers();
