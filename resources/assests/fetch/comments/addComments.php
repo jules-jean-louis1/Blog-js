@@ -5,18 +5,18 @@ require_once '../../Classes/Comments.php';
 
 if (isset($_POST['comment'])) {
     $comment_id = intval($_POST['comment_id']);
-    $comment = htmlspecialchars($_POST['comment']);
-    $idArticle = intval($_GET['id']);
+    $content = htmlspecialchars($_POST['comment']);
+    $idArticle = intval($_POST['article_id']);
     $user_id = $_SESSION['id'];
 
-    if (!empty($comment)) {
+    if (!empty($content)) {
         $comment = new Comments();
-        $comments = $comment->addComment($comment_id, $comment, $idArticle, $user_id);
+        $comments = $comment->addComment($comment_id, $content, $idArticle, $user_id);
         header('Content-Type: application/json');
         if ($comments) {
-            echo json_encode(['status' => 'success', 'message' => 'Commentaire ajouté avec succès']);
-        } else {
             echo json_encode(['status' => 'error', 'comments' => 'Une erreur est survenue']);
+        } else {
+            echo json_encode(['status' => 'success', 'message' => 'Commentaire ajouté avec succès']);
         }
     } else {
         header('Content-Type: application/json');

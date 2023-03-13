@@ -234,7 +234,7 @@ async function getPages() {
 getArticles(page);*/
 
 let category = 'all';
-let order = 'ASC';
+let order = 'DESC';
 async function getArticles(page, category, order) {
     const params = new URLSearchParams();
     params.append("page", page);

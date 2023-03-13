@@ -19,10 +19,10 @@ require_once 'resources/assests/Classes/Users.php';
         <title><?= $_SESSION['login']?> - Dashboard</title>
     </head>
     <body>
-    <header>
+    <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
         <?php include_once 'resources/assests/import/header.php' ?>
     </header>
-        <main>
+        <main class="lg:mt-[6%]">
             <article>
                 <section>
                     <div id="containerDash">
@@ -41,7 +41,7 @@ require_once 'resources/assests/Classes/Users.php';
                                         <th class="px-4 py-2">Login</th>
                                         <th class="px-4 py-2">Droits</th>
                                         <th class="px-4 py-2">Action</th>
-                                        <th class="px-4 py-2">Aricles</th>
+                                        <th class="px-4 py-2">Articles</th>
                                         <th class="px-4 py-2">Commentaires</th>
                                     </tr>
                                     </thead>
@@ -52,13 +52,15 @@ require_once 'resources/assests/Classes/Users.php';
                     </div>
                 </section>
                 <section>
-                    <div id="categoriesWarp">
-                        <div id="titleCategories">
-                            <h1 class="text-4xl text-blue-400">
-                                Catégories
-                            </h1>
+                    <div class="flex justify-center">
+                        <div id="categoriesWarp">
+                            <div id="titleCategories">
+                                <h1 class="text-4xl text-blue-400">
+                                    Catégories
+                                </h1>
+                            </div>
+                            <div id="containerCategory"></div>
                         </div>
-                        <div id="containerCategory"></div>
                     </div>
                 </section>
             </article>

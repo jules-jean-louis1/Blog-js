@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once 'resources/assests/Classes/Comments.php';
 
@@ -38,17 +39,21 @@ if (isset($_POST['comment'])) {
     <title>Article</title>
 </head>
 <body>
-<header>
+<header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main>
+<main class="lg:pt-[4%]">
     <div class="flex justify-center">
         <div id="article" class="w-[98%] lg:w-[65%]"></div>
     </div>
     <div id="commentContainer" class="flex flex-col items-center">
         <div class="w-[98%] lg:w-[65%]">
-            <button id="commentForm" class="lg:my-2 lg:mx-5 p-2 border-[1px] border-[#ac1de4] rounded-lg w-full font-bold text-lg">Ajouter un commentaire</button>
+            <div id="commentForm"></div>
+<!--            <button id="commentForm" class="lg:my-2 lg:mx-5 p-2 border-[1px] border-[#ac1de4] rounded-lg w-full font-bold text-lg">Ajouter un commentaire</button>-->
             <div id="commentFormDisplay" class="py-2 lg:mx-5"></div>
+            <div id="containerMessageProfil" class="h-[65px] w-full">
+                <div id="errorMsg" class="w-full"></div>
+            </div>
         </div>
     </div>
     <div class="flex justify-center">

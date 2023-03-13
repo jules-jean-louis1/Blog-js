@@ -94,10 +94,15 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('SELECT utilisateurs.id, utilisateurs.login, utilisateurs.droits, COUNT(DISTINCT articles.id) AS nb_articles, COUNT(DISTINCT comments.id) AS nb_comments 
+        $req = $bdd->prepare('SELECT 
+                                      utilisateurs.id, 
+                                      utilisateurs.login, 
+                                      utilisateurs.droits, 
+                                      COUNT(DISTINCT articles.id) AS nb_articles, 
+                                      COUNT(DISTINCT comments.id) AS nb_comments 
                                     FROM utilisateurs 
                                     LEFT JOIN articles ON utilisateurs.id = articles.author_id 
-                                    LEFT JOIN comments ON utilisateurs.id = articles.author_id 
+                                    LEFT JOIN comments ON utilisateurs.id = comments.user_id 
                                     GROUP BY utilisateurs.id, utilisateurs.login, utilisateurs.droits');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);

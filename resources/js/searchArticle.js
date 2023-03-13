@@ -271,12 +271,12 @@ async function getComments(id) {
 }
 
 // Fonction de récupération des réponses aux commentaires quand le parent_id != 0
-
+//resources/assests/fetch/comments/addComments.php
 
 
 
 // Fonction qui permet d'ajouter un commentaire
-function createFormAddComments(parent) {
+async function createFormAddComments(parent) {
     const FormForAddComments = document.createElement('form');
     FormForAddComments.action = '';
     FormForAddComments.method = 'post';
@@ -321,43 +321,35 @@ function createFormAddComments(parent) {
 
     FormForAddComments.appendChild(containerFormAddComments);
     parent.appendChild(FormForAddComments);
-}
-
-
-function AddCommentForm() {
-    if (!document.querySelector("#FormForAddComments")) {
-        createFormAddComments(formCommentDisplay);
-    }
-        // createFormAddComments(formCommentDisplay);
+        const Message = document.querySelector("#errorMsg");
         const formComment = document.querySelector("#FormForAddComments");
         formComment.addEventListener('submit', async (e) => {
             e.preventDefault();
-            await fetch('search.php', {
+            await fetch('', {
                 method: 'POST',
                 body: new FormData(formComment)
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        formCommentDisplay.innerHTML = data.message;
-                        formCommentDisplay.classList.add('messageAlert');
+                        Message.innerHTML = data.message;
+                        Message.classList.add('messageAlert');
                         getComments(id);
                     } else {
-                        formCommentDisplay.innerHTML = data.message;
-                        formCommentDisplay.classList.add('messageAlert');
+                        Message.innerHTML = data.message;
+                        Message.classList.add('messageAlert');
 
                     }
 
                 })
         });
 
-    document.getElementById("comment").focus();
+        document.getElementById("comment").focus();
 }
 
-BtnAddCommentForm.addEventListener('click', function () {
-    AddCommentForm();
-})
 
+
+createFormAddComments(formCommentDisplay);
 getArticle(id);
 getComments(id);
 
