@@ -40,7 +40,9 @@ if (isset($_POST['login'])) {
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password" placeholder="password" class="p-2 bg-slate-100 rounded-lg">
     </div>
-    <div id="errorMsg"></div>
+    <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
+        <div id="errorMsg"></div>
+    </div>
     <div id="containerSubmit">
         <button type="submit" name="submit" id="submit" class="p-2 rounded-lg bg-[#AC1DE4] font-semibold text-white">Connexion</button>
     </div>

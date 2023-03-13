@@ -55,7 +55,9 @@ if (isset($_POST['login'])) {
         <label for="passwordConfirm">Confirmer le mot de passe</label>
         <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirmer le mot de passe" class="p-2 bg-slate-100">
     </div>
-    <div id="errorMsg"></div>
+    <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
+        <div id="errorMsg"></div>
+    </div>
     <div id="containerSubmit">
         <button type="submit" name="submit" id="submit" class="p-2 rounded-lg bg-[#AC1DE4] font-semibold text-white">Inscription</button>
     </div>
