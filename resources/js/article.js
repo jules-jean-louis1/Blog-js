@@ -1,4 +1,15 @@
-import { displayError, displaySuccess ,formatDate } from './function/function.js';
+import { displayError} from './function/function.js';
+import { displaySuccess} from './function/function.js';
+import { formatDate } from './function/function.js';
+import { loginFormHeader } from './function/function.js';
+import { registerHeader } from './function/function.js';
+import { closeModalDialog } from './function/function.js';
+
+// Varaiables presente dans le header de tous les pages
+const BtnLogin = document.querySelector('#buttonLoginHeader');
+const BtnRegister = document.querySelector('#buttonRegisterHeader');
+const formDisplayer = document.querySelector('#formDisplayer');
+
 // Récupérer l'ID à partir de la query string
 const searchParams = new URLSearchParams(window.location.search);
 const page = searchParams.get("page");
@@ -302,4 +313,5 @@ formFilterArticles.addEventListener("change", (ev) => {
     getArticles(page, category, order);
 });
 getPages();
-
+loginFormHeader(BtnLogin);
+registerHeader(BtnRegister);
