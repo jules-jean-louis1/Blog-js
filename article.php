@@ -115,12 +115,6 @@ require_once 'resources/assests/Classes/Articles.php';
                                     <option value="DESC">+ anciens</option>
                                 </select>
                             </div>
-                            <div class="py-2">
-                                <button type="submit" id="buttonFilter"
-                                        class="p-2 bg-blue-400 rounded-lg text-white">
-                                    Filtrer
-                                </button>
-                            </div>
                         </div>
                     </form>
                 </div>

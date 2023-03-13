@@ -294,7 +294,7 @@ async function getArticles(page, category, order) {
 
 getArticles(page, category, order);
 
-formFilterArticles.addEventListener("submit", (ev) => {
+formFilterArticles.addEventListener("change", (ev) => {
     ev.preventDefault();
     const formData = new FormData(formFilterArticles);
     const category = formFilterArticles.querySelector("#category2").value;

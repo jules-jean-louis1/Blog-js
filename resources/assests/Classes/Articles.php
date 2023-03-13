@@ -61,7 +61,7 @@ class Articles
             $offset = 0;
         }
 
-        $req = "SELECT articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
+        $req = "SELECT articles.id ,articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
                 categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
                 FROM articles
                 INNER JOIN categories ON articles.category_id = categories.id
