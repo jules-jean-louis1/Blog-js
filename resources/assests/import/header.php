@@ -18,17 +18,31 @@
                                 </button>
                             </a>
                         </li>
-                        <li>
-                            <?php if ($_SESSION['droits'] == 'administrateur') : ?>
-                                <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 bg-green-500">
-                                    <a href="dashboard.php"><?= $_SESSION['login'] ?></a>
-                                </button>
-                            <?php else: ?>
-                            <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
-                                <a href="profil.php"><?= $_SESSION['login'] ?></a>
-                            </button>
-                            <?php endif; ?>
-                        </li>
+                        <?php if ($_SESSION['droits'] == 'administrateur') : ?>
+                            <li>
+                                <a href="dashboard.php">
+                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 bg-green-500 flex items-center rounded-lg text-white">
+                                        <img src="resources/images/icon/settings.svg" class="h-[1.2em] filter-white">
+                                        <span>Dashboard</span>
+                                    </button>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="profil.php">
+                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                        <?= $_SESSION['login'] ?>
+                                    </button>
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <a href="profil.php">
+                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                        <?= $_SESSION['login'] ?>
+                                    </button>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <button type="button" id="buttonLoginHeader" class="py-[4px] px-2 rounded-lg border-[1px] border-red-500 ease-in duration-100
                                                                                 hover:bg-red-500 hover:text-white">

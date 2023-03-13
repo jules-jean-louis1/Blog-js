@@ -23,6 +23,9 @@ require_once 'resources/assests/Classes/Articles.php';
 </header>
 <main>
     <section>
+        <div id="formDisplayer"></div>
+    </section>
+    <section>
         <div id="containerCreateArticle" class="flex justify-center items-center">
             <?php if (isset($_SESSION['droits']) && ($_SESSION['droits'] == 'administrateur' || $_SESSION['droits'] == 'moderateur')) { ?>
             <!-- Le code pour afficher l'interface d'écriture d'article -->

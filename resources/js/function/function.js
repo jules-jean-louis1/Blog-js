@@ -20,6 +20,8 @@ function formatDate(timestamp) {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${month} ${day}, ${year} à ${hours}:${minutes}`;
 }
+// Fonction Login
 
+// Fonction Register
 // Export des fonctions pour une utilisation externe
 export { displayError, displaySuccess, formatDate };

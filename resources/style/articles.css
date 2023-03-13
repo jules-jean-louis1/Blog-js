@@ -18,6 +18,9 @@ li {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.filter-white {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(54deg) brightness(110%) contrast(101%);
+}
 
 /* Message d'erreur */
 .alert-success {
