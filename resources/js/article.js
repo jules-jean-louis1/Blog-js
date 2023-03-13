@@ -250,7 +250,7 @@ async function getArticles(page, category, order) {
         for (const articles of data.articles) {
             // Créer le contenu HTML pour l'article
             let articleContainer = document.createElement("div");
-            articleContainer.setAttribute("class", "flex flex-col items-start justify-around bg-[#F5F8FC] rounded-lg ease-in duration-300 lg:w-1/3 p-3 min-h-[20.5rem]" +
+            articleContainer.setAttribute("class", "my-5 flex flex-col items-start justify-around bg-[#F5F8FC] rounded-lg ease-in duration-300 lg:w-[30%] p-3 min-h-[20.5rem]" +
                 " border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866] cursor-pointer");
             // Titre de l'article
             let articleTitle = document.createElement("h2");
