@@ -252,22 +252,33 @@ async function getArticles(page, category, order) {
             let articleContainer = document.createElement("div");
             articleContainer.setAttribute("class", "my-5 flex flex-col items-start justify-around bg-[#F5F8FC] rounded-lg ease-in duration-300 lg:w-[30%] p-3 min-h-[20.5rem]" +
                 " border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866] cursor-pointer");
-            // Titre de l'article
-            let articleTitle = document.createElement("h2");
-            articleTitle.setAttribute("class", "font-bold text-xl");
-            articleTitle.textContent = articles.title;
-            // Catégorie de l'article
-            let articleCategory = document.createElement("p");
-            articleCategory.setAttribute("class", "text-[#525866] text-sm");
-            articleCategory.textContent = "#" + articles.category_name;
-            // Auteur de l'article
-            let articleAuthor = document.createElement("p");
-            articleAuthor.setAttribute("class", "text-[#525866] text-sm");
-            articleAuthor.textContent = "Par " + articles.author_login;
-            // Date de création de l'article
-            let articleCreatedAt = document.createElement("p");
-            articleCreatedAt.setAttribute("class", "text-[#525866] text-sm");
-            articleCreatedAt.textContent = formatDate(articles.created_at);
+            //Conteneur de l'article
+            let articleContainerInfos = document.createElement("div");
+            articleContainerInfos.setAttribute("class", "flex flex-col items-start justify-between w-full");
+
+                // Titre de l'article
+                let articleTitle = document.createElement("h2");
+                articleTitle.setAttribute("class", "font-bold text-xl");
+                articleTitle.textContent = articles.title;
+                // Catégorie de l'article
+                let articleCategory = document.createElement("p");
+                articleCategory.setAttribute("class", "text-[#526866a3] text-sm");
+                articleCategory.textContent = "#" + articles.category_name;
+                // Conteneur de l'auteur de l'article
+                    let containerLoginAvatar = document.createElement("div");
+                    containerLoginAvatar.setAttribute("class", "flex flex-row items-center justify-start space-x-2 py-2");
+                        // Avatar de l'auteur de l'article
+                        let articleAvatar = document.createElement("img");
+                        articleAvatar.setAttribute("class", "w-6 h-6 rounded-full");
+                        articleAvatar.setAttribute("src", "resources/images/avatar/" + articles.user_avatar);
+                        // Auteur de l'article
+                        let articleAuthor = document.createElement("p");
+                        articleAuthor.setAttribute("class", "text-[#525866] text-sm");
+                        articleAuthor.textContent = articles.author_login;
+                // Date de création de l'article
+                let articleCreatedAt = document.createElement("p");
+                articleCreatedAt.setAttribute("class", "text-[#525866] text-sm py-2");
+                articleCreatedAt.textContent = formatDate(articles.created_at);
             // Date de mise à jour de l'article
             /*let articleUpdatedAt = document.createElement("p");
             articleUpdatedAt.setAttribute("class", "text-[#525866] text-sm");
@@ -285,10 +296,13 @@ async function getArticles(page, category, order) {
 
             // Ajouter le contenu HTML à la page
             articlesDisplay.appendChild(articleContainer);
-            articleContainer.appendChild(articleTitle);
-            articleContainer.appendChild(articleCategory);
-            articleContainer.appendChild(articleAuthor);
-            articleContainer.appendChild(articleCreatedAt);
+            articleContainer.appendChild(articleContainerInfos);
+            articleContainerInfos.appendChild(articleTitle);
+            articleContainerInfos.appendChild(articleCategory);
+            articleContainerInfos.appendChild(containerLoginAvatar);
+            containerLoginAvatar.appendChild(articleAvatar);
+            containerLoginAvatar.appendChild(articleAuthor);
+            articleContainerInfos.appendChild(articleCreatedAt);
             // articleContainer.appendChild(articleUpdatedAt);
             articleContainer.appendChild(articleContent);
             articleContainer.appendChild(articleRead);

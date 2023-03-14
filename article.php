@@ -21,7 +21,7 @@ require_once 'resources/assests/Classes/Articles.php';
 <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main class="mt-[8%] lg:mt-[6%]">
+<main class="mt-[8%] sm:mt-[5%] lg:mt-[3%]">
     <section>
         <div id="formDisplayer"></div>
     </section>
