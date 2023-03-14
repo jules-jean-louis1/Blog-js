@@ -61,8 +61,7 @@ session_start();
                 <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col space-y-2" enctype="multipart/form-data">
                     <div>
                         <label for="avatar">Avatar</label>
-                        <img src="resources/images/avatar/<?=$_SESSION['user_avatar']?>">
-                        <input type="file" name="uploadfile" id="uploadfile" class="p-2 rounded-lg bg-slate-100" value="">
+                        <input class="form-control" type="file" name="uploadfile" value="" class="p-2 rounded-lg bg-slate-100"/>
                     </div>
                     <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
                         <div id="errorMsgAvatar"></div>

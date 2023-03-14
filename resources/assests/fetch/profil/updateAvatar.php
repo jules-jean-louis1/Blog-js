@@ -3,34 +3,32 @@
 session_start();
 require_once '../../Classes/Users.php';
 
-
-
-/*$filename = "unnamed-3.png";
-$tempname = $_FILES["uploadfile"]["tmp_name"];
-$folder = "../../../images/avatar/".$filename;
-$id = $_SESSION['id'];
-$user = new Users();
-$avatar = $user->updateAvatar($id, $filename);*/
-
 if (isset($_POST['upload'])) {
     $filename = $_FILES["uploadfile"]["name"];
     $tempname = $_FILES["uploadfile"]["tmp_name"];
-    $folder = "../../../images/avatar/".$filename;
+    $folder = "/resources/images/avatar/".$filename;
     $id = $_SESSION['id'];
 
     var_dump($filename);
     var_dump($tempname);
     var_dump($folder);
-    var_dump($id);
-    die();
+
     $user = new Users();
     $avatar = $user->updateAvatar($id, $filename);
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'avatarUp', 'message' => 'Votre avatar a bien été modifié']);
+    echo "Votre avatar a bien été modifié";
+/*    header('Content-Type: application/json');
+    echo json_encode(['status' => 'avatarUp', 'message' => 'Votre avatar a bien été modifié']);*/
 } else {
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => 'Une erreur est survenue']);
+    echo "Une erreur est survenue";
+    /*header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'message' => 'Une erreur est survenue']);*/
 }
+?>
+<form action="" method="post" enctype="multipart/form-data">
+    <input class="form-control" type="file" name="uploadfile" value="" />
+    <button class="btn btn-primary" type="submit" name="upload">UPLOAD</button>
+</form>
+<?php
 /*if (isset($_POST['uploadfile'])) {
     $filename = $_FILES["uploadfile"]["name"];
     $tempname = $_FILES["uploadfile"]["tmp_name"];
