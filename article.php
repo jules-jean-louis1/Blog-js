@@ -21,15 +21,15 @@ require_once 'resources/assests/Classes/Articles.php';
 <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main class="lg:mt-[6%]">
+<main class="mt-[8%] lg:mt-[6%]">
     <section>
         <div id="formDisplayer"></div>
     </section>
     <section>
-        <div id="containerCreateArticle" class="flex justify-center items-center lg:py-[2%]">
+        <div id="containerCreateArticle" class="flex flex-row justify-center items-center lg:py-[2%]">
             <?php if (isset($_SESSION['droits']) && ($_SESSION['droits'] == 'administrateur' || $_SESSION['droits'] == 'moderateur')) { ?>
             <!-- Le code pour afficher l'interface d'écriture d'article -->
-            <div id="ContainerWriteArticle" class="flex justify-center items-center space-x-2 border-[1px] border-[#0e1217] rounded-lg py-[3px] w-[20%]">
+            <div id="ContainerWriteArticle" class="flex flex-col lg:flex-row justify-center items-center space-x-2 border-[1px] border-[#0e1217] rounded-lg py-[3px] w-[20%]">
                 <div id="titleArticlePage">
                     <h1 class="text-lg ">Ecrire un article</h1>
                 </div>

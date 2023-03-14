@@ -58,7 +58,7 @@ class Articles
 
 
         // Nombre d'articles par page
-        $limit = 10;
+        $limit = 9;
 
 // Calcul de l'offset en fonction de la page demandée
         $offset = ($page - 1) * $limit;

@@ -314,5 +314,6 @@ formFilterArticles.addEventListener("change", (ev) => {
     getArticles(page, category, order);
 });
 getPages();
+
 loginFormHeader(BtnLogin);
 registerHeader(BtnRegister);

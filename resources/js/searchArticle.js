@@ -14,10 +14,18 @@ const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
 
 
+// Fonction pour verifier si l'utilisateur est connecté
+if (btnNoConnect) {
+    loginFormHeader(btnNoConnect);
+}
+if (BtnLogin) {
+    loginFormHeader(BtnLogin);
+}
+if (BtnRegister) {
+    registerHeader(BtnRegister);
+}
+
 // Fonction qui recupère l'id du commentaire pour répondre
-loginFormHeader(btnNoConnect);
-loginFormHeader(BtnLogin);
-registerHeader(BtnRegister);
 function  replyComment(commentId) {
     document.querySelector("#commentId").value = commentId;
     document.getElementById("comment").focus();
