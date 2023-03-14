@@ -66,7 +66,11 @@ async function getArticle(id) {
                     </div>
                     <div id="articlesMoreSearch" class="flex flex-col">
                       <div id="infoPost" class="flex flex-col">
-                        <h2 class="text-xl font-bold">${art.author_login}</h2>
+                        <div id="loginInfoContainer" class="flex items-center space-x-2">
+                            <img src="resources/images/avatar/${art.user_avatar}" alt="avatar" class="w-9 h-9 rounded-full">
+                            <h2 class="text-xl font-bold">${art.author_login}</h2>
+                        </div>
+                        
                         <p class="flex flex-row">
                           Poster · <time class="date">${formattedDateC}</time>`
                         if (art.updated_at != null) {
@@ -120,13 +124,13 @@ async function getComments(id) {
                         commentRow.setAttribute("id", "commentRow");
                         // Création de la div qui contiendra les infos du commentaire
                         let commentInfo = document.createElement("div");
-                        commentInfo.classList.add("flex", "flex-row", "space-x-2");
+                        commentInfo.classList.add("flex", "flex-row", "space-x-2", "items-center");
                         commentInfo.setAttribute("id", "commentInfo");
                         // Span qui contiendra le label "Par"
-                        let commentRowLabel = document.createElement("span");
-                        commentRowLabel.classList.add("font-lg", "text-[#526866a3]");
+                        let commentRowLabel = document.createElement("img");
+                        commentRowLabel.classList.add("h-8", "w-8", "rounded-full", "object-cover", "object-center");
                         commentRowLabel.setAttribute("id", "commentRowLabel");
-                        commentRowLabel.textContent = "Par";
+                        commentRowLabel.setAttribute("src", "resources/images/avatar/" + comment.user_avatar);
                         // Span qui contiendra le nom de l'auteur du commentaire
                         let commentAuthor = document.createElement("span");
                         commentAuthor.classList.add("font-bold", "text-[#000]");
@@ -214,17 +218,17 @@ async function getComments(id) {
                          for (const subComment of data.comments) {
                              if (subComment.parent_comment_id == comment.id && subComment.id != subComment.parent_comment_id) { // si le commentaire est une réponse à ce commentaire parent
                                  let subLi = document.createElement("li");
-                                 subLi.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-[2em]", "shadow-md", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
+                                 subLi.classList.add("flex", "flex-col", "border-l-[1px]", "border-[#a8b3cf]", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
                                  subLi.setAttribute("id", "comment-" + subComment.id);
 
                                     let subCommentInfo = document.createElement("div");
                                     subCommentInfo.classList.add("flex", "flex-row", "space-x-2");
                                     subCommentInfo.setAttribute("id", "subCommentInfo");
                                     // Span qui contiendra le label "Par"
-                                    let subCommentRowLabel = document.createElement("span");
-                                    subCommentRowLabel.classList.add("font-lg", "text-[#526866a3]");
+                                    let subCommentRowLabel = document.createElement("img");
+                                    subCommentRowLabel.classList.add("h-8", "w-8", "rounded-full", "object-cover", "object-center");
                                     subCommentRowLabel.setAttribute("id", "subCommentRowLabel");
-                                    subCommentRowLabel.textContent = "Par";
+                                    subCommentRowLabel.setAttribute("src", "resources/images/avatar/" + comment.user_avatar);
                                     // Span qui contiendra le nom de l'auteur du commentaire
                                     let subCommentAuthor = document.createElement("span");
                                     subCommentAuthor.classList.add("font-bold", "text-[#000]");

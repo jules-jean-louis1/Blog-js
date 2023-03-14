@@ -18,7 +18,7 @@ require_once 'Database.php';
         {
             $db = new Database();
             $bdd = $db->getBdd();
-            $req = $bdd->prepare('SELECT comments.id, comments.parent_comment_id, comments.content, utilisateurs.login, comments.created_at
+            $req = $bdd->prepare('SELECT comments.id, comments.parent_comment_id, comments.content, utilisateurs.login, utilisateurs.user_avatar, comments.created_at
                                         FROM comments
                                         INNER JOIN utilisateurs ON comments.user_id = utilisateurs.id
                                         WHERE comments.article_id = :article_id
