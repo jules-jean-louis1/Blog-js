@@ -31,15 +31,15 @@ if (isset($_POST['login'])) {
         <p>
             <span class="text-lg font-bold">Connectez-vous sur Blog</span>
         </p>
-        <button type="button" id="closeDialog" class="p-2 bg-slate-200 rounded-full hover:text-black">&times;</button>
+        <button type="button" id="closeDialog" class="py-2 px-4 hover:bg-slate-200 rounded-full">&times;</button>
     </div>
     <div class="flex flex-col">
-        <label for="login">Email</label>
-        <input type="text" name="login" id="login" placeholder="login" class="p-2 bg-slate-100 rounded-lg">
+        <label for="login" class="px-[4px] py-[3px]">Login</label>
+        <input type="text" name="login" id="login" placeholder="login" class="p-2 bg-[#52586633] rounded-[14px]">
     </div>
     <div class="flex flex-col">
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" placeholder="password" class="p-2 bg-slate-100 rounded-lg">
+        <label for="password" class="px-[4px] py-[3px]">Mot de passe</label>
+        <input type="password" name="password" id="password" placeholder="password" class="p-2 bg-[#52586633] rounded-[14px]">
     </div>
     <div id="containerMessageProfil" class="h-[65px] w-full">
         <div id="errorMsg" class="w-full"></div>

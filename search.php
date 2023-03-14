@@ -42,23 +42,39 @@ if (isset($_POST['comment'])) {
 <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main class="lg:pt-[4%]">
-    <div class="flex justify-center">
-        <div id="article" class="w-[98%] lg:w-[65%]"></div>
-    </div>
-    <div id="commentContainer" class="flex flex-col items-center">
-        <div class="w-[98%] lg:w-[65%]">
-            <div id="commentForm"></div>
-<!--            <button id="commentForm" class="lg:my-2 lg:mx-5 p-2 border-[1px] border-[#ac1de4] rounded-lg w-full font-bold text-lg">Ajouter un commentaire</button>-->
-            <div id="commentFormDisplay" class="py-2 lg:mx-5"></div>
-            <div id="containerMessageProfil" class="h-[65px] w-full">
-                <div id="errorMsg" class="w-full"></div>
+<main class="pt-[7%] lg:pt-[4%]">
+    <section>
+        <div id="formDisplayer"></div>
+    </section>
+    <section>
+        <div class="flex justify-center">
+            <div id="article" class="w-[98%] lg:w-[65%]"></div>
+        </div>
+        <div id="commentContainer" class="flex flex-col items-center">
+            <div class="w-[98%] lg:w-[65%]">
+                <?php if (isset($_SESSION['login'])) : ?>
+                    <div id="commentForm"></div>
+                    <div id="commentForm"></div>
+                    <div id="commentFormDisplay" class="py-2 lg:mx-5"></div>
+                    <div id="containerMessageProfil" class="h-[65px] w-full">
+                        <div id="errorMsg" class="w-full"></div>
+                    </div>
+                <?php else: ?>
+                    <div class="flex flex-col items-center justify-center mx-4 lg:mx-5">
+                        <button id="NotConnected"
+                                class="text-xl text-black border-[1px] border-[#ac1de4] py-2 px-6 rounded-lg">Vous devez
+                            être connecté pour commenter
+                        </button>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
-    </div>
-    <div class="flex justify-center">
-        <div id="commentsOfArticles" class="w-[98%] lg:w-[65%]"></div>
-    </div>
+        <div class="flex justify-center">
+            <div id="commentsOfArticles" class="w-[98%] lg:w-[65%]"></div>
+        </div>
+    </section>
 </main>
 </body>
 </html>
+
+

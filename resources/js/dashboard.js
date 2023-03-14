@@ -56,36 +56,38 @@ const GetUsers = async () => {
                     `;
                 }
                 TableDisplay.innerHTML += `
-                <tr class="border-2 ">
-                    <td class="px-4 py-2 text-center">${user.id}</td>
-                    <td class="px-4 py-2 text-center">${user.login}</td>
-                    <td class="px-4 py-2">
-                        <form action="resources/assests/fetch/updateDroits.php" method="post" id="updateDroits_${user.id}" data-id="${user.id}" class="flex">
+                <tr class="border-[1px]">
+                    <td class="px-4 py-2 text-center border-[1px] hover:bg-[#F5F8FC]">${user.id}</td>
+                    <td class="px-4 py-2 text-center border-[1px] hover:bg-[#F5F8FC]">${user.login}</td>
+                    <td class="px-4 py-2 border-[1px] hover:bg-[#F5F8FC]">
+                        <form action="resources/assests/fetch/updateDroits.php" method="post" id="updateDroits_${user.id}" data-id="${user.id}" class="flex justify-between">
                             <select name="droits" id="droits" class="p-2 bg-slate-100 rounded-lg">
                                 <option value="${user.droits}">${user.droits}</option>
                                 ${optionHtml}
                             </select>
                             <div id="btnSubmit">
-                                <button type="submit" class="bg-green-500 p-2 rounded-lg text-white" name="btnUpdateDroits" id="btnUpdateDroits">
+                                <button type="submit" class="border-2 border-green-500 hover:bg-green-500 p-2 rounded-lg hover:text-white duration-100 ease-in"
+                                        name="btnUpdateDroits" id="btnUpdateDroits">
                                        Modifier
                                 </button>
                             </div>
                         </form>
-                    <td class="px-4 py-2">
+                    <td class="px-4 py-2 flex justify-center  hover:bg-[#F5F8FC]">
                         ${
                     (user.droits === 'administrateur')
                         ? ''
-                        : `<button class="bg-red-500 p-2 rounded-lg text-white" id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
+                        : `<button class="border-2 border-red-500 hover:bg-red-500 p-2 rounded-lg hover:text-white duration-100 ease-in" 
+                                    id="deleteUser" data-id="${user.id}" onclick="deleteUsers(${user.id})">
                         Supprimer
                         </button>`
                 }
                     </td>
-                    <td class="px-4 py-2">
+                    <td class="px-4 py-2 text-center border-[1px] hover:bg-[#F5F8FC]">
                         <p>
                             <span>${user.nb_articles}</span>
                         </p>
                     </td>
-                    <td class="px-4 py-2">
+                    <td class="px-4 py-2 text-center border-[1px] hover:bg-[#F5F8FC]">
                         <p>
                             <span>${user.nb_comments}</span>
                         </p>

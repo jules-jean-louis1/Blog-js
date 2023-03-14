@@ -1,27 +1,40 @@
-const BtnAddCommentForm = document.querySelector("#commentForm");
+import { displayError} from './function/function.js';
+import { displaySuccess} from './function/function.js';
+import { formatDate } from './function/function.js';
+import { loginFormHeader } from './function/function.js';
+import { registerHeader } from './function/function.js';
+
 const formCommentDisplay = document.querySelector("#commentFormDisplay");
+const BtnLogin = document.querySelector('#buttonLoginHeader');
+const BtnRegister = document.querySelector('#buttonRegisterHeader');
+const btnNoConnect = document.querySelector('#NotConnected');
 
 // Récupérer l'ID à partir de la query string
 const searchParams = new URLSearchParams(window.location.search);
 const id = searchParams.get("id");
 
-// Formatage de la date
-function formatDate(timestamp) {
-    const months = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jui', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${month} ${day}, ${year} à ${hours}:${minutes}`;
-}
-// Fonction qui recupère l'id du commentaire pour répondre
 
+// Fonction qui recupère l'id du commentaire pour répondre
+loginFormHeader(btnNoConnect);
+loginFormHeader(BtnLogin);
+registerHeader(BtnRegister);
 function  replyComment(commentId) {
     document.querySelector("#commentId").value = commentId;
     document.getElementById("comment").focus();
 }
+// Fonction pour recupérer si l'utilisateur a des droits pour modifier ou supprimer un commentaire
+async function getRights() {
+    await fetch('resources/assests/fetch/articles/get_droits.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === true) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+}
+
 
 // Fonction pour la récupération des articles quand on clique dessus
 async function getArticle(id) {
@@ -82,7 +95,11 @@ async function getComments(id) {
         .then(response => response.json())
         .then(data => {
             if(data.status === 'empty') {
-                commentaires.innerHTML = data.message;
+                 let emptyComment = document.createElement("div");
+                    emptyComment.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-4");
+                    emptyComment.setAttribute("id", "commentRow");
+                    emptyComment.innerHTML = data.message;
+                    commentaires.appendChild(emptyComment);
             } else {
                 commentaires.innerHTML = "";
 
@@ -125,41 +142,45 @@ async function getComments(id) {
                         let commentButtons = document.createElement("div");
                         commentButtons.classList.add("flex", "flex-row", "justify-end");
                         commentButtons.setAttribute("id", "commentButtons");
-                        // Bouton de Reponse du commentaire
-                        let commentReplyButton = document.createElement("button");
-                        commentReplyButton.classList.add("hover:bg-[#1ddc6f3d]", "text-white", "font-bold", "p-2", "rounded-lg");
-                        commentReplyButton.setAttribute("id", "commentReplyButton");
+
+                             // Bouton de Reponse du commentaire
+                             let commentReplyButton = document.createElement("button");
+                             commentReplyButton.classList.add("hover:bg-[#1ddc6f3d]", "text-white", "font-bold", "p-2", "rounded-lg");
+                             commentReplyButton.setAttribute("id", "commentReplyButton");
                              // Icon du bouton de réponse
                              let CommentReplyButtonIcon = document.createElement("img");
                              CommentReplyButtonIcon.setAttribute("src", "resources/images/icon/comments.svg");
                              CommentReplyButtonIcon.setAttribute("class", "green-reply");
-                        // Bouton de modification du commentaire
-                        let commentEditButton = document.createElement("button");
-                        commentEditButton.classList.add("hover:bg-[#0dcfdc3d]", "text-white", "font-bold", "p-2", "rounded-lg");
-                        commentEditButton.setAttribute("id", "commentEditButton");
-                        commentEditButton.setAttribute("onclick", "editComment(" + comment.id + ")");
+
+
+                             // Bouton de modification du commentaire
+                             let commentEditButton = document.createElement("button");
+                             commentEditButton.classList.add("hover:bg-[#0dcfdc3d]", "text-white", "font-bold", "p-2", "rounded-lg");
+                             commentEditButton.setAttribute("id", "commentEditButton");
+                             commentEditButton.setAttribute("onclick", "editComment(" + comment.id + ")");
                              // Icon du bouton de modification
                              let CommentEditButtonIcon = document.createElement("img");
                              CommentEditButtonIcon.setAttribute("src", "resources/images/icon/edit1.svg");
                              CommentEditButtonIcon.setAttribute("class", "blue-edit");
-                        // Bouton de suppression du commentaire
-                        let commentDeleteButton = document.createElement("button");
-                        commentDeleteButton.classList.add("hover:bg-[#5E0700]", "text-white", "font-bold", "p-2", "rounded-lg");
-                        commentDeleteButton.setAttribute("id", "commentDeleteButton");
-                        commentDeleteButton.setAttribute("onclick", "deleteComment(" + comment.id + ")");
+                             // Bouton de suppression du commentaire
+                             let commentDeleteButton = document.createElement("button");
+                             commentDeleteButton.classList.add("hover:bg-[#5E0700]", "text-white", "font-bold", "p-2", "rounded-lg");
+                             commentDeleteButton.setAttribute("id", "commentDeleteButton");
+                             commentDeleteButton.setAttribute("onclick", "deleteComment(" + comment.id + ")");
                              // Icon du bouton de suppression
                              let subCommentDeleteButtonIcon = document.createElement("img");
                              subCommentDeleteButtonIcon.setAttribute("src", "resources/images/icon/trashcan.svg");
                              subCommentDeleteButtonIcon.setAttribute("class", "red-delete");
+                             commentReplyButton.addEventListener('click', function () {
+                                 replyComment(comment.id);
 
-                        let replyList = document.createElement("ul");
-                        replyList.classList.add("ml-8", "mb-4");
-                        replyList.setAttribute("id", "replyList");
-                        // Ajout fonction sur les boutons
-                        commentReplyButton.addEventListener('click', function () {
-                            replyComment(comment.id);
+                             });
 
-                        });
+                             let replyList = document.createElement("ul");
+                             replyList.classList.add("ml-8", "mb-4");
+                             replyList.setAttribute("id", "replyList");
+                             // Ajout fonction sur les boutons
+
 
                         commentaires.appendChild(commentRow);
                         commentRow.appendChild(commentInfo);
@@ -169,13 +190,17 @@ async function getComments(id) {
                         commentRow.appendChild(commentContent);
                         commentContent.appendChild(commentContentP);
                         commentRow.appendChild(commentButtons);
-                        commentButtons.appendChild(commentReplyButton);
-                        commentReplyButton.appendChild(CommentReplyButtonIcon);
-                        commentButtons.appendChild(commentEditButton);
-                        commentEditButton.appendChild(CommentEditButtonIcon);
-                        commentButtons.appendChild(commentDeleteButton);
-                        commentDeleteButton.appendChild(subCommentDeleteButtonIcon);
-                        commentRow.appendChild(replyList);
+
+                            commentButtons.appendChild(commentReplyButton);
+                            commentReplyButton.appendChild(CommentReplyButtonIcon);
+                            commentButtons.appendChild(commentEditButton);
+                            commentEditButton.appendChild(CommentEditButtonIcon);
+                            commentButtons.appendChild(commentDeleteButton);
+                            commentDeleteButton.appendChild(subCommentDeleteButtonIcon);
+                            commentRow.appendChild(replyList);
+
+
+
 
                         // Appel de la fonction de récupération des réponses aux commentaires
                          for (const subComment of data.comments) {
@@ -241,7 +266,7 @@ async function getComments(id) {
                                     subCommentDeleteButtonIcon.setAttribute("class", "red-delete");
                                     // Ajout fonction sur les boutons
                                     subCommentReplyButton.addEventListener('click', function () {
-                                        AddCommentForm();
+                                        //AddCommentForm();
                                         replyComment(subComment.id);
                                     });
 
@@ -346,10 +371,39 @@ async function createFormAddComments(parent) {
 
         document.getElementById("comment").focus();
 }
+function AddCommentForm() {
+    if (!document.querySelector("#FormForAddComments")) {
+        createFormAddComments(formCommentDisplay);
+    }
+    // createFormAddComments(formCommentDisplay);
+    const Message = document.querySelector("#errorMsg");
+    const formComment = document.querySelector("#FormForAddComments");
+    formComment.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await fetch('search.php', {
+            method: 'POST',
+            body: new FormData(formComment)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Message.innerHTML = data.message;
+                    Message.classList.add('messageAlert');
+                    getComments(id);
+                } else {
+                    Message.innerHTML = data.message;
+                    Message.classList.add('messageAlert');
 
+                }
 
+            })
+    });
 
-createFormAddComments(formCommentDisplay);
+    document.getElementById("comment").focus();
+}
+if (formCommentDisplay) { // Si le formulaire existe
+    createFormAddComments(formCommentDisplay);
+}
 getArticle(id);
 getComments(id);
 

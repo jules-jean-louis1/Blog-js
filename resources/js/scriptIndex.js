@@ -3,6 +3,7 @@
 const BtnLogin = document.querySelector('#buttonLoginHeader');
 const BtnRegister = document.querySelector('#buttonRegisterHeader');
 const formDisplayer = document.querySelector('#formDisplayer');
+const btnNoCompte = document.querySelector('#btnNoCompte');
 
 // Fonction pour la gestion des messages d'erreurs
 function displayError(message) {
@@ -127,3 +128,5 @@ BtnLogin.addEventListener('click', async (ev) => {
                     });
                 });
 });
+
+

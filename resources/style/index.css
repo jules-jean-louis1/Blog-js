@@ -59,8 +59,15 @@
 }
 .dialog_modal {
     border-radius: 0.5rem;
-    background-color: #EAEBEC;
-    border: 1px solid #a8b3cf;
+    background-color: #F5F8FC;
+    border: 1px solid #9E15D9;
+}
+#passwordConfirm, #password , #login{
+    border: 1px solid transparent;
+}
+#passwordConfirm:hover , #password:hover , #login:hover {
+    border: 1px solid transparent;
+    box-shadow: 0 3px black ;
 }
 #overlay {
     position: fixed;

@@ -107,7 +107,7 @@ li {
     background-color: #e5e7eb;
 }*/
 /* Bouton ajout Commentaires */
-#commentForm , #zone_recherche{
+#commentForm , #zone_recherche, #NotConnected{
     box-shadow: 0 6px 6px -2px #c029f066;
 }
 #buttonCreateArticle:hover {

@@ -22,42 +22,47 @@ require_once 'resources/assests/Classes/Users.php';
     <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
         <?php include_once 'resources/assests/import/header.php' ?>
     </header>
-        <main class="lg:mt-[6%]">
+        <main class="mt-[10%] lg:mt-[6%]">
             <article>
                 <section>
                     <div id="containerDash">
                         <div id="titleDashboard">
-                            <h1 class="text-4xl text-center text-blue-400">
+                            <h1 class="text-4xl text-center font-semibold">
                                 Dashboard
                             </h1>
                         </div>
+                        <div id="containerMessage" class="h-[40px]">
+                            <div id="errorMsg"></div>
+                        </div>
                         <div id="tableauUser" class="flex justify-center">
                             <div class="w-[80%] flex flex-col items-center justify-center">
-                                <div id="errorMsg"></div>
-                                <table class="w-full border-2">
-                                    <thead>
+                                <table class="w-full border-[1px]">
+                                    <thead class="rounded-t-lg">
                                     <tr>
-                                        <th class="px-4 py-2">ID</th>
-                                        <th class="px-4 py-2">Login</th>
-                                        <th class="px-4 py-2">Droits</th>
-                                        <th class="px-4 py-2">Action</th>
-                                        <th class="px-4 py-2">Articles</th>
-                                        <th class="px-4 py-2">Commentaires</th>
+                                        <th class="px-4 py-2 border-[1px]">ID</th>
+                                        <th class="px-4 py-2 border-[1px]">Login</th>
+                                        <th class="px-4 py-2 border-[1px]">Droits</th>
+                                        <th class="px-4 py-2 border-[1px]">Action</th>
+                                        <th class="px-4 py-2 border-[1px]">Articles</th>
+                                        <th class="px-4 py-2 border-[1px]">Commentaires</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="tableauTbody" class="w-full border-2"></tbody>
+                                    <tbody id="tableauTbody" class="w-full border-[1px]"></tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </section>
                 <section>
-                    <div class="flex justify-center">
-                        <div id="categoriesWarp">
-                            <div id="titleCategories">
-                                <h1 class="text-4xl text-blue-400">
+                    <div class="flex justify-center pt-[3%] lg:pt-[4%]">
+                        <div id="categoriesWarp" class="flex items-start">
+                            <div id="titleCategories" class="flex flex-col items-center space-x-2">
+                                <h1 class="text-4xl text-semibold">
                                     Catégories
                                 </h1>
+                                <p>
+                                    <span class="w-[130px]">Ici, vous pouvez renommer les catégories.</span>
+                                </p>
                             </div>
                             <div id="containerCategory"></div>
                         </div>

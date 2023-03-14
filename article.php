@@ -121,8 +121,8 @@ require_once 'resources/assests/Classes/Articles.php';
                             <div class="py-2">
                                 <label for="order" class="font-light text-sm">Date -</label>
                                 <select name="order" id="order" class="bg-slate-100 p-2 rounded-lg font-light text-sm">
-                                    <option value="ASC">+ récents</option>
-                                    <option value="DESC">+ anciens</option>
+                                    <option value="DESC">+ récents</option>
+                                    <option value="ASC">+ anciens</option>
                                 </select>
                             </div>
                         </div>
