@@ -49,8 +49,7 @@ require_once 'resources/assests/Classes/Articles.php';
                                 </h3>
                             </div>
                             <button data-close-button type="button" id="closeModal"
-                                    class="text-slate-600 hover:bg-slate-200 rounded-lg font-semibold p-2">
-                                <!--&times;-->
+                                    class="text-slate-600 hover:bg-slate-100 rounded-lg font-semibold p-2">
                                 Fermer
                             </button>
                         </div>
