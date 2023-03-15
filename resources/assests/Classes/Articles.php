@@ -8,12 +8,13 @@ class Articles
     {
 
     }
-    public function createArticle($title, $content, $category_id, $author_id)
+    public function createArticle($title, $content, $category_id, $author_id, $img_header)
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('INSERT INTO articles (title, content, category_id, author_id, created_at) VALUES (:title, :content, :category_id, :author_id, NOW())');
-        $req->execute(['title' => $title, 'content' => $content, 'category_id' => $category_id, 'author_id' => $author_id]);
+        $req = $bdd->prepare('INSERT INTO articles (title, content, img_header, category_id, author_id, created_at) 
+                                    VALUES (:title, :content, :img_header, :category_id, :author_id, NOW())');
+        $req->execute(['title' => $title, 'content' => $content, 'img_header' => $img_header ,'category_id' => $category_id, 'author_id' => $author_id]);
     }
     public function getCategory()
     {
@@ -69,7 +70,7 @@ class Articles
         }
 
         $req = "SELECT articles.id ,articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
-                categories.name AS category_name, utilisateurs.user_avatar, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
+                categories.name AS category_name, utilisateurs.user_avatar, utilisateurs.login AS author_login, articles.img_header, articles.created_at, articles.updated_at
                 FROM articles
                 INNER JOIN categories ON articles.category_id = categories.id
                 INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id";

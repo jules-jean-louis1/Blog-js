@@ -283,10 +283,14 @@ async function getArticles(page, category, order) {
             /*let articleUpdatedAt = document.createElement("p");
             articleUpdatedAt.setAttribute("class", "text-[#525866] text-sm");
             articleUpdatedAt.textContent = "Mise à jour le " + articles.updated_at;*/
-            // Contenu de l'article
-            let articleContent = document.createElement("p");
-            articleContent.setAttribute("class", "text-[#525866] text-sm");
-            articleContent.textContent = articles.content_preview;
+            // Contenu de l'article (preview)
+                let articleContent = document.createElement("div");
+                articleContent.setAttribute("class", "flex flex-col items-start justify-start w-full py-2");
+                // Image de l'article
+                let articleImg = document.createElement("img");
+                articleImg.setAttribute("class", "w-full h-[10rem] object-cover rounded-lg");
+                articleImg.setAttribute("src", "resources/images/articles/" + articles.img_header);
+
             // Bouton pour lire l'article
             let articleRead = document.createElement("a");
             articleRead.setAttribute("class", "rounded-lg bg-[#0e1217] ease-in duration-100"+
@@ -305,6 +309,7 @@ async function getArticles(page, category, order) {
             articleContainerInfos.appendChild(articleCreatedAt);
             // articleContainer.appendChild(articleUpdatedAt);
             articleContainer.appendChild(articleContent);
+            articleContent.appendChild(articleImg);
             articleContainer.appendChild(articleRead);
         }
     } else {

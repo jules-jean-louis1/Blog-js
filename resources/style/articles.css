@@ -116,7 +116,7 @@ li {
 textarea {
     resize: none;
 }
-#comment {
+#comment, #content {
     resize: none;
 }
 

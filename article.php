@@ -36,7 +36,7 @@ require_once 'resources/assests/Classes/Articles.php';
                 <div id="btncreeArticle">
                     <button data-modal-target="#modal" type="button" id="buttonCreateArticle"
                             class="p-[6px] text-white bg-[#0e1217] ease-in duration-100  hover:bg-[#2d313a] font-semibold rounded-lg flex items-center">
-                            <img src="resources/images/icon/plusRounded.svg" class="filter-white">
+                            <img src="resources/images/icon/plusRounded.svg" class="filter-white" alt="plusIcon">
                             <span>Article</span>
                     </button>
                 </div>
@@ -55,7 +55,7 @@ require_once 'resources/assests/Classes/Articles.php';
                         </div>
                         <div class="modal-content">
                             <form action="resources/assests/fetch/createArticle.php" method="post"
-                                  id="form-modal-article">
+                                  id="form-modal-article" enctype="multipart/form-data">
                                 <div id="warpperArticleDialog">
                                     <div class="flex flex-col">
                                         <input type="text" name="title" id="title"
@@ -66,12 +66,19 @@ require_once 'resources/assests/Classes/Articles.php';
                                                           class="bg-slate-100 p-2 rounded-b-lg"
                                                           placeholder="Contenu de l'article"></textarea>
                                     </div>
-                                    <div class="flex flex-col">
-                                        <label for="category" class="font-semibold text-lg">Catégorie</label>
-                                        <select name="category" id="category" class="bg-slate-100 p-2 rounded-lg">
-                                        </select>
+                                    <div class="flex justify-around py-2">
+                                        <div class="flex items-center">
+                                            <label for="category" class="font-semibold text-lg">Catégorie -</label>
+                                            <select name="category" id="category" class="bg-slate-100 p-2 rounded-lg">
+                                            </select>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <label for="image" class="font-semibold text-lg">Image -</label>
+                                            <input type="file" name="imageHeader" id="image"
+                                                   class="bg-slate-100 p-2 rounded-lg">
+                                        </div>
                                     </div>
-                                    <div class="py-2">
+                                    <div class="h-[45px]">
                                         <div id="errorMsg"></div>
                                     </div>
                                     <div class="flex flex-col py-2">
