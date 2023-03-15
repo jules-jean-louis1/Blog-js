@@ -33,14 +33,25 @@ class Articles
         $req = $bdd->prepare('UPDATE categories SET name = :category_id WHERE id = :id');
         $req->execute(['category_id' => $categories, 'id' => $id]);
     }
-    public function numberPage()
+    public function numberPage($category = null, $order = 'DESC')
     {
         $db = new Database();
         $bdd = $db->getBdd();
 
-        // Compter le nombre total d'articles
+        // Construire la requête en fonction de la catégorie et de l'ordre
         $countQuery = "SELECT COUNT(*) as count FROM articles";
-        $countResult = $bdd->query($countQuery)->fetch(PDO::FETCH_ASSOC);
+        if ($category && $category !== "all") {
+            $countQuery .= " INNER JOIN categories ON articles.category_id = categories.id WHERE categories.name = :category";
+        }
+        $countQuery .= " ORDER BY articles.created_at $order";
+
+        // Préparer et exécuter la requête
+        $stmt = $bdd->prepare($countQuery);
+        if ($category && $category !== "all") {
+            $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+        }
+        $stmt->execute();
+        $countResult = $stmt->fetch(PDO::FETCH_ASSOC);
         $count = $countResult['count'];
 
         // Calculer le nombre total de pages
@@ -48,6 +59,7 @@ class Articles
 
         return $pages;
     }
+
     public function getArticles($page, $category, $order)
     {
         $db = new Database();
@@ -112,7 +124,7 @@ class Articles
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, utilisateurs.user_avatar, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.updated_at
+        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, utilisateurs.user_avatar, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.img_header, articles.updated_at
                               FROM articles
                               INNER JOIN categories ON articles.category_id = categories.id
                               INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id

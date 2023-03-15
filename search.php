@@ -48,7 +48,7 @@ if (isset($_POST['comment'])) {
     </section>
     <section>
         <div class="flex justify-center">
-            <div id="article" class="w-[98%] lg:w-[65%]"></div>
+            <div id="article" class="w-full lg:w-[65%]"></div>
         </div>
         <div id="commentContainer" class="flex flex-col items-center">
             <div class="w-[98%] lg:w-[65%]">

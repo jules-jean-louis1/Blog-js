@@ -23,6 +23,8 @@ const search = document.querySelector("#searchInput");
 const BtnFilter = document.querySelector("#buttonFilterArticle");
 const formFilterArticles = document.querySelector("#FormFilterArticles");
 
+
+
 const openModal = (modal) => {
     if (modal == null) return;
     modal.classList.add('active');
@@ -199,39 +201,31 @@ async function getArticle(id) {
 }
 
 // Fonction pour afficher le nombre de pages
-async function getPages() {
-    await fetch('resources/assests/fetch/articles/countPage.php')
+async function getPages(category, order) {
+    const params = new URLSearchParams();
+    params.append("category2", category);
+    params.append("order", order);
+    await fetch(`resources/assests/fetch/articles/countPage.php?${params.toString()}`)
         .then(response => response.json())
         .then(data => {
             let pages = document.querySelector("#pages");
             let pagesHTML = "";
             for (let i = 0; i < data.pages.length; i++) {
                 const page = data.pages[i];
-                pagesHTML += `
+                if(page > 0) {
+                    pagesHTML += `
                             <li class="page-item border-[1px] p-2 rounded-lg">
                                 <!--Penser a changer le href pour la page pour index-->
                                 <a class="page-link" href="article.php?page=${page}">${page}</a>
                             </li>
                           `;
-            }
+                }
 
-            pages.innerHTML = pagesHTML;
+                pages.innerHTML = pagesHTML;
+                }
+
         })
 }
-
-// Fonction pour afficher les articles
-/*async function getArticles(page) {
-    await fetch('article.php?page=' + page)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            let articlesDisplay = document.querySelector("#articlesContainerDisplay");
-            for (articles of data) {
-
-            }
-        })
-}
-getArticles(page);*/
 
 let category = 'all';
 let order = 'DESC';
@@ -320,7 +314,7 @@ async function getArticles(page, category, order) {
         // Ajouter le contenu HTML à la page
         articlesDisplay.appendChild(articleContainer);
     }
-
+    getPages(category, order);
 }
 
 getArticles(page, category, order);
@@ -332,7 +326,6 @@ formFilterArticles.addEventListener("change", (ev) => {
     const order = formFilterArticles.querySelector("#order").value;
     getArticles(page, category, order);
 });
-getPages();
 
 loginFormHeader(BtnLogin);
 registerHeader(BtnRegister);

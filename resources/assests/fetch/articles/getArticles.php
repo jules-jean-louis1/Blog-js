@@ -2,10 +2,6 @@
 session_start();
 require_once '../../Classes/Articles.php';
 
-$page = 1;
-$category = 'all';
-$order = 'ASC';
-
 if (isset($_GET['page'])) {
     $page = intval($_GET['page']);
 }

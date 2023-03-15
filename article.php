@@ -21,7 +21,7 @@ require_once 'resources/assests/Classes/Articles.php';
 <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
     <?php include_once 'resources/assests/import/header.php' ?>
 </header>
-<main class="mt-[8%] sm:mt-[5%] lg:mt-[3%]">
+<main class="mt-[20%] sm:mt-[5%] lg:mt-[3%]">
     <section>
         <div id="formDisplayer"></div>
     </section>
@@ -113,7 +113,7 @@ require_once 'resources/assests/Classes/Articles.php';
                                 <img src="resources/images/icon/search.svg" class="filter-white">
                             </button>
                         </div>
-                        <ul id="results"></ul>
+                        <ul id="results" class="z-index-50 fixed bg-[#FFFFFFF4] rounded-lg min-w-max lg:max-w-[15%] w-full"></ul>
                     </form>
                     <form action="resources/assests/fetch/articles/getArticles.php" method="post" id="FormFilterArticles"
                             >
@@ -138,13 +138,13 @@ require_once 'resources/assests/Classes/Articles.php';
         </div>
     </section>
     <section class="flex justify-center">
-        <div id="containerArticlePage" class="w-[98%] lg:w-[85%] lg:mt-[3%]">
+        <div id="containerArticlePage" class="w-[98%] mt-[2%] lg:w-[85%] lg:mt-[3%]">
             <div class="">
                 <div class="flex flex-row items-center justify-between">
                     <h1 class="text-xl font-bold">Articles</h1>
                     <div id="containerPagination">
                         <div id="Paginations">
-                            <ul id="pages" class="flex space-x-2"></ul>
+                            <ul id="pages" class="flex space-x-2 m-w-[50px]"></ul>
                         </div>
                     </div>
                 </div>

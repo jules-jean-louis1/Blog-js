@@ -60,9 +60,11 @@ async function getArticle(id) {
                 let formattedDateU = formatDate(art.updated_at);
                 articleHTML = `
           <div id="containerDarticles" class="flex justify-center">
-                <div class="p-4">
-                    <div id="iconeMoreSearch">
-                      <div id="comentaireArticleMoreSearch"></div>
+                <div class="p-2">
+                    <div id="iconeMoreSearch" class="h-[41%] pb-2 ">
+                        <div id="comentaireArticleMoreSearch" class="w-full h-full">
+                            <img src="resources/images/articles/${art.img_header}" alt="img_${art.img_header}" class="w-full h-full object-cover rounded-t-2">
+                        </div>
                     </div>
                     <div id="articlesMoreSearch" class="flex flex-col">
                       <div id="infoPost" class="flex flex-col">
