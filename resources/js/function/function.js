@@ -135,6 +135,14 @@ function closeModalDialog() {
     dialog.close();
     dialog.remove();
 }
+function toggleMenu() {
+    let menuItems = document.getElementById("menuItems");
+    if (menuItems.classList.contains("hidden")) {
+        menuItems.classList.remove("hidden");
+    } else {
+        menuItems.classList.add("hidden");
+    }
+}
 
 // Export des fonctions pour une utilisation externe
 export { displayError};
@@ -143,4 +151,5 @@ export {formatDate};
 export {loginFormHeader};
 export {registerHeader};
 export {closeModalDialog};
+export {toggleMenu};
 

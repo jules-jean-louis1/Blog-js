@@ -130,3 +130,18 @@ BtnLogin.addEventListener('click', async (ev) => {
 });
 
 
+function toggleMenu() {
+    let menuItems = document.getElementById("menuItems");
+    if (menuItems.classList.contains("hidden")) {
+        menuItems.classList.remove("hidden");
+    } else {
+        menuItems.classList.add("hidden");
+    }
+}
+const BtnBurgerMenu = document.querySelector('#BtnBurgerMenu');
+BtnBurgerMenu.addEventListener('click', toggleMenu);
+
+
+
+
+

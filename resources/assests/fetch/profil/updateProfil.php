@@ -1,4 +1,4 @@
-<?php
+<?php // ajoute check login
 session_start();
 require_once '../../Classes/Users.php';
 
@@ -11,11 +11,17 @@ if (!empty($_POST['login'])) {
     $login = htmlspecialchars($_POST['login']);
 
     $user = new Users();
-    $user->updateLogin($login, $_SESSION['id']);
-    $_SESSION['login'] = $login;
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'loginUp', 'message' => 'Votre login a bien été modifié']);
-    die();
+    if ($user->checkLogin($login) == true) {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Ce login est déjà utilisé']);
+        die();
+    } else {
+        $user->updateLogin($login, $_SESSION['id']);
+        $_SESSION['login'] = $login;
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'loginUp', 'message' => 'Votre login a bien été modifié']);
+        die();
+    }
 }
 
 if (isset($_POST['password']) && isset($_POST['passwordConfirm'])) {

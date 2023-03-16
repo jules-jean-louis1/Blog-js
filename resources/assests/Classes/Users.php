@@ -65,6 +65,7 @@ class Users
         $bdd = $db->getBdd();
         $req = $bdd->prepare('UPDATE utilisateurs SET login = :login WHERE id = :id');
         $req->execute(['login' => $login, 'id' => $id]);
+        $_SESSION['login'] = $login;
     }
     public function updatePassword($password, $id)
     {

@@ -3,6 +3,7 @@ import { displaySuccess} from './function/function.js';
 import { formatDate } from './function/function.js';
 import { loginFormHeader } from './function/function.js';
 import { registerHeader } from './function/function.js';
+import { toggleMenu } from './function/function.js';
 import { closeModalDialog } from './function/function.js';
 
 // Varaiables presente dans le header de tous les pages
@@ -24,6 +25,8 @@ const BtnFilter = document.querySelector("#buttonFilterArticle");
 const formFilterArticles = document.querySelector("#FormFilterArticles");
 
 
+const BtnBurgerMenu = document.querySelector('#BtnBurgerMenu');
+BtnBurgerMenu.addEventListener('click', toggleMenu);
 
 const openModal = (modal) => {
     if (modal == null) return;

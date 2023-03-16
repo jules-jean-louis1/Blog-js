@@ -124,7 +124,7 @@ class Articles
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, utilisateurs.user_avatar, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.img_header, articles.updated_at
+        $req = $bdd->prepare('SELECT articles.id, articles.title, articles.content, utilisateurs.user_avatar, categories.id AS category_id, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at, articles.img_header, articles.updated_at
                               FROM articles
                               INNER JOIN categories ON articles.category_id = categories.id
                               INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
@@ -132,5 +132,12 @@ class Articles
         $req->execute(['id' => $id]);
         $article = $req->fetch(PDO::FETCH_ASSOC);
         return $article;
+    }
+    public function editArticle($id, $titre, $content, $categories)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('UPDATE articles SET title = :title, content = :content, category_id = :category_id, updated_at = NOW() WHERE id = :id');
+        $req->execute(['title' => $titre, 'content' => $content, 'category_id' => $categories, 'id' => $id]);
     }
 }

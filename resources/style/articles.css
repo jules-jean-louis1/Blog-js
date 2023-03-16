@@ -46,7 +46,7 @@ li {
     border-radius: 0.5rem;
     color: #526866a3;
 }
-.hidden {
+.hidden-text {
     transition: ease-out 1.5s;
     opacity: 0;
 }
@@ -83,29 +83,14 @@ li {
 #formCreateArticle {
      display: none;
  }
-/*#results {
-    position: absolute;
-    width: 30%;
-    top: 20%;
-    left: 190px;
-    z-index: 10;
-    background-color: #ffffff;
-    padding: 8px;
-    max-height: 300px;
-    overflow-y: auto;
+#passwordConfirm, #password , #login{
+    border: 1px solid transparent;
+}
+#passwordConfirm:hover , #password:hover , #login:hover {
+    border: 1px solid transparent;
+    box-shadow: 0 3px black ;
 }
 
-#results li {
-    margin: 5px 0;
-    padding: 5px;
-    border: 1px solid #52586633;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#results li:hover {
-    background-color: #e5e7eb;
-}*/
 /* Bouton ajout Commentaires */
 #commentForm , #zone_recherche, #NotConnected{
     box-shadow: 0 6px 6px -2px #c029f066;

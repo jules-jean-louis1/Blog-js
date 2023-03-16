@@ -26,6 +26,7 @@ session_start();
                 Hello World
             </h2>
         </div>
+        <div id="containerComments"></div>
     </main>
 </body>
 </html>

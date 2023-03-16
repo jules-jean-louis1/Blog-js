@@ -3,11 +3,19 @@ import { displaySuccess} from './function/function.js';
 import { formatDate } from './function/function.js';
 import { loginFormHeader } from './function/function.js';
 import { registerHeader } from './function/function.js';
+import { toggleMenu } from './function/function.js';
+
+
 
 const formCommentDisplay = document.querySelector("#commentFormDisplay");
 const BtnLogin = document.querySelector('#buttonLoginHeader');
 const BtnRegister = document.querySelector('#buttonRegisterHeader');
 const btnNoConnect = document.querySelector('#NotConnected');
+const btnEdit = document.querySelector('#editArticleBtn');
+
+
+const BtnBurgerMenu = document.querySelector('#BtnBurgerMenu');
+BtnBurgerMenu.addEventListener('click', toggleMenu);
 
 // Récupérer l'ID à partir de la query string
 const searchParams = new URLSearchParams(window.location.search);
@@ -73,11 +81,11 @@ async function getArticle(id) {
                             <h2 class="text-xl font-bold">${art.author_login}</h2>
                         </div>
                         
-                        <p class="flex flex-row">
-                          Poster · <time class="date">${formattedDateC}</time>`
+                        <p class="flex flex-row space-x-2">
+                          <span class="text-sm text-slate-400">Poster · <time class="date">${formattedDateC}</time></span>`
                         if (art.updated_at != null) {
                             articleHTML += `
-                          MaJ le <time class="date">${formattedDateU}</time>
+                          <span class="text-sm text-slate-400">- MaJ le <time class="date">${formattedDateU}</time></span>
                             `;
                         }
                         articleHTML += `
@@ -101,6 +109,8 @@ async function getArticle(id) {
             }
         })
 }
+
+
 
 // Fonction de récupération des commentaires quand le parent_id = 0
 async function getComments(id) {
@@ -218,7 +228,7 @@ async function getComments(id) {
 
                         // Appel de la fonction de récupération des réponses aux commentaires
                          for (const subComment of data.comments) {
-                             if (subComment.parent_comment_id == comment.id && subComment.id != subComment.parent_comment_id) { // si le commentaire est une réponse à ce commentaire parent
+                             if (subComment.parent_comment_id == comment.id) { // si le commentaire est une réponse à ce commentaire parent
                                  let subLi = document.createElement("li");
                                  subLi.classList.add("flex", "flex-col", "border-l-[1px]", "border-[#a8b3cf]", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
                                  subLi.setAttribute("id", "comment-" + subComment.id);
@@ -280,7 +290,7 @@ async function getComments(id) {
                                     subCommentDeleteButtonIcon.setAttribute("class", "red-delete");
                                     // Ajout fonction sur les boutons
                                     subCommentReplyButton.addEventListener('click', function () {
-                                        //AddCommentForm();
+                                        AddCommentForm();
                                         replyComment(subComment.id);
                                     });
 
@@ -299,8 +309,8 @@ async function getComments(id) {
                                     subCommentButtons.appendChild(subCommentDeleteButton);
                                     subCommentDeleteButton.appendChild(subCommentDeleteButtonIcon);
 
-                             }
-                         }
+                                 }
+                            }
 
 
                     }
@@ -386,10 +396,6 @@ async function createFormAddComments(parent) {
         document.getElementById("comment").focus();
 }
 function AddCommentForm() {
-    if (!document.querySelector("#FormForAddComments")) {
-        createFormAddComments(formCommentDisplay);
-    }
-    // createFormAddComments(formCommentDisplay);
     const Message = document.querySelector("#errorMsg");
     const formComment = document.querySelector("#FormForAddComments");
     formComment.addEventListener('submit', async (e) => {
@@ -415,8 +421,124 @@ function AddCommentForm() {
 
     document.getElementById("comment").focus();
 }
+
+function  getCategoryForForm (DisplayCategory) {
+    fetch('resources/assests/fetch/fetchCategory.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(element => {
+                DisplayCategory.innerHTML += `<option value="${element.id}">${element.name}</option>`;
+            });
+        })
+}
+function closeModal() {
+    let dialog = document.querySelector("#dialog");
+    dialog.close();
+    dialog.remove();
+}
 if (formCommentDisplay) { // Si le formulaire existe
     createFormAddComments(formCommentDisplay);
+}
+function createFormEdit(parent) {
+
+}
+// Fonction qui permet de répondre à un commentaire
+function editArticle(id) {
+    let body = document.querySelector('#editAricle');
+    btnEdit.addEventListener('click', async (e) => {
+        let createModal = document.createElement('dialog');
+        createModal.setAttribute('id', 'dialog');
+        createModal.className = 'dialog_modal';
+        body.appendChild(createModal);
+        createModal.showModal();
+        await fetch('resources/assests/fetch/articles/fetchDisplayArticle.php?id=' + id)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.status === 'success') {
+
+                    createModal.innerHTML += `
+                    <div class="p-4 rounded-lg">
+                        <form action="" method="post" id="formEditArticle" class="rounded-lg">
+                            <div id="containerCloseDialog" class="flex flex-row justify-between items-center">
+                                <p>
+                                    <span class="text-lg font-bold">Modifier l'article:</span>
+                                </p>
+                            <button type="button" id="closeDialog" class="py-2 px-4 hover:bg-slate-200 rounded-full">&times;</button>
+                            </div>
+                            <div class="flex flex-col">
+                                <input type="hidden" name="id" value="${data.articles.id}">
+                                <label for="title">Titre</label>
+                                <input type="text" name="title" id="title" class="bg-slate-100 p-2 rounded-lg" value="${data.articles.title}">
+                            </div>
+                            <div class="flex flex-col">
+                                <label for="content">Contenu</label>
+                                <textarea name="content" id="content" cols="30" rows="10" class="bg-slate-100 p-2 rounded-lg" >${data.articles.content}</textarea>
+                            </div>
+                            <div class="flex flex-col">
+                                <h4>Auteur :${data.articles.author_login}</h4>
+                            </div>
+                            <div id="containerMessageProfil" class="h-[65px] w-full">
+                                <div id="errorMsg" class="w-full"></div>
+                            </div>
+                            <div class="flex justify-around">
+                                <label for="category">Catégorie</label>
+                                <select name="categoryFormEdit" id="categoryFormEdit">
+                                    <option value="${data.articles.category_id}">${data.articles.category_name}</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col">
+                                <button type="submit" class="bg-[#04b43533] hover:bg-[#15ce5c] text-[#526866a3] hover:text-[#fff] font-bold p-2 rounded-lg mt-2">
+                                    Modifier
+                                </button>
+                            </div>
+                        </form>
+                    </div>`;
+
+                    // Récupération de l'élément categoryFormEdit
+                    let category = document.querySelector('#categoryFormEdit');
+
+                    // Vérification que l'élément category existe
+                    if (category !== null) {
+                        // Appel de la fonction getCategoryForForm
+                        getCategoryForForm(category);
+                    }
+                    let closeDialog = document.querySelector('#closeDialog');
+                    closeDialog.addEventListener('click', () => {
+                        closeModal();
+                    });
+                }
+            });
+            let btnEditArticle = document.querySelector('#formEditArticle');
+            btnEditArticle.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await fetch('resources/assests/fetch/articles/editArticle.php', {
+                    method: 'POST',
+                    body: new FormData(btnEditArticle)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        let Message = document.querySelector("#errorMsg");
+                        if (data.status === 'success') {
+                            Message.innerHTML = data.message;
+                            displaySuccess(Message);
+                            const myTimeout = setTimeout(closeModal(), 1000)
+                            myTimeout;
+                            getArticle(id);
+                        }
+                        if (data.status === 'error') {
+                            Message.innerHTML = data.message;
+                            displayError(Message);
+                        }
+                })
+            });
+
+    });
+}
+
+// Verifier que le bouton existe
+if (btnEdit) {
+    editArticle(id);
 }
 getArticle(id);
 getComments(id);

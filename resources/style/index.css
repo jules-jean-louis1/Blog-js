@@ -38,11 +38,10 @@
     border: 1px solid rgba(56,139, 253, 0.4);
     color: #c1d1d9;
 }
-.hidden {
+.hidden-text {
     transition: ease-out 1.5s;
     opacity: 0;
 }
-
 /* Article */
 .modal {
     position: fixed;

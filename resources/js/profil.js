@@ -1,4 +1,15 @@
 
+function toggleMenu() {
+    let menuItems = document.getElementById("menuItems");
+    if (menuItems.classList.contains("hidden")) {
+        menuItems.classList.remove("hidden");
+    } else {
+        menuItems.classList.add("hidden");
+    }
+}
+
+const BtnBurgerMenu = document.querySelector('#BtnBurgerMenu');
+BtnBurgerMenu.addEventListener('click', toggleMenu);
 
 // Fonction pour la gestion des messages d'erreurs
 function displayError(message) {
@@ -24,7 +35,7 @@ async function getInfosUser() {
                       class="flex flex-col space-y-2">
                     <div class="flex flex-col space-y-2">
                         <label for="login">Login</label>
-                        <input type="text" name="login" id="login" placeholder="${infos[0].login}"
+                        <input type="text" name="login" id="login" value="${infos[0].login}"
                                class="p-2 rounded-lg bg-slate-100">
                     </div>
                     <div class="flex flex-col space-y-2">
