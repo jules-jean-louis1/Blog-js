@@ -14,7 +14,7 @@ require_once 'resources/assests/Classes/Users.php';
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="https://cdn.tailwindcss.com"></script>
-        <script defer src="resources/js/dashboard.js"></script>
+        <script defer type="module" src="resources/js/dashboard.js"></script>
         <link rel="stylesheet" href="resources/style/index.css">
         <title><?= $_SESSION['login']?> - Dashboard</title>
     </head>
@@ -54,8 +54,8 @@ require_once 'resources/assests/Classes/Users.php';
                     </div>
                 </section>
                 <section>
-                    <div class="flex justify-center pt-[3%] lg:pt-[4%]">
-                        <div id="categoriesWarp" class="flex items-start">
+                    <div class="flex justify-around pt-[3%] lg:pt-[4%]">
+                        <div id="categoriesWarp" class="flex flex-col ">
                             <div id="titleCategories" class="flex flex-col items-center space-x-2">
                                 <h1 class="text-4xl text-semibold">
                                     Catégories
@@ -66,6 +66,16 @@ require_once 'resources/assests/Classes/Users.php';
                             </div>
                             <div id="containerCategory"></div>
                         </div>
+                        <div class="flex flex-col">
+                            <div id="titleFiltre" class="flex flex-col items-center space-x-2 max-h-[32%]">
+                                <h1 class="text-4xl text-semibold">
+                                    Commentaires
+                                </h1>
+                                <p>
+                                    <span class="w-[130px]">Ici, vous pouvez filtrer les articles.</span>
+                                </p>
+                            <div id="containerFiltreUsers"></div>
+                            <div id="containerUsers" class="w-[90%] max-h-[50%] overflow-scroll">
                     </div>
                 </section>
             </article>

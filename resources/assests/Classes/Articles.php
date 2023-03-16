@@ -140,4 +140,16 @@ class Articles
         $req = $bdd->prepare('UPDATE articles SET title = :title, content = :content, category_id = :category_id, updated_at = NOW() WHERE id = :id');
         $req->execute(['title' => $titre, 'content' => $content, 'category_id' => $categories, 'id' => $id]);
     }
+    public function gettitleArticles()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT articles.id, articles.title, categories.id, categories.name
+                                    FROM articles
+                                    INNER JOIN categories ON categories.id = articles.category_id;');
+        $req->execute();
+        $title = $req->fetchAll(PDO::FETCH_ASSOC);
+        $title = json_encode($title);
+        return $title;
+    }
 }

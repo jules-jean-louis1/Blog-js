@@ -82,11 +82,11 @@ class Users
         $req = $bdd->prepare('DELETE FROM utilisateurs WHERE id = :id');
         $req->execute(['id' => $id]);
     }
-    public function getAllUsers()
+    public function getLoginUser()
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('SELECT * FROM utilisateurs');
+        $req = $bdd->prepare('SELECT id, login FROM utilisateurs');
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         $result = json_encode($result);
@@ -139,4 +139,5 @@ class Users
         $req = $bdd->prepare('UPDATE `utilisateurs` SET `user_avatar` = :user_avatar WHERE `utilisateurs`.`id` = :id');
         $req->execute(['user_avatar' => $user_avatar, 'id' => $id]);
     }
+
 }
