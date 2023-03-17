@@ -14,6 +14,7 @@ BtnBurgerMenu.addEventListener('click', toggleMenu);
 const TableDisplay = document.querySelector('#tableauTbody');
 const Message = document.querySelector('#errorMsg');
 const container = document.querySelector('#containerUsers');
+const displayArticles = document.querySelector('#DisplayerArticles');
 
 
 // Fonction pour la gestion des messages d'erreurs
@@ -183,13 +184,13 @@ const comment = document.querySelector('#comment');
 const categoryForm = document.querySelector('#categoryForm');
 
 // fonction pour afficher les différentes catégories
-function  getCategoryForForm(category) {
+function getCategoryForForm(category) {
     fetch('resources/assests/fetch/fetchCategory.php')
         .then(response => response.json())
         .then(data => {
-            for (let i = 0; i < data.length; i++) {
-                category.innerHTML += `<option value="${data[i].id}">${data[i].name}</option>`;
-            }
+            data.forEach(element => {
+                category.innerHTML += `<option value="${element.id}">${element.name}</option>`;
+            });
         })
 }
 const login = document.querySelector('#loginFormComment');
@@ -248,7 +249,6 @@ async function filterComment(login, article) {
     await fetch(`resources/assests/fetch/dashboard/filterFormComm.php?${params.toString()}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             container.innerHTML = '';
             if (data.status === 'error') {
                 container.innerHTML = `
@@ -299,6 +299,88 @@ async function filterComment(login, article) {
             }
         })
 }
+// Creation de la fonction pour les fitres dans un formulaire
+async function formFilterArticle() {
+    const formFilter = document.getElementById('containerArticles');
+    const formFilterContainer = document.createElement('div');
+    formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-slate-100');
+    formFilterContainer.setAttribute('id', 'formFilterContainer');
+    formFilterContainer.innerHTML = `
+        <form action="" method="post" class="flex space-x-2" id="formFilterArticles">
+            <select name="loginFormArticle" id="loginFormArticle" class="bg-slate-100 rounded-lg p-2">
+            </select>
+            <select name="categoryFormArticle" id="categoryFormArticle" class="bg-slate-100 rounded-lg p-2">
+            </select>
+        </form>
+    `;
+    formFilter.appendChild(formFilterContainer);
+    const category = document.querySelector('#categoryFormArticle');
+    const login = document.querySelector('#loginFormArticle');
+    await loginSelect(login);
+    await getCategoryForForm(category);
+}
+// fonction pour afficher les articles  filtrés par catégorie
+async function filterArticle(login, category) {
+    const params = new URLSearchParams();
+    params.append('login', login);
+    params.append('category', category);
+    await fetch(`resources/assests/fetch/dashboard/filterFormArticle.php?${params.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            displayArticles.innerHTML = '';
+            if (data.status === 'error') {
+                displayArticles.innerHTML = `
+                    <div class="flex justify-between items-center p-2 rounded-lg">
+                        <p>Aucun article ecrit par cette utilisateur dans cette catégorie</p>
+                    </div>
+                `;
+            } else {
+                data.forEach(element => {
+                    displayArticles.innerHTML += `
+                    <div class="flex justify-between items-center p-2 rounded-lg">
+                        <div class="flex flex-col">
+                            <small><span class="text-slate-400 text-sm">Titre :</span></small>
+                            <p>${element.title}</p>
+                        </div>
+                        <div class="flex flex-col">
+                            <small><span class="text-slate-400 text-sm">Poster :</span></small>
+                            <p>${formatDate(element.created_at)}</p>
+                        </div>
+                        <div class="flex flex-col">
+                            <form action="" method="post" id="formForDeleteArticles">
+                                <input type="hidden" name="articles_id" value="${element.articles_id}">
+                                <button type="submit" class="bg-red-500 p-2 rounded-lg text-white" name="btnDeleteArticle">
+                                    Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    `;
+                    const deleteArticleForms = document.querySelectorAll('#formForDeleteArticles');
+                    deleteArticleForms.forEach(form => {
+                        form.addEventListener('submit', async (event) => {
+                            event.preventDefault();
+                            const articleId = event.target.elements.articles_id.value;
+                            await fetch(`resources/assests/fetch/dashboard/deleteArticle.php?id=${articleId}`, {method: 'DELETE'})
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.status === 'success') {
+                                        Message.innerHTML = data.message;
+                                        displaySuccess(Message);
+                                        filterArticle();
+                                    }
+                                    if (data.status === 'error') {
+                                        Message.innerHTML = data.message;
+                                        displayError(Message);
+                                    }
+                                })
+                        })
+                    });
+                });
+            }
+        })
+}
 
 
 filterUsers();
@@ -308,7 +390,13 @@ formFilter.addEventListener('change', (ev) => {
     const article = document.querySelector('#articleFormComment').value;
     filterComment(login, article)
 })
-
+formFilterArticle();
+const formFilterArticleID = document.getElementById('formFilterArticles');
+formFilterArticleID.addEventListener('change', (ev) => {
+    const login = document.querySelector('#loginFormArticle').value;
+    const category = document.querySelector('#categoryFormArticle').value;
+    filterArticle(login, category);
+})
 modifyCategory();
 
 

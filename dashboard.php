@@ -64,18 +64,38 @@ require_once 'resources/assests/Classes/Users.php';
                                     <span class="w-[130px]">Ici, vous pouvez renommer les catégories.</span>
                                 </p>
                             </div>
-                            <div id="containerCategory"></div>
+                            <div id="containerCategory" class="flex flex-col space-y-3"></div>
                         </div>
                         <div class="flex flex-col">
-                            <div id="titleFiltre" class="flex flex-col items-center space-x-2 max-h-[32%]">
+                            <div id="titleFiltre" class="flex flex-col items-center space-x-2">
                                 <h1 class="text-4xl text-semibold">
                                     Commentaires
                                 </h1>
                                 <p>
                                     <span class="w-[130px]">Ici, vous pouvez filtrer les articles.</span>
                                 </p>
+                            </div>
                             <div id="containerFiltreUsers"></div>
-                            <div id="containerUsers" class="w-[90%] max-h-[50%] overflow-scroll">
+                            <div class="h-[250px] overflow-scroll ">
+                                <div id="containerUsers" class="w-full pt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div id="divContainerArticles">
+                        <div id="titleArticles" class="flex flex-col items-center space-x-2">
+                            <h1 class="text-4xl text-semibold">
+                                Articles
+                            </h1>
+                            <p>
+                                <span class="w-[130px]">Ici, vous pouvez supprimer les articles.</span>
+                            </p>
+                        </div>
+                        <div class="flex flex-col item-center">
+                            <div id="containerArticles"></div>
+                            <div id="DisplayerArticles"></div>
+                        </div>
                     </div>
                 </section>
             </article>

@@ -152,4 +152,28 @@ class Articles
         $title = json_encode($title);
         return $title;
     }
+    public function articlesDashboard($id, $categories)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT articles.id AS articles_id, articles.title, articles.created_at, categories.name AS category_name, utilisateurs.login AS author_login, articles.created_at
+                              FROM articles
+                              INNER JOIN categories ON articles.category_id = categories.id
+                              INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
+                              WHERE articles.author_id = :id AND articles.category_id = :category_id');
+        $req->execute(['id' => $id, 'category_id' => $categories]);
+        $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+        $articles = json_encode($articles);
+        return $articles;
+    }
+    public function deleteArticle($id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('DELETE articles, comments
+                                    FROM articles
+                                    LEFT JOIN comments ON comments.article_id = articles.id
+                                    WHERE articles.id = :id');
+        $req->execute(['id' => $id]);
+    }
 }
