@@ -174,6 +174,7 @@ class Articles
                                     FROM articles
                                     LEFT JOIN comments ON comments.article_id = articles.id
                                     WHERE articles.id = :id');
-        $req->execute(['id' => $id]);
+        $result = $req->execute(['id' => $id]);
+        return $result;
     }
 }

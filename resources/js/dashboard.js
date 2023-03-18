@@ -306,7 +306,7 @@ async function formFilterArticle() {
     formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-slate-100');
     formFilterContainer.setAttribute('id', 'formFilterContainer');
     formFilterContainer.innerHTML = `
-        <form action="" method="post" class="flex space-x-2" id="formFilterArticles">
+        <form action="" method="post" class="flex flex-col space-y-4" id="formFilterArticles">
             <select name="loginFormArticle" id="loginFormArticle" class="bg-slate-100 rounded-lg p-2">
             </select>
             <select name="categoryFormArticle" id="categoryFormArticle" class="bg-slate-100 rounded-lg p-2">
@@ -339,13 +339,15 @@ async function filterArticle(login, category) {
                 data.forEach(element => {
                     displayArticles.innerHTML += `
                     <div class="flex justify-between items-center p-2 rounded-lg">
-                        <div class="flex flex-col">
-                            <small><span class="text-slate-400 text-sm">Titre :</span></small>
-                            <p>${element.title}</p>
-                        </div>
-                        <div class="flex flex-col">
-                            <small><span class="text-slate-400 text-sm">Poster :</span></small>
-                            <p>${formatDate(element.created_at)}</p>
+                        <div class="flex justify-between w-full px-2">
+                            <div class="flex flex-col">
+                                <small><span class="text-slate-400 text-sm">Titre :</span></small>
+                                <p>${element.title}</p>
+                            </div>
+                            <div class="flex flex-col">
+                                <small><span class="text-slate-400 text-sm">Poster :</span></small>
+                                <p>${formatDate(element.created_at)}</p>
+                            </div>
                         </div>
                         <div class="flex flex-col">
                             <form action="" method="post" id="formForDeleteArticles">

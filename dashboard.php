@@ -92,9 +92,9 @@ require_once 'resources/assests/Classes/Users.php';
                                 <span class="w-[130px]">Ici, vous pouvez supprimer les articles.</span>
                             </p>
                         </div>
-                        <div class="flex flex-col item-center">
+                        <div class="flex item-center">
                             <div id="containerArticles"></div>
-                            <div id="DisplayerArticles"></div>
+                            <div id="DisplayerArticles" class="w-full h-[400px] rounded-lg bg-slate-100"></div>
                         </div>
                     </div>
                 </section>
