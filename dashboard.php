@@ -82,8 +82,8 @@ require_once 'resources/assests/Classes/Users.php';
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div id="divContainerArticles">
+                <section class="flex justify-center">
+                    <div id="divContainerArticles" class="lg:w-[80%]">
                         <div id="titleArticles" class="flex flex-col items-center space-x-2">
                             <h1 class="text-4xl text-semibold">
                                 Articles
