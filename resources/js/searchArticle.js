@@ -228,7 +228,7 @@ async function getComments(id) {
 
                         // Appel de la fonction de récupération des réponses aux commentaires
                          for (const subComment of data.comments) {
-                             if (subComment.parent_comment_id == comment.id) { // si le commentaire est une réponse à ce commentaire parent
+                             if (subComment.parent_comment_id == comment.id && subComment.id != subComment.parent_comment_id) { // si le commentaire est une réponse à ce commentaire parent
                                  let subLi = document.createElement("li");
                                  subLi.classList.add("flex", "flex-col", "border-l-[1px]", "border-[#a8b3cf]", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
                                  subLi.setAttribute("id", "comment-" + subComment.id);
