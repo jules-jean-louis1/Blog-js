@@ -289,11 +289,14 @@ async function getArticles(page, category, order) {
                 articleImg.setAttribute("src", "resources/images/articles/" + articles.img_header);
 
             // Bouton pour lire l'article
-            let articleRead = document.createElement("a");
+            let articleRead = document.createElement("button");
             articleRead.setAttribute("class", "rounded-lg bg-[#0e1217] ease-in duration-100"+
                                                                "hover:bg-[#2d313a] font-semibold text-white py-[5px] px-2");
-            articleRead.setAttribute("href", "search.php?id=" + articles.id);
             articleRead.textContent = "Lire l'article";
+            articleRead.addEventListener("click", () => {
+               readArticlesModal(articles.id);
+            });
+
 
             // Ajouter le contenu HTML à la page
             articlesDisplay.appendChild(articleContainer);
@@ -332,3 +335,77 @@ formFilterArticles.addEventListener("change", (ev) => {
 
 loginFormHeader(BtnLogin);
 registerHeader(BtnRegister);
+
+
+
+// Ajout Modal pour lire l'articles.
+
+async function readArticlesModal(id) {
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('id', 'dialog');
+    dialog.className = 'dialog_modal w-[80%] h-full bg-[#F5F8FC] rounded-lg shadow-lg';
+    formDisplayer.appendChild(dialog);
+    dialog.innerHTML = '';
+    dialog.showModal();
+    await fetch('resources/assests/fetch/articles/fetchDisplayArticle.php?id=' + id)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+          if (data.status === 'empty') {
+
+            } else {
+              let art = data.articles;
+              // accéder directement à l'objet article
+              let formattedDateC = formatDate(art.created_at);
+              let formattedDateU = formatDate(art.updated_at);
+                dialog.innerHTML+=`
+                  <div id="wapperArt">
+                      <div id="closeContainer" class="flex justify-end">
+                        <button id="closeModalArticles" class="close-modal bg-[#0e1217] text-white rounded-full w-8 h-8 flex items-center justify-center">&times;</button>
+                      </div>
+                      <div id="containerDarticles" class="flex justify-center">
+                        <div class="p-2">
+                          <div id="iconeMoreSearch" class="h-[41%] pb-2 ">
+                            <div id="comentaireArticleMoreSearch" class="w-full h-full">
+                              <img src="resources/images/articles/${art.img_header}" alt="img_${art.img_header}" class="w-full h-full object-cover rounded-t-2">
+                            </div>
+                          </div>
+                          <div id="articlesMoreSearch" class="flex flex-col">
+                            <div id="infoPost" class="flex flex-col">
+                              <div id="loginInfoContainer" class="flex items-center space-x-2">
+                                <img src="resources/images/avatar/${art.user_avatar}" alt="avatar" class="w-9 h-9 rounded-full">
+                                <h2 class="text-xl font-bold">${art.author_login}</h2>
+                              </div>
+                              <div id="dateInfoContainer" class="flex flex-row space-x-2">
+                                <p class="flex flex-row space-x-2">
+                                  <span class="text-sm text-slate-400">Poster · <time class="date">${formattedDateC}</time></span>`
+                                  if (art.updated_at != null) {
+                                      dialog.innerHTML += `
+                                  <span class="text-sm text-slate-400">- MaJ le <time class="date">${formattedDateU}</time></span>
+                                  `;
+                                  }
+                                  dialog.innerHTML += `
+                              </p>
+                              <p class="flex flex-row">
+                                <span class="bg-[#EAEBEC] rounded-lg p-[1px] text-[#526866a3] font-bold">#${art.category_name}</span>
+                              </p>
+                           </div>
+                          </div>
+                           <div id="title_articleMoreSearch" class="my-2 p-2 rounded-lg">
+                              <h1 class="text-4xl font-bold">${art.title}</h1>
+                           </div>
+                           <div id="content_articleMoreSearch" class="m-2 p-2 rounded-lg">
+                                <p>${art.content}</p>
+                           </div>
+                          </div>
+                        </div>
+                      </div>
+                     `;
+                }
+            const closeModal = dialog.querySelector('.close-modal');
+            closeModal.addEventListener('click', () => {
+                dialog.close();
+            });
+        });
+}
+
