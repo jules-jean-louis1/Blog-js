@@ -22,8 +22,7 @@ require_once 'Database.php';
                                         FROM comments
                                         INNER JOIN utilisateurs ON comments.user_id = utilisateurs.id
                                         WHERE comments.article_id = :article_id
-                                        ORDER BY comments.created_at DESC
-                                        ');
+                                        ORDER BY comments.parent_comment_id asc , comments.created_at DESC');
             $req->execute(['article_id' => $article_id]);
             $comments = $req->fetchAll(PDO::FETCH_ASSOC);
             return $comments;
