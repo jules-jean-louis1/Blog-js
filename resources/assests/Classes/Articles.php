@@ -177,4 +177,14 @@ class Articles
         $result = $req->execute(['id' => $id]);
         return $result;
     }
+    public function checkCategories()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT categories.id, categories.name
+                                    FROM categories');
+        $req->execute();
+        $categories = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $categories;
+    }
 }

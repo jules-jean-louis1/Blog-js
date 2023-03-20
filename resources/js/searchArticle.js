@@ -110,6 +110,19 @@ async function getArticle(id) {
         })
 }
 
+// fonction pour afficher le button modifier et supprimer si l'utilisateur est connecté
+function displayEditBtn() {
+    fetch('resources/assests/fetch/comments/editCom.php')
+        .then(response => response.text())
+        .then(data => {
+            if (data === comment.login) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+}
+
 
 
 // Fonction de récupération des commentaires quand le parent_id = 0
@@ -132,7 +145,7 @@ async function getComments(id) {
                     // vérifier si le commentaire est un commentaire parent
                     if (comment.parent_comment_id == 0) {
                         const commentDiv = document.createElement('div');
-                        commentDiv.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-4");
+                        commentDiv.classList.add("flex", "flex-col", "border-[1px]", "border-[#a8b3cf]", "rounded-lg", "shadow-md", "bg-[#fff]", "hover:bg-[#f3f3f3]", "p-4", "m-4");
                         commentDiv.setAttribute("id", "commentRow");
                         commentDiv.innerHTML = `
                           <div class="flex flex-col space-x-2 justify-start" id="commentInfo">
@@ -149,12 +162,12 @@ async function getComments(id) {
                                 <button class="hover:bg-[#1ddc6f3d] text-white font-bold p-2 rounded-lg" id="commentReplyButton">
                                   <img src="resources/images/icon/comments.svg" class="green-reply" alt="commentIcon">
                                 </button>
-                                <button class="hover:bg-[#0dcfdc3d] text-white font-bold p-2 rounded-lg" id="commentEditButton">
+                                <!--<button class="hover:bg-[#0dcfdc3d] text-white font-bold p-2 rounded-lg" id="commentEditButton">
                                   <img src="resources/images/icon/edit1.svg" class="blue-edit" alt="editBtn">
                                 </button>
                                 <button class="hover:bg-[#5E0700] text-white font-bold p-2 rounded-lg" id="commentDeleteButton">
                                   <img src="resources/images/icon/trashcan.svg" alt="delete" class="red-delete">
-                                </button>
+                                </button>-->
                           </div>
                           <ul id="replyList" class="ml-8 mb-4"></ul>
                         `;
@@ -186,12 +199,12 @@ async function getComments(id) {
                                         <button class="hover:bg-[#1ddc6f3d] text-white font-bold p-2 rounded-lg" id="commentRepliesButton">
                                             <img src="resources/images/icon/comments.svg" class="green-reply" alt="commentIcon">
                                         </button>
-                                        <button class="hover:bg-[#0dcfdc3d] text-white font-bold p-2 rounded-lg" id="commentEditButton">
+                                        <!--<button class="hover:bg-[#0dcfdc3d] text-white font-bold p-2 rounded-lg" id="commentEditButton">
                                             <img src="resources/images/icon/edit1.svg" class="blue-edit" alt="editBtn">
                                         </button>
                                         <button class="hover:bg-[#5E0700] text-white font-bold p-2 rounded-lg" id="commentDeleteButton">
                                             <img src="resources/images/icon/trashcan.svg" alt="delete" class="red-delete">
-                                        </button>
+                                        </button>-->
                                     </div>
                                 </div>
                                 `;
