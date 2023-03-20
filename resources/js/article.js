@@ -406,6 +406,9 @@ async function readArticlesModal(id) {
             closeModal.addEventListener('click', () => {
                 dialog.close();
             });
+            //
+            // Afficher les commentaires
+
         });
 }
 
