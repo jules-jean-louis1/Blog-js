@@ -54,7 +54,7 @@ if (isset($_POST['comment'])) {
             <div class="w-[98%] lg:w-[65%]">
                 <?php if (isset($_SESSION['login'])) : ?>
                     <?php if ($_SESSION['droits'] == 'moderateur' || $_SESSION['droits'] == 'administrateur') {
-                        echo '<div id="editAricle">
+                        echo '<div id="editAricle" class="flex justify-center">
                             <button id="editArticleBtn" class="text-xl text-black border-[1px] border-[#ac1de4] py-2 px-6 rounded-lg">Modifier l\'article</button>  
                           </div>';
                     }
@@ -80,6 +80,9 @@ if (isset($_POST['comment'])) {
         </div>
     </section>
 </main>
+<footer>
+    <?php include_once 'resources/assests/import/footer.php' ?>
+</footer>
 </body>
 </html>
 

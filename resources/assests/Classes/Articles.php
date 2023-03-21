@@ -187,4 +187,18 @@ class Articles
         $categories = $req->fetchAll(PDO::FETCH_ASSOC);
         return $categories;
     }
+    public function lastestArticles()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare("SELECT articles.id, articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, articles.img_header, categories.name AS category_name, utilisateurs.user_avatar, utilisateurs.login AS author_login, articles.created_at
+                              FROM articles
+                              INNER JOIN categories ON articles.category_id = categories.id
+                              INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
+                              ORDER BY articles.created_at DESC LIMIT 3");
+        $req->execute();
+        $articles = $req->fetchAll(PDO::FETCH_ASSOC);
+        $articles = json_encode($articles);
+        return $articles;
+    }
 }

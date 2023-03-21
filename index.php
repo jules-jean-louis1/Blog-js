@@ -21,12 +21,16 @@ session_start();
 </header>
     <main>
         <div id="formDisplayer"></div>
-        <div id="test">
-            <h2 class="text-6xl text-center text-blue-400">
-                Hello World
-            </h2>
-        </div>
-        <div id="containerComments"></div>
+        <section class="pt-[10%]">
+            <div class="flex justify-center">
+                <div class="lg:w-[90%] flex justify-around">
+                    <div id="containerArticleLast" class="flex flex-wrap justify-around"></div>
+                </div>
+            </div>
+        </section>
     </main>
+<footer>
+    <?php include_once 'resources/assests/import/footer.php' ?>
+</footer>
 </body>
 </html>
