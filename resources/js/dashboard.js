@@ -76,7 +76,7 @@ const GetUsers = async () => {
                     <td class="px-4 py-2 text-center border-[1px] hover:bg-[#F5F8FC]">${user.login}</td>
                     <td class="px-4 py-2 border-[1px] hover:bg-[#F5F8FC]">
                         <form action="resources/assests/fetch/updateDroits.php" method="post" id="updateDroits_${user.id}" data-id="${user.id}" class="flex justify-between">
-                            <select name="droits" id="droits" class="p-2 bg-slate-100 rounded-lg">
+                            <select name="droits" id="droits" class="p-2 bg-[#E9E9E9] rounded-lg">
                                 <option value="${user.droits}">${user.droits}</option>
                                 ${optionHtml}
                             </select>
@@ -145,7 +145,7 @@ const modifyCategory = async() => {
                 optionHtml += `
                     <div class="flex justify-between items-center p-2 rounded-lg">
                         <form action="" method="post" class="flex space-x-2" id="update_${category.id}"  data-id-cat="${category.id}">
-                            <input type="text" name="nom" id="nom" placeholder="${category.name}" class="bg-slate-100 rounded-lg p-2">
+                            <input type="text" name="nom" id="nom" placeholder="${category.name}" class="bg-[#E9E9E9] rounded-lg p-2">
                             <button type="submit" class="bg-green-500 p-2 rounded-lg text-white" name="btnUpdateCategory" id="btnUpdateCategory_${category.id}">
                                 Modifier
                             </button>
@@ -226,13 +226,13 @@ fetch('resources/assests/fetch/dashboard/getAllComment.php')
 async function filterUsers() {
     const formFilter = document.getElementById('containerFiltreUsers');
     const formFilterContainer = document.createElement('div');
-    formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-slate-100');
+    formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-[#E9E9E9]');
     formFilterContainer.setAttribute('id', 'formFilterContainer');
     formFilterContainer.innerHTML = `
-        <form action="" method="post" class="flex flex-col space-y-2" id="formFilter">
-            <select name="loginFormComment" id="loginFormComment" class="bg-slate-100 rounded-lg p-2">
+        <form action="" method="post" class="flex space-x-2" id="formFilter">
+            <select name="loginFormComment" id="loginFormComment" class="bg-[#E9E9E9] rounded-lg p-2">
             </select>
-            <select name="articleFormComment" id="articleFormComment" class="bg-slate-100 rounded-lg p-2">
+            <select name="articleFormComment" id="articleFormComment" class="bg-[#E9E9E9] rounded-lg p-2">
             </select>
         </form>
     `;
@@ -303,13 +303,13 @@ async function filterComment(login, article) {
 async function formFilterArticle() {
     const formFilter = document.getElementById('containerArticles');
     const formFilterContainer = document.createElement('div');
-    formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-slate-100');
+    formFilterContainer.classList.add('flex', 'justify-between', 'items-center', 'space-x-2', 'p-2', 'rounded-lg', 'bg-[#E9E9E9]');
     formFilterContainer.setAttribute('id', 'formFilterContainer');
     formFilterContainer.innerHTML = `
-        <form action="" method="post" class="flex flex-col space-y-4" id="formFilterArticles">
-            <select name="loginFormArticle" id="loginFormArticle" class="bg-slate-100 rounded-lg p-2">
+        <form action="" method="post" class="flex space-x-4" id="formFilterArticles">
+            <select name="loginFormArticle" id="loginFormArticle" class="bg-[#E9E9E9] rounded-lg p-2">
             </select>
-            <select name="categoryFormArticle" id="categoryFormArticle" class="bg-slate-100 rounded-lg p-2">
+            <select name="categoryFormArticle" id="categoryFormArticle" class="bg-[#E9E9E9] rounded-lg p-2">
             </select>
         </form>
     `;

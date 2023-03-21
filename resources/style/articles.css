@@ -130,3 +130,8 @@ textarea {
 #commentDeleteButton:hover > .red-delete {
     filter: invert(31%) sepia(69%) saturate(4555%) hue-rotate(347deg) brightness(89%) contrast(114%);
 }
+
+/* BODY */
+body {
+    background: #F9F9F9;
+}

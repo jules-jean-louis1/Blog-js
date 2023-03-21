@@ -54,8 +54,8 @@ require_once 'resources/assests/Classes/Users.php';
                     </div>
                 </section>
                 <section>
-                    <div class="flex justify-around pt-[3%] lg:pt-[4%]">
-                        <div id="categoriesWarp" class="flex flex-col ">
+                    <div class="flex flex-col items-center pt-[3%] lg:py-[3%]">
+                        <div id="categoriesWarp" class="flex flex-col lg:w-[80%] items-center border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
                             <div id="titleCategories" class="flex flex-col items-center space-x-2">
                                 <h1 class="text-4xl text-semibold">
                                     Catégories
@@ -64,27 +64,29 @@ require_once 'resources/assests/Classes/Users.php';
                                     <span class="w-[130px]">Ici, vous pouvez renommer les catégories.</span>
                                 </p>
                             </div>
-                            <div id="containerCategory" class="flex flex-col space-y-3"></div>
-                        </div>
-                        <div class="flex flex-col">
-                            <div id="titleFiltre" class="flex flex-col items-center space-x-2">
-                                <h1 class="text-4xl text-semibold">
-                                    Commentaires
-                                </h1>
-                                <p>
-                                    <span class="w-[130px]">Ici, vous pouvez filtrer les articles.</span>
-                                </p>
-                            </div>
-                            <div id="containerFiltreUsers"></div>
-                            <div class="h-[250px] overflow-scroll ">
-                                <div id="containerUsers" class="w-full pt-2"></div>
-                            </div>
+                            <div id="containerCategory" class="flex flex-col items-center space-y-3"></div>
                         </div>
                     </div>
                 </section>
                 <section class="flex justify-center">
-                    <div id="divContainerArticles" class="lg:w-[80%]">
-                        <div id="titleArticles" class="flex flex-col items-center space-x-2">
+                    <div class="flex flex-col items-center lg:w-[80%] border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
+                        <div id="titleFiltre" class="flex flex-col items-center space-x-2 py-2">
+                            <h1 class="text-4xl text-semibold">
+                                Commentaires
+                            </h1>
+                            <p>
+                                <span class="w-[130px]">Filtrer les commentaires de chaque utilisateurs par articles.</span>
+                            </p>
+                        </div>
+                        <div id="containerFiltreUsers"></div>
+                        <div class="h-[250px] overflow-scroll ">
+                            <div id="containerUsers" class="w-full pt-2"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="flex justify-center">
+                    <div id="divContainerArticles" class="flex flex-col lg:my-[3%] lg:w-[80%] border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
+                        <div id="titleArticles" class="flex flex-col items-center space-x-2 py-2">
                             <h1 class="text-4xl text-semibold">
                                 Articles
                             </h1>
@@ -92,9 +94,9 @@ require_once 'resources/assests/Classes/Users.php';
                                 <span class="w-[130px]">Ici, vous pouvez supprimer les articles.</span>
                             </p>
                         </div>
-                        <div class="flex item-center">
-                            <div id="containerArticles"></div>
-                            <div id="DisplayerArticles" class="w-full h-[400px] rounded-lg bg-slate-100"></div>
+                        <div class="flex flex-col item-center">
+                            <div id="containerArticles" class="flex justify-center"></div>
+                            <div id="DisplayerArticles" class="w-full h-[400px] rounded-lg"></div>
                         </div>
                     </div>
                 </section>
