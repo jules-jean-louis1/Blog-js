@@ -64,32 +64,40 @@ class Articles
     {
         $db = new Database();
         $bdd = $db->getBdd();
-// Vérifier si le numéro de page est valide
+        // Vérifier si le numéro de page est valide
         if (!$page || $page < 1) {
             $page = 1;
         }
 
-
         // Nombre d'articles par page
         $limit = 9;
 
-// Calcul de l'offset en fonction de la page demandée
+        // Calcul de l'offset en fonction de la page demandée
         $offset = ($page - 1) * $limit;
 
-// Définir l'offset à 0 si le numéro de page est inférieur à 1
+        // Définir l'offset à 0 si le numéro de page est inférieur à 1
         if ($offset < 0) {
             $offset = 0;
         }
 
-        $req = "SELECT articles.id ,articles.title, SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview, 
-                categories.name AS category_name, utilisateurs.user_avatar, utilisateurs.login AS author_login, articles.img_header, articles.created_at, articles.updated_at
-                FROM articles
-                INNER JOIN categories ON articles.category_id = categories.id
-                INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id";
-
+        $req = "SELECT articles.id,
+           articles.title,
+           SUBSTRING_INDEX(articles.content, ' ', 18) AS content_preview,
+           categories.name AS category_name,
+           utilisateurs.user_avatar,
+           utilisateurs.login AS author_login,
+           articles.img_header,
+           articles.created_at,
+           articles.updated_at,
+           COUNT(comments.id) AS comment_count
+    FROM articles
+    INNER JOIN categories ON articles.category_id = categories.id
+    INNER JOIN utilisateurs ON articles.author_id = utilisateurs.id
+    LEFT JOIN comments ON articles.id = comments.article_id
+    GROUP BY articles.id";
 
         if ($category && $category != "all") {
-            $req .= ' WHERE categories.name = :category';
+            $req .= ' HAVING category_name = :category';
         }
 
         $req .= " ORDER BY articles.created_at $order LIMIT :limit OFFSET :offset";
@@ -97,7 +105,6 @@ class Articles
         $stmt = $bdd->prepare($req);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-
 
         if ($category && $category != "all") {
             $stmt->bindParam(':category', $category, PDO::PARAM_STR);
@@ -107,6 +114,8 @@ class Articles
         $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $articles;
     }
+
+
     public function searchArticle($search)
     {
         $db = new Database();

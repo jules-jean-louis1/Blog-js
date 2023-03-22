@@ -139,5 +139,26 @@ class Users
         $req = $bdd->prepare('UPDATE `utilisateurs` SET `user_avatar` = :user_avatar WHERE `utilisateurs`.`id` = :id');
         $req->execute(['user_avatar' => $user_avatar, 'id' => $id]);
     }
-
+    public function displayInfosUser($id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT c.id, c.content, c.created_at, a.title, u.*, tc.total_comments
+                                    FROM comments c
+                                    INNER JOIN articles a ON c.article_id = a.id
+                                    INNER JOIN utilisateurs u ON c.user_id = u.id
+                                    INNER JOIN (
+                                      SELECT COUNT(*) as total_comments
+                                      FROM comments
+                                      WHERE user_id = :user_id
+                                    ) tc
+                                    WHERE c.user_id = :user_id
+                                    ORDER BY c.created_at DESC
+                                    LIMIT 4;
+                                    ');
+        $req->execute(['user_id' => $id]);
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        $result = json_encode($result);
+        return $result;
+    }
 }

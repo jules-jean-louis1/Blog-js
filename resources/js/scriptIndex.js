@@ -148,33 +148,34 @@ async function lastArticles() {
         .then(data => {
             data.forEach(article => {
                 let articleElement = document.createElement('div');
-                articleElement.className = 'flex flex-row';
+                articleElement.className = 'flex w-1/3 p-2';
                 articleElement.innerHTML = `
-                        <div class="flex">
-                            <div class="my-5 flex flex-col items-start justify-around bg-[#F5F8FC] rounded-lg ease-in duration-300 lg:w-[30%] p-3 min-h-[20.5rem] border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866] cursor-pointer">
-                                <div class="flex flex-col items-start justify-between w-full">
-                                    <h2 class="text-[#525866] text-[1.2rem] font-bold">${article.title}</h2>
-                                    <p class="text-[#526866a3] text-sm">#${article.category_name}</p>
-                                    <div class="flex flex-row items-center justify-start space-x-2 py-2">
-                                        <img src="resources/images/avatar/${article.user_avatar}" alt="${article.login}" class="w-6 h-6 rounded-full">
-                                        <p class="text-sm">
-                                            par <span class="text-[#525866] font-bold text-sm">${article.author_login}</span>
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col items-start justify-start w-full py-2">
-                                        <a href="article.php?id=${article.id}">
-                                            <img src="resources/images/articles/${article.img_header}" alt="${article.title}" class="w-full h-full object-cover rounded-t-2">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col items-start justify-between w-full">
-                                    <div class="contentArticleLast">
-                                        <p>${article.content_preview}</p>
-                                        <a href="article.php?id=${article.id}" class="">Lire la suite</a>
-                                    </div>
-                                </div>
+                    <div class="my-5 flex flex-col items-start justify-around bg-[#F5F8FC] rounded-lg ease-in duration-300 p-3 min-h-[20.5rem] border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866] cursor-pointer">
+                        <div class="flex flex-col items-start justify-between w-full">
+                            <h2 class="text-[#525866] text-[1.2rem] font-bold">${article.title}</h2>
+                            <p class="text-[#526866a3] text-sm">#${article.category_name}</p>
+                            <div class="flex flex-row items-center justify-start space-x-2 py-2">
+                                <img src="resources/images/avatar/${article.user_avatar}" alt="${article.login}" class="w-6 h-6 rounded-full">
+                                <p class="text-sm">
+                                    par <span class="text-[#525866] font-bold text-sm">${article.author_login}</span>
+                                </p>
+                            </div>
+                            <div class="flex flex-col items-start justify-start w-full py-2">
+                                <img src="resources/images/articles/${article.img_header}" alt="${article.title}" class="w-full h-[10rem] object-cover rounded-lg">
                             </div>
                         </div>
+                        <div class="flex flex-col items-start justify-between w-full">
+                            <div class="contentArticleLast">
+                                <p>${article.content_preview}</p>
+                               
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center justify-between w-full">
+                            <a href="article.php?id=${article.id}" class="w-full">
+                                <button class="border-[1px] border-[#ac1de4] rounded-lg w-full py-2" id="read-more">Lire la suite</button>
+                            </a>
+                        </div>
+                    </div>
                 `;
                 containerArticles.appendChild(articleElement);
             });

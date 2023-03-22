@@ -9,7 +9,26 @@ if (empty($_POST['login']) && empty($_POST['password']) && empty($_POST['passwor
 }
 if (!empty($_POST['login'])) {
     $login = htmlspecialchars($_POST['login']);
-
+    if (strlen($login) < 3) {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Votre login doit contenir au moins 5 caractères']);
+        die();
+    }
+    if (strlen($login) > 18) {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Votre login ne doit pas dépasser 20 caractères']);
+        die();
+    }
+    if ($login == $_SESSION['login']) {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Votre login est déjà celui-ci']);
+        die();
+    }
+    if ($login === 'admin') {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'Vous ne pouvez pas utiliser ce login']);
+        die();
+    }
     $user = new Users();
     if ($user->checkLogin($login) == true) {
         header('Content-Type: application/json');

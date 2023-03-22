@@ -29,7 +29,8 @@
                             </li>
                             <li>
                                 <a href="profil.php">
-                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC] flex items-center ease-in duration-300 border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866]">
+                                        <img src="resources/images/icon/user1.svg" class="h-[1.2em] px-[1px]">
                                         <?= $_SESSION['login'] ?>
                                     </button>
                                 </a>
@@ -37,7 +38,8 @@
                         <?php else: ?>
                             <li>
                                 <a href="profil.php">
-                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                    <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC] flex items-center ease-in duration-300 border-[1px] border-[#52586633] hover:border-[#525866] hover:shadow-[0 0 10px 0 #525866]">
+                                        <img src="resources/images/icon/user1.svg" class="h-[1.2em] px-[1px]">
                                         <?= $_SESSION['login'] ?>
                                     </button>
                                 </a>
@@ -106,6 +108,7 @@
                         <li>
                             <a href="profil.php">
                                 <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                    <img src="resources/images/icon/user1.svg" class="h-[1.2em]">
                                     <?= $_SESSION['login'] ?>
                                 </button>
                             </a>

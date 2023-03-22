@@ -24,7 +24,7 @@ session_start();
         <section class="pt-[10%]">
             <div class="flex justify-center">
                 <div class="lg:w-[90%] flex justify-around">
-                    <div id="containerArticleLast" class="flex flex-wrap justify-around"></div>
+                    <div id="containerArticleLast" class="flex flex-wrap"></div>
                 </div>
             </div>
         </section>
