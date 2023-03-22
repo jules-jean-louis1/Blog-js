@@ -192,7 +192,7 @@ async function infosDisplay() {
 
                     let containerCom = document.createElement('li');
                     containerCom.classList.add('flex', 'flex-col', 'space-y-2', 'items-center', 'p-3');
-                    if(comments === null){
+                    if(comments.title !== null) {
                         containerCom.innerHTML += `
                         <div class="flex justify-between px-2 py-2 rounded-lg bg-[#E9E9E9] w-4/5">
                             <div class="flex flex-col">
