@@ -65,8 +65,10 @@ async function getInfosUser() {
                             Update
                         </button>
                     </div>
+                </form>
+                <form action="" method="post" id="deleteCompteForm">
                     <div class="flex flex-col space-y-2">
-                        <button type="submit" id="delete" name="delete" class="p-2 rounded-lg bg-red-500 text-white">
+                        <button type="submit" id="deleteCompte" name="deleteCompte" class="p-2 rounded-lg bg-red-500 text-white">
                             Supprimer Compte
                         </button>
                     </div>
@@ -92,6 +94,31 @@ async function getInfosUser() {
                 </form>
             </div>
             `;
+            // Fonction pour supprimer le compte
+            const deleteCompteForm = document.querySelector('#deleteCompteForm');
+            deleteCompteForm.addEventListener('submit', async (ev) => {
+                ev.preventDefault();
+                await fetch('resources/assests/fetch/profil/deleteCompte.php', {
+                    method: 'POST',
+                    body: new FormData(deleteCompteForm)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        let message = document.querySelector('#errorMsg');
+                        if (data.status === 'success') {
+                            message.innerHTML = data.message;
+                            displaySuccess(message);
+                            setTimeout(() => {
+                                window.location.href = 'index.php';
+                            }, 3000);
+                        }
+                        if (data.status === 'error') {
+                            message.innerHTML = data.message;
+                            displayError(message);
+                        }
+                    });
+            });
             // fonction pour changer l'avatar
             const profilForm = document.querySelector('#profilForm');
             profilForm.addEventListener('submit', async (ev) => {

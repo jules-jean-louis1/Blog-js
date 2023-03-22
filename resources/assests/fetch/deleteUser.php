@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../Classes/Users.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
