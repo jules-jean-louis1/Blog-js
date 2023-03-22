@@ -33,7 +33,7 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits, member_since, user_avatar) 
+        $req = $bdd->prepare('INSERT INTO utilisateurs (login, password, droits, user_avatar,  member_since) 
                                     VALUES (:login, :password , "utilisateur", "default_avatar.png", NOW())');
         $password = password_hash($password, PASSWORD_DEFAULT);
         $req->execute(['login' => $login, 'password' => $password]);
@@ -144,17 +144,18 @@ class Users
         $db = new Database();
         $bdd = $db->getBdd();
         $req = $bdd->prepare('SELECT c.id, c.content, c.created_at, a.title, u.*, tc.total_comments
-                                    FROM comments c
-                                    INNER JOIN articles a ON c.article_id = a.id
-                                    INNER JOIN utilisateurs u ON c.user_id = u.id
-                                    INNER JOIN (
-                                      SELECT COUNT(*) as total_comments
+                                    FROM utilisateurs u
+                                    LEFT JOIN comments c ON c.user_id = u.id
+                                    LEFT JOIN articles a ON c.article_id = a.id
+                                    LEFT JOIN (
+                                      SELECT user_id, COUNT(*) as total_comments
                                       FROM comments
-                                      WHERE user_id = :user_id
-                                    ) tc
-                                    WHERE c.user_id = :user_id
+                                      GROUP BY user_id
+                                    ) tc ON u.id = tc.user_id
+                                    WHERE u.id = :user_id
                                     ORDER BY c.created_at DESC
                                     LIMIT 4;
+                                    ;
                                     ');
         $req->execute(['user_id' => $id]);
         $result = $req->fetchAll(PDO::FETCH_ASSOC);

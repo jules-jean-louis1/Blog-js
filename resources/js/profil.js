@@ -29,7 +29,7 @@ function formatDateSansh(timestamp) {
     const day = date.getDate();
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${month} ${day}, ${year}`;
+    return `${day} ${month} ${year}`;
 }
 async function getInfosUser() {
     await fetch('resources/assests/fetch/profil/userInfos.php')
@@ -40,22 +40,22 @@ async function getInfosUser() {
 
             profil.innerHTML = `
 
-            <div id="containerFormUpdateProfil">
+            <div id="containerFormUpdateProfil" class="pt-4">
                 <form action="resources/assests/fetch/profil/updateProfil.php" method="post" id="profilForm"
                       class="flex flex-col space-y-2">
                     <div class="flex flex-col space-y-2">
                         <label for="login">Login</label>
                         <input type="text" name="login" id="login" value="${infos[0].login}"
-                               class="p-2 rounded-lg bg-[#E9E9E9]">
+                               class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password" class="p-2 rounded-lg bg-[#E9E9E9]">
+                        <input type="password" name="password" id="password" class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
                     </div>
                     <div class="flex flex-col space-y-2">
                         <label for="passwordConfirm">Confirmation du mot de passe</label>
                         <input type="password" name="passwordConfirm" id="passwordConfirm"
-                               class="p-2 rounded-lg bg-[#E9E9E9]">
+                               class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
                     </div>
                     <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
                         <div id="errorMsg"></div>
@@ -72,7 +72,7 @@ async function getInfosUser() {
                     </div>
                 </form>
             </div> 
-            <div id="containerFormUpdateAvatar" class="border-[1px] border-slate-300 p-4 rounded-lg">
+            <div id="containerFormUpdateAvatar" class="pt-4">
                 <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col space-y-2 items-center" enctype="multipart/form-data">
                     <div id="containerProfilAvatar">
                         <img src="resources/images/avatar/${infos[0].user_avatar}" alt="avatar" class="w-24 h-24 rounded-full">
@@ -165,38 +165,73 @@ async function infosDisplay() {
               container.classList.add('flex', 'flex-col', 'space-y-2', 'items-center');
                 container.innerHTML = `
               <div id="containerProfilINfo">
-                <div class="flex space-x-4">
+                <div class="flex space-x-24">
                     <div class="bg-[#E9E9E9] flex flex-col  space-y-3 items-center p-2 rounded-lg">
                         <img src="resources/images/avatar/${data[0].user_avatar}" alt="avatar" class="w-16 h-16 rounded-full">
                         <div class="flex flex-col">
                             <p class="text-sm font-light text-gray-500">Commentaires</p>
-                            <div class="flex justify-center space-x-2">
-                                <p class="text-lg font-bold">
-                                    ${data[0].total_comments}
-                                </p>
+                            <div class="flex justify-center space-x-2">                  
+                                 ${data[0].total_comments > 0 ?
+                                `<p class="text-lg font-bold">${data[0].total_comments}</p>` :
+                                `<p class="text-lg font-bold">0</p>`
+                                    }
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col items-start justify-around">
                         <h4 class="text-lg font-bold">${data[0].login}</h4>
+                        <p class="p-0.5 px-1 bg-[#E9E9E9] rounded-lg capitalize">${data[0].droits}</p>
                         <h4 class="text-sm font-light text-gray-500">Membre depuis ${formatDateSansh(data[0].member_since)}</h4>
                         <button id="displayFormModif" class="border-[1px] border-black px-4 py-2 rounded-lg font-bold">Modifier vos informations</button>
                     </div>
                 </div>
-                <div id="lastCommentaires">
-                
-                </div>
               </div> 
                 `;
+                const containerComLast = document.querySelector('#lastCommentaires');
                 data.forEach(comments =>{
 
-                })
+                    let containerCom = document.createElement('li');
+                    containerCom.classList.add('flex', 'flex-col', 'space-y-2', 'items-center', 'p-3');
+                    if(comments === null){
+                        containerCom.innerHTML += `
+                        <div class="flex justify-between px-2 py-2 rounded-lg bg-[#E9E9E9] w-4/5">
+                            <div class="flex flex-col">
+                                <small>
+                                   Titre de l'article :${comments.title}
+                                </small>
+                                <p>${comments.content}</p>
+                            </div>
+                            <p class="text-sm font-light text-gray-500 flex items-end">le ${formatDateSansh(comments.created_at)}</p>
+                        </div>
+                                            `;
+                    }else{
+                        containerCom.innerHTML += `
+                        <div class="flex justify-between px-2 py-2 rounded-lg bg-[#E9E9E9] w-4/5">
+                            <div class="flex flex-col items-center justify-center">
+                                <p class="p-2">Vous n'avez pas encore posté de commentaire.</p>
+                            </div>
+                        </div>`;
+                    }
+                    containerComLast.appendChild(containerCom);
+                });
+
             containerInfos.appendChild(container);
+
+            const btnToggleForm = document.querySelector('#displayFormModif');
+            btnToggleForm.addEventListener('click', () => {
+                containerComLast.classList.toggle('hidden');
+                let profil = document.querySelector('#formProfil');
+                if (containerComLast.classList.contains('hidden')) {
+                    getInfosUser();
+                } else {
+                    profil.innerHTML = '';
+                }
+            });
+
         });
 }
 infosDisplay();
 
-getInfosUser();
 
 
 

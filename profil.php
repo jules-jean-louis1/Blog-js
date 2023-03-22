@@ -21,11 +21,12 @@ session_start();
 </header>
 <main>
     <section class="flex flex-col items-center justify-center lg:pt-[5%]">
-        <div id="containerProfile" class="py-8">
+        <!--<div id="containerProfile" class="py-8">
             <h2 class="text-2xl font-bold text-center">Profil</h2>
-        </div>
-        <div id="containerProfileInfo"></div>
-        <div id="formProfil" class="flex justify-around lg:w-[70%]"></div>
+        </div>-->
+        <div id="containerProfileInfo" class="border-b-[1px] border-[#52586633] py-4 w-3/5"></div>
+        <ul id="lastCommentaires" class="w-4/5"></ul>
+        <div id="formProfil" class="flex justify-around lg:w-3/5"></div>
     </section>
 </main>
 </body>

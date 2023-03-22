@@ -24,7 +24,7 @@ if (!empty($_POST['login'])) {
         echo json_encode(['status' => 'error', 'message' => 'Votre login est déjà celui-ci']);
         die();
     }
-    if ($login === 'admin') {
+    if ($login === 'admin' || $login === 'moderateur' || $login === 'utilisateur' || $login === 'Admin') {
         header('Content-Type: application/json');
         echo json_encode(['status' => 'error', 'message' => 'Vous ne pouvez pas utiliser ce login']);
         die();
