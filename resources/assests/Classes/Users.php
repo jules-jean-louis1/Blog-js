@@ -79,9 +79,26 @@ class Users
     {
         $db = new Database();
         $bdd = $db->getBdd();
-        $req = $bdd->prepare('DELETE FROM utilisateurs WHERE id = :id');
-        $req->execute(['id' => $id]);
+
+        // Début de la transaction
+        $bdd->beginTransaction();
+
+        // Supprimer les commentaires de l'utilisateur
+        $req1 = $bdd->prepare('DELETE FROM comments WHERE user_id = :id');
+        $req1->execute(['id' => $id]);
+
+        // Supprimer les articles de l'utilisateur
+        $req2 = $bdd->prepare('DELETE FROM articles WHERE author_id = :id');
+        $req2->execute(['id' => $id]);
+
+        // Supprimer l'utilisateur
+        $req3 = $bdd->prepare('DELETE FROM utilisateurs WHERE id = :id');
+        $req3->execute(['id' => $id]);
+
+        // Validation de la transaction
+        $bdd->commit();
     }
+
     public function getLoginUser()
     {
         $db = new Database();

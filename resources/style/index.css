@@ -122,6 +122,9 @@ textarea {
 body {
     background: #F9F9F9;
 }
-#read-more{
+#read-more, #upload:hover ,#update:hover {
     box-shadow: 0 6px 6px -2px #c029f066;
+}
+#deleteCompte:hover {
+    box-shadow: 0 6px 6px -2px #bd1911;
 }

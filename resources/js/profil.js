@@ -39,60 +39,74 @@ async function getInfosUser() {
             let infos = JSON.parse(data.infos); // convertir la chaîne JSON en un objet JavaScript
 
             profil.innerHTML = `
-
-            <div id="containerFormUpdateProfil" class="pt-4">
-                <form action="resources/assests/fetch/profil/updateProfil.php" method="post" id="profilForm"
-                      class="flex flex-col space-y-2">
-                    <div class="flex flex-col space-y-2">
-                        <label for="login">Login</label>
-                        <input type="text" name="login" id="login" value="${infos[0].login}"
-                               class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password" class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <label for="passwordConfirm">Confirmation du mot de passe</label>
-                        <input type="password" name="passwordConfirm" id="passwordConfirm"
-                               class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
-                    </div>
-                    <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
-                        <div id="errorMsg"></div>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <button type="submit" id="update" name="update" class="p-2 rounded-lg bg-green-500 text-white">
-                            Update
-                        </button>
-                    </div>
-                </form>
+        <div>
+            <div class="flex flex-col lg:flex-row space-y-2 lg:justify-around lg:space-x-8">
+                <div id="containerFormUpdateProfil" class="pt-4">
+                    <form action="resources/assests/fetch/profil/updateProfil.php" method="post" id="profilForm"
+                          class="flex flex-col space-y-2">
+                        <div class="flex flex-col space-y-2">
+                            <label for="login">Login</label>
+                            <input type="text" name="login" id="login" value="${infos[0].login}"
+                                   class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" name="password" id="password" class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <label for="passwordConfirm">Confirmation du mot de passe</label>
+                            <input type="password" name="passwordConfirm" id="passwordConfirm"
+                                   class="p-2 rounded-lg bg-[#E9E9E9] hover:bg-[#e0e0e0]">
+                        </div>
+                        <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
+                            <div id="errorMsg"></div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button type="submit" id="update" name="update" class="p-2 rounded-xl bg-[#9E15D9] text-white">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div> 
+                <div id="containerFormUpdateAvatar" class="pt-4">
+                    <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col items-center justify-around h-full" enctype="multipart/form-data">
+                        <div id="containerProfilAvatar">
+                            <img src="resources/images/avatar/${infos[0].user_avatar}" alt="avatar" class="w-24 h-24 rounded-full">
+                        </div>
+                        <div class="flex flex-col border-[1px] border-slate-300 p-2 rounded-lg">
+                            <label for="avatar">Changer votre avatar</label>
+                            <input class="form-control" type="file" name="uploadfile" class="p-2 rounded-xl bg-[#E9E9E9]"/>
+                        </div>
+                        <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
+                            <div id="errorMsgAvatar"></div>
+                        </div>
+                        <div class="w-full">
+                            <button type="submit" id="upload" name="upload" class="p-2 rounded-xl bg-[#9E15D9] text-white w-full">
+                                Update Avatar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="containerFormDeleteCompte" class="pt-4">
+            <div class="border-[1px] border-[#F10606CE] bg-[#DC110128] rounded-2xl p-4">
+                <div>
+                    <h2 class="text-lg font-normal">La suppression de votre compte entraînera :</h2>
+                    <ul class="font-light">
+                        <li>1. Suppression définitive de votre compte ainsi que de vos données.</li>
+                        <li>2. Suppression définitive de vos commentaires et articles.</li>
+                        <li>3. Votre login sera accessible pour les autres utilisateurs.</li>                 
+                    </ul> 
+                </div>
                 <form action="" method="post" id="deleteCompteForm">
                     <div class="flex flex-col space-y-2">
-                        <button type="submit" id="deleteCompte" name="deleteCompte" class="p-2 rounded-lg bg-red-500 text-white">
-                            Supprimer Compte
-                        </button>
-                    </div>
-                </form>
-            </div> 
-            <div id="containerFormUpdateAvatar" class="pt-4">
-                <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col space-y-2 items-center" enctype="multipart/form-data">
-                    <div id="containerProfilAvatar">
-                        <img src="resources/images/avatar/${infos[0].user_avatar}" alt="avatar" class="w-24 h-24 rounded-full">
-                    </div>
-                    <div class="flex flex-col border-[1px] border-slate-300 p-2 rounded-lg">
-                        <label for="avatar">Changer votre avatar</label>
-                        <input class="form-control" type="file" name="uploadfile" class="p-2 rounded-lg bg-[#E9E9E9]"/>
-                    </div>
-                    <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
-                        <div id="errorMsgAvatar"></div>
-                    </div>
-                    <div>
-                        <button type="submit" id="upload" name="upload" class="p-2 rounded-lg bg-green-500 text-white">
-                            Update Avatar
+                        <button type="submit" id="deleteCompte" name="deleteCompte" class="p-2 rounded-xl bg-[#c72017] hover:bg-[#bd1911] text-white font-bold ease-in duration-25">
+                            Supprimer Votre Compte
                         </button>
                     </div>
                 </form>
             </div>
+        </div>
             `;
             // Fonction pour supprimer le compte
             const deleteCompteForm = document.querySelector('#deleteCompteForm');
