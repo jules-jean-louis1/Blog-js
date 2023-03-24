@@ -180,7 +180,7 @@ async function getComments(id) {
                         comments.forEach(reply => {
                             if (reply.parent_comment_id === comment.id) {
                                 const responseDiv = document.createElement('li');
-                                responseDiv.classList.add("flex", "flex-col", "border-l-[1px]", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
+                                responseDiv.classList.add("flex", "flex-col", "border-l-[1px]", "border-[#a8b3cf]", "bg-[#fff]", "hover:bg-[#EAEBEC]", "p-4", "m-2");
                                 responseDiv.setAttribute("id", "subComment_" + reply.id);
 
                                 responseDiv.innerHTML = `
@@ -192,7 +192,10 @@ async function getComments(id) {
                                         </div>
                                         <span class="text-sm text-[#526866a3]" id="commentDate">${formatDate(reply.created_at)}</span>
                                     </div>
-                                    <div class="m-2 p-2 rounded-lg" id="commentContent">
+                                    <div class="m-2 p-0.5 rounded-lg" id="commentContent">
+                                        <div class="inline-block bg-purple-200 rounded-lg p-0.5">
+                                            <p class="font-bold text-black" id="loginofreply">@${comment.login}</p>
+                                        </div>
                                         <p class="font-sm text-[#000]" id="commentContentP">${reply.content}</p>
                                     </div>
                                     <div id="commentButtons" class="flex flex-row justify-end">

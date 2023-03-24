@@ -1,8 +1,9 @@
 <div id="containerHeader" class="mx-4">
     <div id="wapperHeader" class="flex justify-between items-center p-2">
         <div id="logo" class="p-2 rounded-lg bg-slate-100 font-bold">
-            <a href="index.php">
-                <h1>Blog</h1>
+            <a href="index.php" class="flex space-x-2">
+                <img src="resources/images/icon/LC.png" class="h-[1.5em] ">
+                <h1>Option 13</h1>
             </a>
         </div>
         <div id="linksHeader" class="hidden md:block">

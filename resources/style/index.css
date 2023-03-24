@@ -122,9 +122,18 @@ textarea {
 body {
     background: #F9F9F9;
 }
-#read-more, #upload:hover ,#update:hover {
+#read-more, #upload:hover ,#update:hover, #viewMore:hover {
     box-shadow: 0 6px 6px -2px #c029f066;
 }
 #deleteCompte:hover {
     box-shadow: 0 6px 6px -2px #bd1911;
+}
+#userFormAff:hover, #categoriesFormAff:hover, #commentFormAff:hover, #articlesFormAff:hover {
+    box-shadow: 0 6px 6px -2px #a9a8a8;
+}
+#option13 {
+    background: linear-gradient(90deg, #ac1de4 0%, #502cd7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

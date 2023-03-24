@@ -210,4 +210,36 @@ class Articles
         $articles = json_encode($articles);
         return $articles;
     }
+    public function countCategories()
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('SELECT COUNT(*) as count FROM categories');
+        $req->execute();
+        $count = $req->fetch(PDO::FETCH_ASSOC);
+        if ($count['count'] <= 5) {
+            return json_encode(['status' => '5']);
+        } else if ($count['count'] >= 8) {
+            return json_encode(['status' => '8']);
+        } else {
+            return json_encode(['status' => false]);
+        }
+    }
+    public function addCategory($name)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('INSERT INTO categories (name) VALUES (:name)');
+        $req->execute(['name' => $name]);
+    }
+    public function deleteCategory($id)
+    {
+        $db = new Database();
+        $bdd = $db->getBdd();
+        $req = $bdd->prepare('DELETE categories
+                                    FROM categories
+                                    WHERE categories.id = :id');
+        $result = $req->execute(['id' => $id]);
+        return $result;
+    }
 }

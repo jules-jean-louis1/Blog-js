@@ -15,7 +15,10 @@ const TableDisplay = document.querySelector('#tableauTbody');
 const Message = document.querySelector('#errorMsg');
 const container = document.querySelector('#containerUsers');
 const displayArticles = document.querySelector('#DisplayerArticles');
-
+const buttonAfficherUsers = document.querySelector('#userFormAff');
+const buttonAfficherArticles = document.querySelector('#articlesFormAff');
+const buttonAfficherCategories = document.querySelector('#categoriesFormAff');
+const buttonAfficherCommentaires = document.querySelector('#commentFormAff');
 
 // Fonction pour la gestion des messages d'erreurs
 function displayError(message) {
@@ -213,7 +216,7 @@ function getArticleForForm(article) {
             });
         })
 }
-function getCommentForForm(comment) {
+function getCategorieForForm(comment) {
 fetch('resources/assests/fetch/dashboard/getAllComment.php')
         .then(response => response.json())
         .then(data => {
@@ -383,7 +386,62 @@ async function filterArticle(login, category) {
             }
         })
 }
+// Afficher les differents Formulaire
+let displayUserS = document.querySelector('#displayAllUser');
+let displayCategoriesS = document.querySelector('#displayCategories');
+let displayCommentS = document.querySelector('#displayCommentaires');
+let displayArticlesS = document.querySelector('#displayArticles');
+buttonAfficherUsers.addEventListener('click', () => {
 
+    // display.classList.add('hidden');
+    if (displayUserS.classList.contains('hidden')) {
+        displayUserS.classList.remove('hidden');
+        displayUserS.classList.add('block');
+        displayCategoriesS.classList.add('hidden');
+        displayCommentS.classList.add('hidden');
+        displayArticlesS.classList.add('hidden')
+    } else {
+        displayUserS.classList.remove('block');
+        displayUserS.classList.add('hidden');
+    }
+    // display.classList.add('none');
+});
+buttonAfficherCategories.addEventListener('click', () => {
+   if (displayCategoriesS.classList.contains('hidden')) {
+       displayCategoriesS.classList.remove('hidden');
+       displayCategoriesS.classList.add('block');
+       displayUserS.classList.add('hidden');
+       displayCommentS.classList.add('hidden');
+       displayArticlesS.classList.add('hidden')
+   } else {
+         displayCategoriesS.classList.remove('block');
+         displayCategoriesS.classList.add('hidden');
+   }
+});
+buttonAfficherCommentaires.addEventListener('click', () => {
+    if (displayCommentS.classList.contains('hidden')) {
+        displayCommentS.classList.remove('hidden');
+        displayCommentS.classList.add('block');
+        displayUserS.classList.add('hidden');
+        displayCategoriesS.classList.add('hidden');
+        displayArticlesS.classList.add('hidden')
+    } else {
+        displayCommentS.classList.remove('block');
+        displayCommentS.classList.add('hidden');
+    }
+});
+buttonAfficherArticles.addEventListener('click', () => {
+    if (displayArticlesS.classList.contains('hidden')) {
+        displayArticlesS.classList.remove('hidden');
+        displayArticlesS.classList.add('block');
+        displayUserS.classList.add('hidden');
+        displayCategoriesS.classList.add('hidden');
+        displayCommentS.classList.add('hidden');
+    } else {
+        displayArticlesS.classList.remove('block');
+        displayArticlesS.classList.add('hidden');
+    }
+});
 
 filterUsers();
 const formFilter = document.getElementById('formFilter');

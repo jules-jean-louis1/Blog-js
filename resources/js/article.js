@@ -68,6 +68,7 @@ if (formCreateArticle) {
                     message.innerHTML = data.message;
                     displaySuccess(message);
                     const modal = document.querySelector('#modal-article');
+                    getArticles(page, category, order);
                     closeModal(modal);
                 }
                 if (data.status == 'empty') {
@@ -223,10 +224,8 @@ async function getPages(category, order) {
                             </li>
                           `;
                 }
-
                 pages.innerHTML = pagesHTML;
                 }
-
         })
 }
 
@@ -289,11 +288,25 @@ async function getArticles(page, category, order) {
                 articleImg.setAttribute("src", "resources/images/articles/" + articles.img_header);
 
             // Bouton pour lire l'article
-            let articleRead = document.createElement("a");
-            articleRead.setAttribute("class", "rounded-lg bg-[#0e1217] ease-in duration-100"+
-                                                               "hover:bg-[#2d313a] font-semibold text-white py-[5px] px-2");
-            articleRead.setAttribute("href", "search.php?id=" + articles.id);
-            articleRead.textContent = "Lire l'article";
+            let artcileReadContainer = document.createElement("div");
+            artcileReadContainer.setAttribute("class", "flex flex-row items-center justify-around w-full");
+
+                let articleRead = document.createElement("a");
+                articleRead.setAttribute("class", "rounded-lg bg-[#0e1217] ease-in duration-100"+
+                                                                   "hover:bg-[#2d313a] font-semibold text-white py-[5px] px-2");
+                articleRead.setAttribute("href", "search.php?id=" + articles.id);
+                articleRead.textContent = "Lire l'article";
+
+                let containerComments = document.createElement("div");
+                containerComments.setAttribute("class", "flex flex-row items-center justify-center space-x-2");
+
+                let imgComments = document.createElement("img");
+                imgComments.setAttribute("class", "w-6 h-6");
+                imgComments.setAttribute("src", "resources/images/icon/comments.svg");
+
+                let countComments = document.createElement("p");
+                countComments.setAttribute("class", "text-[#525866] text-sm");
+                countComments.textContent = articles.comment_count;
 
             // Ajouter le contenu HTML à la page
             articlesDisplay.appendChild(articleContainer);
@@ -307,7 +320,11 @@ async function getArticles(page, category, order) {
             // articleContainer.appendChild(articleUpdatedAt);
             articleContainer.appendChild(articleContent);
             articleContent.appendChild(articleImg);
-            articleContainer.appendChild(articleRead);
+            articleContainer.appendChild(artcileReadContainer);
+            artcileReadContainer.appendChild(articleRead);
+            artcileReadContainer.appendChild(containerComments);
+            containerComments.appendChild(imgComments);
+            containerComments.appendChild(countComments);
         }
     } else {
         let articleContainer = document.createElement("div");

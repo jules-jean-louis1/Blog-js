@@ -25,13 +25,21 @@ require_once 'resources/assests/Classes/Users.php';
         <main class="mt-[10%] lg:mt-[6%]">
             <article>
                 <section>
+                    <div id="titleDashboard">
+                        <h1 class="text-4xl text-center font-semibold">
+                            Dashboard
+                        </h1>
+                    </div>
+                    <div class="flex lg:flex-row flex-col justify-center py-4 space-x-2">
+                        <button id="userFormAff" class="border-[1px] border-black px-4 py-2 rounded-lg font-bold hover:bg-[#EAEBEC] ease-in duration-50">Modifier les utilisateurs</button>
+                        <button id="categoriesFormAff" class="border-[1px] border-black px-4 py-2 rounded-lg font-bold hover:bg-[#EAEBEC] ease-in duration-50">Modifier les catégories</button>
+                        <button id="commentFormAff" class="border-[1px] border-black px-4 py-2 rounded-lg font-bold hover:bg-[#EAEBEC] ease-in duration-50">Modifier les commentaires</button>
+                        <button id="articlesFormAff" class="border-[1px] border-black px-4 py-2 rounded-lg font-bold hover:bg-[#EAEBEC] ease-in duration-50">Modifier les articles</button>
+                    </div>
+                </section>
+                <section id="displayAllUser">
                     <div id="containerDash">
-                        <div id="titleDashboard">
-                            <h1 class="text-4xl text-center font-semibold">
-                                Dashboard
-                            </h1>
-                        </div>
-                        <div id="containerMessage" class="h-[40px]">
+                        <div id="containerMessage" class="flex justify-center p-2 h-[40px]">
                             <div id="errorMsg"></div>
                         </div>
                         <div id="tableauUser" class="flex justify-center">
@@ -53,8 +61,8 @@ require_once 'resources/assests/Classes/Users.php';
                         </div>
                     </div>
                 </section>
-                <section>
-                    <div class="flex flex-col items-center pt-[3%] lg:py-[3%]">
+                <section class="hidden" id="displayCategories">
+                    <div class="flex flex-col items-center pt-[2%] lg:py-[3%]">
                         <div id="categoriesWarp" class="flex flex-col lg:w-[80%] items-center border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
                             <div id="titleCategories" class="flex flex-col items-center space-x-2">
                                 <h1 class="text-4xl text-semibold">
@@ -68,7 +76,7 @@ require_once 'resources/assests/Classes/Users.php';
                         </div>
                     </div>
                 </section>
-                <section class="flex justify-center">
+                <section class="flex justify-center hidden" id="displayCommentaires">
                     <div class="flex flex-col items-center lg:w-[80%] border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
                         <div id="titleFiltre" class="flex flex-col items-center space-x-2 py-2">
                             <h1 class="text-4xl text-semibold">
@@ -84,7 +92,7 @@ require_once 'resources/assests/Classes/Users.php';
                         </div>
                     </div>
                 </section>
-                <section class="flex justify-center">
+                <section class="flex justify-center hidden" id="displayArticles">
                     <div id="divContainerArticles" class="flex flex-col lg:my-[3%] lg:w-[80%] border-[1px] border-[#D2D2D2] rounded-lg bg-[#F8F8F8]">
                         <div id="titleArticles" class="flex flex-col items-center space-x-2 py-2">
                             <h1 class="text-4xl text-semibold">

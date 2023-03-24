@@ -49,7 +49,7 @@ class Users
             if (password_verify($password, $result['password'])) {
                 $_SESSION['id'] = $result['id'];
                 $_SESSION['login'] = $result['login'];
-                /*$_SESSION['user_avatar'] = $result['user_avatar'];*/
+                $_SESSION['user_avatar'] = $result['user_avatar'];
                 $_SESSION['droits'] = $result['droits'];
                 return true;
             } else {

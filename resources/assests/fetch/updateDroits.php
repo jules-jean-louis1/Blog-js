@@ -11,9 +11,11 @@ if (isset($_GET['id']) && isset($_GET['droits'])) {
     $users->updateDroits($id, $droits);
     header('Content-Type: application/json');
     echo json_encode(['status' => 'success', 'message' => 'Les droits ont bien été modifiés']);
+    die();
 } else {
     header('Content-Type: application/json');
     echo json_encode(['status' => 'error', 'message' => 'Une erreur est survenue']);
+    die();
 }
-
 ?>
+

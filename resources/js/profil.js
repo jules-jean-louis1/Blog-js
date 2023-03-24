@@ -40,8 +40,13 @@ async function getInfosUser() {
 
             profil.innerHTML = `
         <div>
-            <div class="flex flex-col lg:flex-row space-y-2 lg:justify-around lg:space-x-8">
+            <div class="flex flex-col lg:flex-row lg:justify-around lg:space-x-8">
+                
                 <div id="containerFormUpdateProfil" class="pt-4">
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-bold">Informations personnelles</h2>
+                    <p class="font-light text-[#525866]">Modifier votre login est password</p>
+                </div>
                     <form action="resources/assests/fetch/profil/updateProfil.php" method="post" id="profilForm"
                           class="flex flex-col space-y-2">
                         <div class="flex flex-col space-y-2">
@@ -69,13 +74,16 @@ async function getInfosUser() {
                     </form>
                 </div> 
                 <div id="containerFormUpdateAvatar" class="pt-4">
-                    <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col items-center justify-around h-full" enctype="multipart/form-data">
+                    <div class="flex flex-col">
+                        <h2 class="text-lg font-bold">Votre avatar</h2>
+                        <p class="font-light text-[#525866]">Modifier votre avatar</p>
+                    </div>
+                    <form action="resources/assests/fetch/profil/updateAvatar.php" method="post" id="formUpdateAvatar" class="flex flex-col items-center justify-around min-h-[23rem] h-[23rem]" enctype="multipart/form-data">
                         <div id="containerProfilAvatar">
                             <img src="resources/images/avatar/${infos[0].user_avatar}" alt="avatar" class="w-24 h-24 rounded-full">
                         </div>
                         <div class="flex flex-col border-[1px] border-slate-300 p-2 rounded-lg">
-                            <label for="avatar">Changer votre avatar</label>
-                            <input class="form-control" type="file" name="uploadfile" class="p-2 rounded-xl bg-[#E9E9E9]"/>
+                            <input class="form-control" type="file" name="uploadfile" class="p-2 rounded-xl bg-[#E9E9E9] accept="image/png,image/jpeg"/>
                         </div>
                         <div id="containerMessageProfil" class="h-[65px] max-w-[330px]">
                             <div id="errorMsgAvatar"></div>
