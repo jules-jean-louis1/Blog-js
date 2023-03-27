@@ -1,1 +1,21 @@
-Blog
+Mon Blog Personnel
+
+Bienvenue sur mon blog personnel ! C'est ici que je publierai mes articles et où vous pourrez échanger avec moi et les autres visiteurs. Pour ce projet, j'ai choisi de créer un blog personnalisé avec un design professionnel et des fonctionnalités avancées.
+Fonctionnalités
+
+    Page d'accueil : La page d'accueil affiche les derniers articles publiés et propose quelques call-to-actions pour encourager les visiteurs à lire davantage.
+    Authentification : Les utilisateurs peuvent s'inscrire ou se connecter via un formulaire asynchrone.
+    Profil utilisateur : Une fois connecté, l'utilisateur est redirigé vers sa page de profil où il peut modifier ses informations sans recharger la page.
+    Listing des articles : La page des articles présente une liste paginée des articles, avec un paramètre GET pour passer d'une page à l'autre.
+    Création d'articles : Seuls les utilisateurs ayant les rôles de modérateur et d'administrateur peuvent créer des articles, qui sont associés à une catégorie.
+    Affichage d'un article et de ses commentaires : Les articles peuvent être lus individuellement avec une page dédiée, et les commentaires sont affichés en dessous.
+    Panel administrateur : Le panel d'administration permet aux administrateurs de gérer les utilisateurs, les articles, les commentaires, les catégories et les permissions.
+
+Architecture de la base de données
+
+Je n'ai pas de recommandations spécifiques pour la création de la base de données, mais j'ai pris le temps de réfléchir à l'architecture de celle-ci pour garantir la performance et la scalabilité du blog.
+Aller plus loin
+
+Si vous souhaitez aller plus loin, vous pouvez ajouter des filtres asynchrones pour rendre le filtrage des articles plus dynamique et rendre le panel d'administration entièrement sans rechargement de page.
+
+N'hésitez pas à me contacter pour toute question ou suggestion !
