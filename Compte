@@ -4,37 +4,3 @@ Passw : 1234a
 admin : admin
 passw : admin1
 
-rôle prevus sur le site :
-
-    - administrateur
-    - moderateur
-    - utilisateur
-
-    - administrateur : peut tout faire
-    - moderateur : peut modifier les articles et les commentaires
-    - utilisateur : peut commenter les articles
-
-parametres table:
-    Table "utilisateurs" avec les champs suivants :
-
-    id (clé primaire)
-    username
-    password
-    droits (administrateur ou utilisateur)
-
-    Table "articles" avec les champs suivants :
-
-    id (clé primaire)
-    title
-    content
-    author_id (clé étrangère faisant référence à l'id de l'utilisateur qui a écrit l'article)
-    created_at
-    updated_at
-
-    Table "comments" avec les champs suivants :
-
-    id (clé primaire)
-    content
-    article_id (clé étrangère faisant référence à l'id de l'article auquel le commentaire est lié)
-    user_id (clé étrangère faisant référence à l'id de l'utilisateur qui a écrit le commentaire)
-    created_at
