@@ -88,7 +88,7 @@
     <div id="menuItems" class="lg:hidden md:block">
         <?php if (isset($_SESSION['login']) != null) : ?>
             <nav>
-                <ul class="fflex flex-col items-center space-y-2">
+                <ul class="flex flex-col items-center space-y-2 justify-center">
                     <li  class="flex flex-row">
                         <a href="article.php">
                             <button type="button" id="buttonArticle" class="py-[5px] px-2 rounded-lg bg-[#0e1217] ease-in duration-100
@@ -108,7 +108,7 @@
                         </li>
                         <li>
                             <a href="profil.php">
-                                <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC]">
+                                <button type="button" id="buttonRegisterHeader" class="py-[5px] px-2 rounded-lg bg-[#F5F8FC] flex">
                                     <img src="resources/images/icon/user1.svg" class="h-[1.2em]">
                                     <?= $_SESSION['login'] ?>
                                 </button>

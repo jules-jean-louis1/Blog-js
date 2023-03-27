@@ -29,7 +29,7 @@ require_once 'resources/assests/Classes/Articles.php';
         <div id="containerCreateArticle" class="flex flex-row justify-center items-center lg:py-[2%]">
             <?php if (isset($_SESSION['droits']) && ($_SESSION['droits'] == 'administrateur' || $_SESSION['droits'] == 'moderateur')) { ?>
             <!-- Le code pour afficher l'interface d'écriture d'article -->
-            <div id="ContainerWriteArticle" class="flex flex-col lg:flex-row justify-center items-center space-x-2 border-[1px] border-[#0e1217] rounded-lg py-[3px] w-[20%]">
+            <div id="ContainerWriteArticle" class="flex flex-col lg:flex-row justify-center items-center space-x-2 border-[1px] border-[#0e1217] rounded-lg py-[3px] my-2 lg:my-0 w-[98%] lg:w-[20%]">
                 <div id="titleArticlePage">
                     <h1 class="text-lg ">Ecrire un article</h1>
                 </div>
@@ -138,7 +138,7 @@ require_once 'resources/assests/Classes/Articles.php';
         </div>
     </section>
     <section class="flex justify-center">
-        <div id="containerArticlePage" class="w-[98%] mt-[2%] lg:w-[85%] lg:mt-[3%]">
+        <div id="containerArticlePage" class="w-[98%] mt-[3%] lg:w-[85%] lg:mt-[2%]">
             <div class="">
                 <div class="flex flex-row items-center justify-between">
                     <h1 class="text-xl font-bold">Articles</h1>

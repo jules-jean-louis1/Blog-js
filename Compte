@@ -38,3 +38,7 @@ parametres table:
     article_id (clé étrangère faisant référence à l'id de l'article auquel le commentaire est lié)
     user_id (clé étrangère faisant référence à l'id de l'utilisateur qui a écrit le commentaire)
     created_at
+
+    jules-jean-louis_blog-js
+    blog-js
+    Viq1e172@

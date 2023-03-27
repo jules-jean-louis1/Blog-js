@@ -22,7 +22,7 @@ require_once 'resources/assests/Classes/Users.php';
     <header class="border-b-[1px] border-[#52586633] bg-white fixed top-0 w-full">
         <?php include_once 'resources/assests/import/header.php' ?>
     </header>
-        <main class="mt-[10%] lg:mt-[6%]">
+        <main class="mt-[20%] lg:mt-[6%]">
             <article>
                 <section>
                     <div id="titleDashboard">
@@ -39,7 +39,7 @@ require_once 'resources/assests/Classes/Users.php';
                 </section>
                 <section id="displayAllUser">
                     <div id="containerDash">
-                        <div id="containerMessage" class="flex justify-center p-2 h-[40px]">
+                        <div id="containerMessage" class="flex justify-center p-2 h-[60px]">
                             <div id="errorMsg"></div>
                         </div>
                         <div id="tableauUser" class="flex justify-center">
